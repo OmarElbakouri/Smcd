@@ -1,0 +1,32 @@
+# Environment files with secrets
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# macOS
+.DS_Store
+
+# Backend
+smcd-backend/target/
+smcd-backend/*.log
+smcd-backend/logs/
+
+# Frontend
+smcd-frontend/node_modules/
+smcd-frontend/.next/
+smcd-frontend/out/
+smcd-frontend/.env.local
+
+# Build outputs
+*.jar
+*.war
+*.class
+
+# Logs
+*.log
+logs/

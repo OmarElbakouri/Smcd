@@ -1,13 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import axios from 'axios';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { CONGRESS_INFO } from '@/lib/constants';
-import { API_URL } from '@/lib/constants';
+import { CONGRESS_INFO, API_URL } from '@/lib/constants';
 
 interface Speaker {
   id: number;
@@ -17,7 +16,7 @@ interface Speaker {
   specialite: string;
   institution: string;
   photoUrl: string;
-  nomComplet?: string;
+  pays?: string;
 }
 
 interface President {
@@ -43,12 +42,14 @@ export default function HomePage() {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [speakers, setSpeakers] = useState<Speaker[]>([]);
   const [president, setPresident] = useState<President | null>(null);
-  const [stats] = useState({ abstracts: 150, speakers: 25, videos: 80, participants: 500 });
+  const [isVisible, setIsVisible] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
 
-  // Date du congrès - 26 juin 2026
   const congressDate = new Date('2026-06-26T09:00:00');
 
   useEffect(() => {
+    setIsVisible(true);
+
     const timer = setInterval(() => {
       const now = new Date().getTime();
       const distance = congressDate.getTime() - now;
@@ -64,108 +65,88 @@ export default function HomePage() {
     }, 1000);
 
     return () => clearInterval(timer);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    const fetchSpeakers = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/speakers?featured=true&annee=2026`);
-        // Exclure le président de la liste des speakers featured
-        const speakersData = response.data.filter((s: Speaker & { isPresident?: boolean }) => !s.isPresident);
-        setSpeakers(speakersData.slice(0, 6));
+        const [speakersRes, presidentRes] = await Promise.all([
+          axios.get(`${API_URL}/speakers?featured=true&annee=2026`).catch(() => ({ data: [] })),
+          axios.get(`${API_URL}/speakers/president?annee=2026`).catch(() => ({ data: null }))
+        ]);
+
+        const speakersData = speakersRes.data.filter((s: Speaker & { isPresident?: boolean }) => !s.isPresident);
+        setSpeakers(speakersData.slice(0, 4));
+        if (presidentRes.data) setPresident(presidentRes.data);
       } catch (error) {
-        console.error('Erreur chargement speakers:', error);
+        console.error('Erreur chargement données:', error);
       }
     };
 
-    const fetchPresident = async () => {
-      try {
-        const response = await axios.get(`${API_URL}/speakers/president?annee=2026`);
-        setPresident(response.data);
-      } catch (error) {
-        console.error('Erreur chargement président:', error);
-      }
-    };
-
-    fetchSpeakers();
-    fetchPresident();
+    fetchData();
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-[#0A1628]">
       <Header />
 
       <main className="flex-grow">
-        {/* Hero Section avec Countdown */}
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          {/* Background avec overlay */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 64, 175, 0.85) 50%, rgba(6, 95, 70, 0.9) 100%)`,
-            }}
-          />
-          
-          {/* Particules animées - positions fixes pour éviter hydration mismatch */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {[
-              { left: 10, top: 20, delay: 0, duration: 8 },
-              { left: 25, top: 60, delay: 1, duration: 12 },
-              { left: 40, top: 15, delay: 2, duration: 10 },
-              { left: 55, top: 75, delay: 0.5, duration: 9 },
-              { left: 70, top: 30, delay: 3, duration: 11 },
-              { left: 85, top: 50, delay: 1.5, duration: 7 },
-              { left: 15, top: 80, delay: 2.5, duration: 13 },
-              { left: 60, top: 10, delay: 4, duration: 8 },
-              { left: 90, top: 70, delay: 0.8, duration: 10 },
-              { left: 35, top: 45, delay: 3.5, duration: 12 },
-            ].map((particle, i) => (
-              <div
-                key={i}
-                className="absolute w-2 h-2 bg-white/10 rounded-full"
-                style={{
-                  left: `${particle.left}%`,
-                  top: `${particle.top}%`,
-                  animation: `float ${particle.duration}s ease-in-out infinite`,
-                  animationDelay: `${particle.delay}s`,
-                }}
-              />
-            ))}
+        {/* ================================================
+            HERO SECTION - Cinematic & Bold
+            ================================================ */}
+        <section
+          ref={heroRef}
+          className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        >
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            {/* Hero Image - Hassan II Mosque, Casablanca */}
+            <div
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{ backgroundImage: 'url(/hero-casablanca.jpg)' }}
+            />
+
+            {/* Premium Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0A1628]/80 via-[#0A1628]/60 to-[#0A1628]/95" />
+
+            {/* Additional overlay for better text readability */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A1628]/70 via-transparent to-[#0A1628]/70" />
+
+            {/* Subtle animated glow */}
+            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#00D4AA]/10 rounded-full blur-[150px] animate-pulse" />
+
+            {/* Bottom fade for seamless transition */}
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0A1628] to-transparent" />
           </div>
 
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-            {/* Logo/Badge */}
-            <div className="mb-8">
-              <div className="inline-flex items-center justify-center mb-6">
-                <Image 
-                  src="/smcd-logo.svg" 
-                  alt="SMCD Logo" 
-                  width={120} 
-                  height={120}
-                  className="object-contain drop-shadow-2xl"
-                />
-              </div>
+          {/* Content */}
+          <div className={`relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-32 text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+
+            {/* Event Badge */}
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 mb-8 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+              <span className="w-2 h-2 bg-[#00D4AA] rounded-full animate-pulse" />
+              <span className="text-sm font-medium text-white/80 tracking-wide uppercase">
+                {CONGRESS_INFO.dates} • {CONGRESS_INFO.location}
+              </span>
             </div>
 
-            {/* Titre principal */}
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-white mb-6 tracking-tight">
-              Congrès National de
-              <span className="block bg-gradient-to-r from-teal-400 to-cyan-300 bg-clip-text text-transparent">
+            {/* Main Title */}
+            <h1 className="heading-xl text-white mb-8">
+              <span className="block">Congrès National de</span>
+              <span className="block gradient-text">
                 Chirurgie Digestive
               </span>
             </h1>
 
-            <p className="text-xl sm:text-2xl text-gray-300 mb-4 font-light">
-              {CONGRESS_INFO.year} • {CONGRESS_INFO.location}
+            {/* Subtitle */}
+            <p className="max-w-2xl mx-auto text-xl md:text-2xl text-white/60 font-light mb-12 leading-relaxed">
+              L'événement incontournable de la chirurgie digestive au Maroc.
+              Innovation, Excellence, Partage.
             </p>
 
-            <p className="text-lg text-teal-300 mb-12 font-medium">
-              26-27 Juin 2026 • Casablanca
-            </p>
-
-            {/* Countdown */}
-            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-12">
+            {/* Countdown Timer */}
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-16">
               {[
                 { value: timeLeft.days, label: 'Jours' },
                 { value: timeLeft.hours, label: 'Heures' },
@@ -174,31 +155,27 @@ export default function HomePage() {
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center p-4 sm:p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 min-w-[80px] sm:min-w-[100px]"
+                  className="group flex flex-col items-center p-6 md:p-8 glass-card min-w-[100px] md:min-w-[130px] transition-all duration-300 hover:bg-white/10"
                 >
-                  <span className="text-3xl sm:text-5xl font-bold text-white">
+                  <span className="text-4xl md:text-6xl font-bold text-white tabular-nums">
                     {String(item.value).padStart(2, '0')}
                   </span>
-                  <span className="text-sm text-gray-300 mt-1">{item.label}</span>
+                  <span className="text-xs md:text-sm text-white/50 uppercase tracking-wider mt-2 font-medium">
+                    {item.label}
+                  </span>
                 </div>
               ))}
             </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/abstracts/submit"
-                className="group inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-full bg-gradient-to-r from-teal-500 to-cyan-400 text-white hover:from-teal-400 hover:to-cyan-300 transition-all duration-300 shadow-lg hover:shadow-teal-500/50 transform hover:-translate-y-1"
-              >
+              <Link href="/abstracts/submit" className="btn-primary group">
                 Soumettre un Abstract
-                <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </Link>
-              <Link
-                href="/videos"
-                className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-full border-2 border-white/30 text-white hover:bg-white/10 transition-all duration-300"
-              >
+              <Link href="/videos" className="btn-secondary group">
                 <svg className="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z" />
                 </svg>
@@ -207,23 +184,126 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Scroll indicator */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-            <svg className="w-6 h-6 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
+          {/* Scroll Indicator */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+            <div className="flex flex-col items-center gap-2 text-white/30">
+              <span className="text-xs uppercase tracking-widest">Découvrir</span>
+              <div className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center pt-2">
+                <div className="w-1.5 h-3 bg-white/40 rounded-full animate-bounce" />
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Mot du Président */}
-        <section className="py-20 lg:py-32 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-              {/* Image du président */}
+        {/* ================================================
+            KEY THEMES - Bento Grid Style
+            ================================================ */}
+        <section className="relative py-32 bg-[#0A1628]">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+
+            {/* Section Header */}
+            <div className="text-center mb-20">
+              <span className="inline-block px-4 py-2 mb-6 text-xs font-semibold uppercase tracking-widest text-[#00D4AA] bg-[#00D4AA]/10 rounded-full">
+                Thématiques 2026
+              </span>
+              <h2 className="heading-lg text-white mb-6">
+                Au Cœur de <span className="gradient-text">l'Innovation</span>
+              </h2>
+              <p className="max-w-2xl mx-auto text-lg text-white/50">
+                Trois axes majeurs qui façonnent l'avenir de la chirurgie digestive
+              </p>
+            </div>
+
+            {/* Bento Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Card 1 - Large */}
+              <div className="lg:col-span-2 group relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#1E3A5F] to-[#0D2847] p-8 md:p-12 border border-white/5 transition-all duration-500 hover:border-[#00D4AA]/30">
+                <div className="absolute top-0 right-0 w-80 h-80 bg-[#00D4AA]/10 rounded-full blur-[100px] transition-all duration-500 group-hover:bg-[#00D4AA]/20" />
+                <div className="relative z-10">
+                  <div className="w-16 h-16 mb-8 rounded-2xl bg-[#00D4AA]/10 flex items-center justify-center">
+                    <svg className="w-8 h-8 text-[#00D4AA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Chirurgie Robotique</h3>
+                  <p className="text-white/60 text-lg leading-relaxed max-w-xl">
+                    La robotique en chirurgie viscérale et digestive, au service de la précision et du geste sûr.
+                    Découvrez les dernières avancées technologiques.
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 2 */}
+              <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#1E3A5F] to-[#0D2847] p-8 border border-white/5 transition-all duration-500 hover:border-[#FF6B35]/30">
+                <div className="absolute top-0 right-0 w-40 h-40 bg-[#FF6B35]/10 rounded-full blur-[80px] transition-all duration-500 group-hover:bg-[#FF6B35]/20" />
+                <div className="relative z-10">
+                  <div className="w-14 h-14 mb-6 rounded-xl bg-[#FF6B35]/10 flex items-center justify-center">
+                    <svg className="w-7 h-7 text-[#FF6B35]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3">Intelligence Artificielle</h3>
+                  <p className="text-white/60 leading-relaxed">
+                    L'IA comme partenaire du chirurgien pour analyser, anticiper et décider.
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 3 */}
+              <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#1E3A5F] to-[#0D2847] p-8 border border-white/5 transition-all duration-500 hover:border-purple-500/30">
+                <div className="absolute top-0 right-0 w-40 h-40 bg-purple-500/10 rounded-full blur-[80px] transition-all duration-500 group-hover:bg-purple-500/20" />
+                <div className="relative z-10">
+                  <div className="w-14 h-14 mb-6 rounded-xl bg-purple-500/10 flex items-center justify-center">
+                    <svg className="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3">Nouvelles Énergies</h3>
+                  <p className="text-white/60 leading-relaxed">
+                    Le laser en chirurgie colorectale et proctologique.
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 4 - Stats */}
+              <div className="lg:col-span-2 rounded-3xl bg-gradient-to-r from-[#00D4AA]/10 to-[#00D4AA]/5 p-8 md:p-12 border border-[#00D4AA]/20">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                  {[
+                    { value: '500+', label: 'Participants' },
+                    { value: '50+', label: 'Intervenants' },
+                    { value: '100+', label: 'Communications' },
+                    { value: '2', label: 'Jours' },
+                  ].map((stat, i) => (
+                    <div key={i} className="text-center">
+                      <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.value}</div>
+                      <div className="text-sm text-white/50 uppercase tracking-wider">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================
+            PRESIDENT MESSAGE - Elegant Layout
+            ================================================ */}
+        <section className="relative py-32 bg-white overflow-hidden">
+          {/* Decorative elements */}
+          <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-[#F8FAFC] to-transparent" />
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#00D4AA]/5 rounded-full blur-[100px]" />
+
+          <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+
+              {/* Image Column */}
               <div className="relative order-2 lg:order-1">
-                <div className="relative aspect-[3/4] max-w-md mx-auto">
-                  <div className="absolute inset-0 bg-gradient-to-br from-teal-500 to-blue-600 rounded-3xl transform rotate-3"></div>
-                  <div className="relative bg-gray-200 rounded-3xl overflow-hidden shadow-2xl transform -rotate-3 hover:rotate-0 transition-transform duration-500 h-full">
+                <div className="relative aspect-[3/4] max-w-md mx-auto lg:mx-0">
+                  {/* Background decoration */}
+                  <div className="absolute -inset-4 bg-gradient-to-br from-[#00D4AA] to-[#1E3A5F] rounded-[2rem] opacity-20 blur-2xl" />
+
+                  {/* Main image container */}
+                  <div className="relative h-full rounded-[2rem] overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 shadow-2xl">
                     {president?.photoUrl ? (
                       <Image
                         src={president.photoUrl}
@@ -232,15 +312,14 @@ export default function HomePage() {
                         className="object-cover"
                       />
                     ) : (
-                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-100 to-teal-100">
-                        <div className="text-center">
-                          <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-teal-500 to-blue-600 flex items-center justify-center mb-4">
-                            <svg className="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#1E3A5F] to-[#0A1628]">
+                        <div className="text-center p-8">
+                          <div className="w-24 h-24 mx-auto rounded-full bg-[#00D4AA]/20 flex items-center justify-center mb-4">
+                            <svg className="w-12 h-12 text-[#00D4AA]" fill="currentColor" viewBox="0 0 24 24">
                               <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                             </svg>
                           </div>
-                          <p className="text-gray-500 font-medium">Photo du Président</p>
-                          <p className="text-gray-400 text-sm mt-1">À configurer dans l'admin</p>
+                          <p className="text-white/60 text-sm">Photo du Président</p>
                         </div>
                       </div>
                     )}
@@ -248,51 +327,46 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Contenu */}
+              {/* Content Column */}
               <div className="order-1 lg:order-2">
-                <div className="inline-flex items-center px-4 py-2 rounded-full bg-teal-50 text-teal-700 text-sm font-medium mb-6">
-                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                  </svg>
-                  Message du Président
-                </div>
+                <span className="inline-block px-4 py-2 mb-6 text-xs font-semibold uppercase tracking-widest text-[#00D4AA] bg-[#00D4AA]/10 rounded-full">
+                  Mot du Président
+                </span>
 
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                  Mot du
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-blue-600"> Président</span>
+                <h2 className="heading-lg text-[#0A1628] mb-6">
+                  Bienvenue au <span className="gradient-text">Congrès 2026</span>
                 </h2>
 
                 {president ? (
                   <>
-                    <p className="text-xl text-teal-600 font-medium mb-4">
+                    <p className="text-2xl font-semibold text-[#1E3A5F] mb-2">
                       {president.nomComplet}
                     </p>
-                    <p className="text-gray-500 mb-6">{president.specialite} • {president.institution}</p>
+                    <p className="text-gray-500 mb-8">
+                      {president.specialite} • {president.institution}
+                    </p>
                     <div className="prose prose-lg text-gray-600 mb-8">
-                      <p className="text-lg leading-relaxed whitespace-pre-line">
+                      <p className="leading-relaxed text-lg">
                         {president.messagePresident || "Le message du président sera bientôt disponible."}
                       </p>
                     </div>
                   </>
                 ) : (
                   <div className="prose prose-lg text-gray-600 mb-8">
-                    <p className="text-lg leading-relaxed mb-4">
-                      Chers collègues, c'est avec un immense plaisir que je vous accueille au Congrès National 
-                      de Chirurgie Digestive {CONGRESS_INFO.year}. Cette édition s'annonce exceptionnelle avec 
-                      des thématiques à la pointe de l'innovation.
-                    </p>
-                    <p className="text-sm text-gray-400 italic">
-                      (Configurez le président dans l'admin pour personnaliser ce message)
+                    <p className="leading-relaxed text-lg">
+                      Chers collègues, c'est avec un immense plaisir que je vous accueille au Congrès National
+                      de Chirurgie Digestive {CONGRESS_INFO.year}. Cette édition s'annonce exceptionnelle avec
+                      des thématiques à la pointe de l'innovation chirurgicale.
                     </p>
                   </div>
                 )}
 
                 <Link
                   href="/about"
-                  className="inline-flex items-center text-teal-600 font-semibold hover:text-teal-700 transition-colors group"
+                  className="inline-flex items-center text-[#00D4AA] font-semibold hover:text-[#00B894] transition-colors group"
                 >
-                  Lire la suite
-                  <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  En savoir plus
+                  <svg className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Link>
@@ -301,189 +375,107 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Statistiques */}
-        <section className="py-16 bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-              {[
-                { value: stats.abstracts, label: 'Abstracts', icon: '📄', suffix: '+' },
-                { value: stats.speakers, label: 'Intervenants', icon: '👨‍⚕️', suffix: '+' },
-                { value: stats.videos, label: 'Vidéos', icon: '🎬', suffix: '+' },
-                { value: stats.participants, label: 'Participants', icon: '👥', suffix: '+' },
-              ].map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-4xl mb-2">{stat.icon}</div>
-                  <div className="text-4xl sm:text-5xl font-bold text-white mb-2">
-                    {stat.value}{stat.suffix}
-                  </div>
-                  <div className="text-gray-400 text-lg">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* ================================================
+            SPEAKERS - Premium Grid
+            ================================================ */}
+        <section className="relative py-32 bg-[#F8FAFC]">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
-        {/* Nos Invités */}
-        <section className="py-20 lg:py-32 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-50 text-blue-700 text-sm font-medium mb-6">
-                <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                </svg>
-                Édition 2026
+            {/* Section Header */}
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+              <div>
+                <span className="inline-block px-4 py-2 mb-6 text-xs font-semibold uppercase tracking-widest text-[#1E3A5F] bg-[#1E3A5F]/10 rounded-full">
+                  Édition 2026
+                </span>
+                <h2 className="heading-lg text-[#0A1628]">
+                  Nos <span className="gradient-text">Invités</span> d'Honneur
+                </h2>
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-                Nos <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-blue-600">Invités</span> d'Honneur
-              </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                D'éminents chirurgiens de différentes spécialités ont été invités pour partager 
-                leur expertise lors de notre congrès.
-              </p>
-            </div>
-
-            {/* Grille des speakers */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {speakers.length > 0 ? speakers.map((speaker) => (
-                <div
-                  key={speaker.id}
-                  className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
-                >
-                  <div className="relative aspect-[4/5] bg-gradient-to-br from-gray-100 to-gray-200">
-                    {speaker.photoUrl ? (
-                      <Image
-                        src={speaker.photoUrl}
-                        alt={`${speaker.prenom} ${speaker.nom}`}
-                        fill
-                        className="object-cover"
-                      />
-                    ) : (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-24 h-24 rounded-full bg-gradient-to-br from-teal-500 to-blue-600 flex items-center justify-center">
-                          <span className="text-3xl font-bold text-white">
-                            {speaker.prenom?.[0]}{speaker.nom?.[0]}
-                          </span>
-                        </div>
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">
-                      {speaker.titre} {speaker.prenom} {speaker.nom}
-                    </h3>
-                    <p className="text-teal-600 font-medium mb-2">{speaker.specialite}</p>
-                    <p className="text-gray-500 text-sm">{speaker.institution}</p>
-                  </div>
-                </div>
-              )) : (
-                [...Array(6)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
-                  >
-                    <div className="relative aspect-[4/5] bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                      <div className="w-24 h-24 rounded-full bg-gradient-to-br from-teal-500 to-blue-600 flex items-center justify-center">
-                        <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                        </svg>
-                      </div>
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900 mb-1">Invité {i + 1}</h3>
-                      <p className="text-teal-600 font-medium mb-2">Spécialité</p>
-                      <p className="text-gray-500 text-sm">Institution</p>
-                    </div>
-                  </div>
-                ))
-              )}
-            </div>
-
-            <div className="text-center mt-12">
               <Link
                 href="/speakers"
-                className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-full bg-gradient-to-r from-teal-500 to-blue-600 text-white hover:from-teal-400 hover:to-blue-500 transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center px-6 py-3 text-sm font-semibold text-[#1E3A5F] bg-white border border-gray-200 rounded-full hover:bg-[#1E3A5F] hover:text-white hover:border-[#1E3A5F] transition-all duration-300 shadow-sm"
               >
                 Voir tous les intervenants
-                <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
             </div>
-          </div>
-        </section>
 
-        {/* Thématiques du Congrès */}
-        <section className="py-20 lg:py-32 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-                Thématiques du <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-blue-600">Congrès</span>
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                {
-                  icon: '🤖',
-                  title: 'Chirurgie Robotique',
-                  description: 'La robotique en chirurgie viscérale et digestive, au service de la précision et du geste sûr.',
-                  color: 'from-purple-500 to-indigo-600',
-                },
-                {
-                  icon: '🧠',
-                  title: 'Intelligence Artificielle',
-                  description: 'L\'IA comme partenaire du chirurgien pour mieux analyser, anticiper et décider.',
-                  color: 'from-teal-500 to-cyan-600',
-                },
-                {
-                  icon: '⚡',
-                  title: 'Nouvelles Technologies',
-                  description: 'Les nouvelles sources d\'énergie et le laser en chirurgie colorectale et proctologique.',
-                  color: 'from-orange-500 to-red-600',
-                },
-              ].map((theme, index) => (
+            {/* Speakers Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {(speakers.length > 0 ? speakers : Array(4).fill(null)).map((speaker, index) => (
                 <div
-                  key={index}
-                  className="group relative p-8 rounded-3xl bg-white border border-gray-100 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden"
+                  key={speaker?.id || index}
+                  className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 card-hover"
                 >
-                  <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${theme.color}`} />
-                  <div className="text-5xl mb-6">{theme.icon}</div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">{theme.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{theme.description}</p>
+                  {/* Image */}
+                  <div className="relative aspect-[3/4] bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
+                    {speaker?.photoUrl ? (
+                      <Image
+                        src={speaker.photoUrl}
+                        alt={`${speaker.prenom} ${speaker.nom}`}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#1E3A5F] to-[#0A1628]">
+                        <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center">
+                          <svg className="w-10 h-10 text-white/50" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                          </svg>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Overlay on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A1628] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-6">
+                    <h3 className="text-lg font-bold text-[#0A1628] mb-1">
+                      {speaker ? `${speaker.titre || ''} ${speaker.prenom} ${speaker.nom}` : `Invité ${index + 1}`}
+                    </h3>
+                    <p className="text-[#00D4AA] font-medium text-sm mb-1">
+                      {speaker?.specialite || 'Spécialité'}
+                    </p>
+                    <p className="text-gray-500 text-sm">
+                      {speaker?.institution || 'Institution'}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* CTA Final */}
-        <section className="relative py-24 overflow-hidden">
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: `linear-gradient(135deg, rgba(6, 95, 70, 0.95) 0%, rgba(30, 64, 175, 0.95) 100%)`,
-            }}
-          />
-          <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-              Rejoignez-nous pour le Congrès {CONGRESS_INFO.year}
+        {/* ================================================
+            FINAL CTA - Bold & Impactful
+            ================================================ */}
+        <section className="relative py-32 overflow-hidden">
+          {/* Background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0A1628] via-[#1E3A5F] to-[#0A1628]" />
+          <div className="absolute inset-0 bg-grid-pattern opacity-20" />
+
+          {/* Decorative orbs */}
+          <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-[#00D4AA]/20 rounded-full blur-[150px]" />
+          <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[400px] h-[400px] bg-[#FF6B35]/10 rounded-full blur-[120px]" />
+
+          <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
+            <h2 className="heading-lg text-white mb-6">
+              Rejoignez-nous pour le <span className="gradient-text">Congrès 2026</span>
             </h2>
-            <p className="text-xl text-teal-100 mb-10 max-w-2xl mx-auto">
-              Inscrivez-vous dès maintenant et soumettez vos travaux pour participer 
-              à cet événement incontournable de la chirurgie digestive.
+            <p className="text-xl text-white/60 mb-12 max-w-2xl mx-auto">
+              Inscrivez-vous dès maintenant et soumettez vos travaux pour participer
+              à cet événement incontournable de la chirurgie digestive au Maroc.
             </p>
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/abstracts/submit"
-                className="inline-flex items-center justify-center px-10 py-5 text-lg font-bold rounded-full bg-white text-teal-700 hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
-              >
+              <Link href="/abstracts/submit" className="btn-primary">
                 Soumettre un Abstract
               </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center px-10 py-5 text-lg font-semibold rounded-full border-2 border-white text-white hover:bg-white/10 transition-all duration-300"
-              >
+              <Link href="/contact" className="btn-secondary">
                 Nous Contacter
               </Link>
             </div>
@@ -492,14 +484,6 @@ export default function HomePage() {
       </main>
 
       <Footer />
-
-      {/* Styles pour les animations */}
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
-          50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
-        }
-      `}</style>
     </div>
   );
 }

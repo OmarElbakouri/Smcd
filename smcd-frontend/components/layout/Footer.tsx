@@ -2,93 +2,148 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { CONGRESS_INFO, ROUTES } from '@/lib/constants';
 
 /**
- * Footer public du site - Design moderne inspiré de somachir.ma
- * Affiche les liens, newsletter, informations de contact et copyright
+ * Premium Footer - Clean, Professional Design
  */
 export default function Footer() {
     const currentYear = 2026;
     const [email, setEmail] = useState('');
     const [subscribed, setSubscribed] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleNewsletter = (e: React.FormEvent) => {
+    const handleNewsletter = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Simulation d'inscription
+        setIsLoading(true);
+        // Simulate subscription
+        await new Promise(resolve => setTimeout(resolve, 1000));
         setSubscribed(true);
         setEmail('');
-        setTimeout(() => setSubscribed(false), 3000);
+        setIsLoading(false);
+        setTimeout(() => setSubscribed(false), 4000);
     };
 
+    const footerLinks = {
+        congress: [
+            { href: '/about', label: 'À propos' },
+            { href: '/thematiques', label: 'Thématiques' },
+            { href: '/programme', label: 'Programme' },
+            { href: ROUTES.SPEAKERS, label: 'Intervenants' },
+            { href: ROUTES.SPONSORS, label: 'Partenaires' },
+        ],
+        resources: [
+            { href: ROUTES.VIDEOS, label: 'Vidéothèque' },
+            { href: ROUTES.EPOSTERS, label: 'E-Posters' },
+            { href: '/documents', label: 'Documents' },
+            { href: '/archives', label: 'Archives' },
+        ],
+        submissions: [
+            { href: '/abstracts/submit', label: 'Soumettre un Abstract' },
+            { href: '/eposters/upload', label: 'Soumettre un E-Poster' },
+            { href: '/videos/upload', label: 'Soumettre une Vidéo' },
+            { href: ROUTES.CONTACT, label: 'Contact' },
+        ],
+    };
+
+    const socialLinks = [
+        {
+            name: 'Facebook',
+            href: '#',
+            icon: 'M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z'
+        },
+        {
+            name: 'LinkedIn',
+            href: '#',
+            icon: 'M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z'
+        },
+        {
+            name: 'YouTube',
+            href: '#',
+            icon: 'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z'
+        },
+    ];
+
     return (
-        <footer className="bg-gradient-to-b from-slate-900 to-slate-950 text-white">
+        <footer className="bg-[#0A1628] text-white">
             {/* Newsletter Section */}
-            <div className="border-b border-slate-800">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                        <div>
-                            <h3 className="text-2xl sm:text-3xl font-bold mb-2">
-                                Restez <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-400">informé</span>
-                            </h3>
-                            <p className="text-gray-400">
-                                Inscrivez-vous à notre newsletter pour recevoir les dernières actualités du congrès.
-                            </p>
-                        </div>
-                        <div>
-                            <form onSubmit={handleNewsletter} className="flex flex-col sm:flex-row gap-3">
-                                <input
-                                    type="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="Votre adresse email"
-                                    className="flex-1 px-5 py-4 rounded-full bg-slate-800 border border-slate-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
-                                    required
-                                />
-                                <button
-                                    type="submit"
-                                    className="px-8 py-4 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-semibold hover:from-teal-400 hover:to-cyan-400 transition-all duration-300 shadow-lg hover:shadow-teal-500/30 whitespace-nowrap"
-                                >
-                                    {subscribed ? '✓ Inscrit !' : 'S\'inscrire'}
-                                </button>
-                            </form>
-                        </div>
+            <div className="border-b border-white/5">
+                <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+                    <div className="max-w-4xl mx-auto text-center">
+                        <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                            Restez <span className="gradient-text">informé</span>
+                        </h3>
+                        <p className="text-white/50 mb-8 max-w-xl mx-auto">
+                            Inscrivez-vous à notre newsletter pour recevoir les dernières actualités du congrès.
+                        </p>
+                        <form onSubmit={handleNewsletter} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Votre adresse email"
+                                className="flex-1 px-5 py-4 rounded-full bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-[#00D4AA]/50 focus:border-[#00D4AA]/50 transition-all"
+                                required
+                                disabled={isLoading}
+                            />
+                            <button
+                                type="submit"
+                                disabled={isLoading}
+                                className="px-8 py-4 rounded-full bg-[#00D4AA] text-[#0A1628] font-semibold hover:bg-[#00B894] transition-all duration-300 shadow-lg hover:shadow-[#00D4AA]/20 disabled:opacity-70 whitespace-nowrap"
+                            >
+                                {isLoading ? (
+                                    <span className="flex items-center gap-2">
+                                        <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                                        </svg>
+                                        Envoi...
+                                    </span>
+                                ) : subscribed ? (
+                                    <span className="flex items-center gap-2">
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                        </svg>
+                                        Inscrit !
+                                    </span>
+                                ) : (
+                                    "S'inscrire"
+                                )}
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
 
             {/* Main Footer Content */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                    {/* À propos */}
-                    <div className="lg:col-span-1">
-                        <div className="flex items-center space-x-3 mb-6">
-                            <div className="w-12 h-12 bg-gradient-to-br from-teal-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
-                                <span className="text-white font-bold text-xl">S</span>
-                            </div>
-                            <div>
-                                <span className="text-xl font-bold block">SMCD</span>
-                                <span className="text-xs text-gray-500">Congrès 2026</span>
-                            </div>
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12">
+                    {/* Brand */}
+                    <div className="col-span-2 md:col-span-4 lg:col-span-1">
+                        <div className="mb-6">
+                            <Image
+                                src="/smcd-logo.png"
+                                alt="SMCD - Société Marocaine de Chirurgie Digestive"
+                                width={160}
+                                height={64}
+                                className="object-contain h-16 w-auto rounded-lg"
+                            />
                         </div>
-                        <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                            La Société Marocaine de Chirurgie Digestive organise chaque année un congrès
-                            national réunissant les meilleurs spécialistes de la chirurgie digestive.
+                        <p className="text-white/40 text-sm leading-relaxed mb-6">
+                            L'excellence en chirurgie digestive au Maroc.
                         </p>
+
                         {/* Social Links */}
-                        <div className="flex space-x-3">
-                            {[
-                                { icon: 'M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z', name: 'Facebook' },
-                                { icon: 'M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84', name: 'Twitter' },
-                                { icon: 'M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z', name: 'LinkedIn' },
-                            ].map((social, i) => (
+                        <div className="flex gap-3">
+                            {socialLinks.map((social) => (
                                 <a
-                                    key={i}
-                                    href="#"
-                                    className="w-10 h-10 rounded-full bg-slate-800 hover:bg-gradient-to-r hover:from-teal-500 hover:to-cyan-500 flex items-center justify-center transition-all duration-300 group"
+                                    key={social.name}
+                                    href={social.href}
+                                    className="w-10 h-10 rounded-lg bg-white/5 hover:bg-[#00D4AA]/20 flex items-center justify-center transition-all duration-300 group border border-white/5 hover:border-[#00D4AA]/30"
                                     aria-label={social.name}
                                 >
-                                    <svg className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                                    <svg className="w-4 h-4 text-white/40 group-hover:text-[#00D4AA] transition-colors" fill="currentColor" viewBox="0 0 24 24">
                                         <path d={social.icon} />
                                     </svg>
                                 </a>
@@ -96,28 +151,37 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* Liens rapides */}
+                    {/* Le Congrès */}
                     <div>
-                        <h3 className="text-sm font-semibold uppercase tracking-wider mb-6 text-white">
-                            Liens rapides
+                        <h3 className="text-xs font-semibold uppercase tracking-widest mb-6 text-white/70">
+                            Le Congrès
                         </h3>
                         <ul className="space-y-3">
-                            {[
-                                { href: ROUTES.HOME, label: 'Accueil' },
-                                { href: ROUTES.ABOUT, label: 'À propos' },
-                                { href: '/programme', label: 'Programme' },
-                                { href: '/speakers', label: 'Intervenants' },
-                                { href: '/videos', label: 'Vidéos' },
-                                { href: '/eposters', label: 'E-Posters' },
-                            ].map((link, i) => (
-                                <li key={i}>
-                                    <Link 
-                                        href={link.href} 
-                                        className="text-gray-400 hover:text-teal-400 transition-colors text-sm flex items-center group"
+                            {footerLinks.congress.map((link) => (
+                                <li key={link.href}>
+                                    <Link
+                                        href={link.href}
+                                        className="text-white/40 hover:text-[#00D4AA] transition-colors text-sm"
                                     >
-                                        <svg className="w-4 h-4 mr-2 text-gray-600 group-hover:text-teal-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                        </svg>
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Ressources */}
+                    <div>
+                        <h3 className="text-xs font-semibold uppercase tracking-widest mb-6 text-white/70">
+                            Ressources
+                        </h3>
+                        <ul className="space-y-3">
+                            {footerLinks.resources.map((link) => (
+                                <li key={link.href}>
+                                    <Link
+                                        href={link.href}
+                                        className="text-white/40 hover:text-[#00D4AA] transition-colors text-sm"
+                                    >
                                         {link.label}
                                     </Link>
                                 </li>
@@ -127,24 +191,16 @@ export default function Footer() {
 
                     {/* Soumissions */}
                     <div>
-                        <h3 className="text-sm font-semibold uppercase tracking-wider mb-6 text-white">
+                        <h3 className="text-xs font-semibold uppercase tracking-widest mb-6 text-white/70">
                             Soumissions
                         </h3>
                         <ul className="space-y-3">
-                            {[
-                                { href: '/abstracts/submit', label: 'Soumettre un Abstract' },
-                                { href: '/videos/submit', label: 'Soumettre une Vidéo' },
-                                { href: '/eposters/submit', label: 'Soumettre un E-Poster' },
-                                { href: ROUTES.CONTACT, label: 'Nous contacter' },
-                            ].map((link, i) => (
-                                <li key={i}>
-                                    <Link 
-                                        href={link.href} 
-                                        className="text-gray-400 hover:text-teal-400 transition-colors text-sm flex items-center group"
+                            {footerLinks.submissions.map((link) => (
+                                <li key={link.href}>
+                                    <Link
+                                        href={link.href}
+                                        className="text-white/40 hover:text-[#00D4AA] transition-colors text-sm"
                                     >
-                                        <svg className="w-4 h-4 mr-2 text-gray-600 group-hover:text-teal-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                        </svg>
                                         {link.label}
                                     </Link>
                                 </li>
@@ -153,44 +209,35 @@ export default function Footer() {
                     </div>
 
                     {/* Contact */}
-                    <div>
-                        <h3 className="text-sm font-semibold uppercase tracking-wider mb-6 text-white">
+                    <div className="col-span-2 md:col-span-1">
+                        <h3 className="text-xs font-semibold uppercase tracking-widest mb-6 text-white/70">
                             Contact
                         </h3>
                         <ul className="space-y-4">
-                            <li className="flex items-start space-x-3">
-                                <div className="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center flex-shrink-0">
-                                    <svg className="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <li className="flex items-start gap-3">
+                                <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0">
+                                    <svg className="w-4 h-4 text-[#00D4AA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                     </svg>
                                 </div>
-                                <div>
-                                    <p className="text-xs text-gray-500 mb-1">Email</p>
-                                    <p className="text-sm text-gray-300">{CONGRESS_INFO.email}</p>
-                                </div>
+                                <div className="text-sm text-white/40">{CONGRESS_INFO.email}</div>
                             </li>
-                            <li className="flex items-start space-x-3">
-                                <div className="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center flex-shrink-0">
-                                    <svg className="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <li className="flex items-start gap-3">
+                                <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0">
+                                    <svg className="w-4 h-4 text-[#00D4AA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                                     </svg>
                                 </div>
-                                <div>
-                                    <p className="text-xs text-gray-500 mb-1">Téléphone</p>
-                                    <p className="text-sm text-gray-300">{CONGRESS_INFO.phone}</p>
-                                </div>
+                                <div className="text-sm text-white/40">{CONGRESS_INFO.phone}</div>
                             </li>
-                            <li className="flex items-start space-x-3">
-                                <div className="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center flex-shrink-0">
-                                    <svg className="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <li className="flex items-start gap-3">
+                                <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0">
+                                    <svg className="w-4 h-4 text-[#00D4AA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
                                 </div>
-                                <div>
-                                    <p className="text-xs text-gray-500 mb-1">Adresse</p>
-                                    <p className="text-sm text-gray-300">{CONGRESS_INFO.address}</p>
-                                </div>
+                                <div className="text-sm text-white/40">{CONGRESS_INFO.location}</div>
                             </li>
                         </ul>
                     </div>
@@ -198,21 +245,18 @@ export default function Footer() {
             </div>
 
             {/* Copyright */}
-            <div className="border-t border-slate-800">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="border-t border-white/5">
+                <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                        <p className="text-gray-500 text-sm">
+                        <p className="text-white/30 text-sm">
                             © {currentYear} {CONGRESS_INFO.organizer}. Tous droits réservés.
                         </p>
                         <div className="flex flex-wrap justify-center gap-6">
-                            <Link href="/mentions-legales" className="text-gray-500 hover:text-teal-400 text-sm transition-colors">
+                            <Link href="/mentions-legales" className="text-white/30 hover:text-[#00D4AA] text-sm transition-colors">
                                 Mentions légales
                             </Link>
-                            <Link href="/confidentialite" className="text-gray-500 hover:text-teal-400 text-sm transition-colors">
-                                Politique de confidentialité
-                            </Link>
-                            <Link href="/cgv" className="text-gray-500 hover:text-teal-400 text-sm transition-colors">
-                                CGV
+                            <Link href="/confidentialite" className="text-white/30 hover:text-[#00D4AA] text-sm transition-colors">
+                                Confidentialité
                             </Link>
                         </div>
                     </div>
