@@ -1,0 +1,1713 @@
+%!TEX program = xelatex
+\documentclass[a4paper,12pt]{article}
+
+% ============================================
+% PACKAGES
+% ============================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{tcolorbox}
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{hyperref}
+\usepackage{pifont}
+\usepackage{setspace}
+\usepackage{eso-pic}
+\usepackage{transparent}
+\usepackage{lipsum}
+
+% TikZ libraries
+\usetikzlibrary{calc,shapes,positioning,arrows.meta,decorations.pathmorphing,shadows,patterns,fadings}
+
+% tcolorbox libraries
+\tcbuselibrary{skins,breakable,raster}
+
+% ============================================
+% COULEURS - Palette Médicale Professionnelle
+% ============================================
+\definecolor{smcdBlue}{RGB}{12, 35, 64}
+\definecolor{smcdTeal}{RGB}{0, 128, 128}
+\definecolor{smcdGold}{RGB}{212, 175, 55}
+\definecolor{smcdCyan}{RGB}{0, 180, 216}
+\definecolor{smcdLight}{RGB}{240, 248, 255}
+\definecolor{smcdDark}{RGB}{15, 23, 42}
+\definecolor{smcdGray}{RGB}{100, 116, 139}
+\definecolor{platinumColor}{RGB}{229, 228, 226}
+\definecolor{goldColor}{RGB}{255, 215, 0}
+\definecolor{silverColor}{RGB}{192, 192, 192}
+\definecolor{gradientStart}{RGB}{6, 78, 130}
+\definecolor{gradientEnd}{RGB}{0, 128, 128}
+
+% ============================================
+% GEOMETRY
+% ============================================
+\geometry{
+    top=0cm,
+    bottom=0cm,
+    left=0cm,
+    right=0cm,
+    includehead=false,
+    includefoot=false
+}
+
+% ============================================
+% HYPERREF SETUP
+% ============================================
+\hypersetup{
+    colorlinks=true,
+    linkcolor=smcdBlue,
+    urlcolor=smcdTeal,
+    pdfauthor={SMCD},
+    pdftitle={Dossier Sponsoring - Congrès SMCD 2026},
+}
+
+% ============================================
+% CUSTOM COMMANDS
+% ============================================
+
+% Background decoration
+\newcommand{\drawDecorations}{
+    \begin{tikzpicture}[remember picture, overlay]
+        % Subtle corner decorations
+        \fill[smcdTeal, opacity=0.05] (current page.north east) circle (8cm);
+        \fill[smcdCyan, opacity=0.03] (current page.south west) circle (6cm);
+    \end{tikzpicture}
+}
+
+% Header bar for content pages
+\newcommand{\pageHeader}[1]{
+    \begin{tikzpicture}[remember picture, overlay]
+        % Header gradient bar
+        \fill[left color=smcdBlue, right color=smcdTeal] 
+            (current page.north west) rectangle ([yshift=-2.2cm]current page.north east);
+        
+        % SMCD Logo image - positioned at top
+        \node[anchor=north west] at ([xshift=1cm, yshift=-0.2cm]current page.north west) {
+            \includegraphics[height=1.8cm]{logo5.png}
+        };
+        
+        % SMCD text next to logo
+        \node[anchor=west, text=white, font=\small\bfseries, text width=5cm] 
+            at ([xshift=4cm, yshift=-1cm]current page.north west) {Société Marocaine de\\Chirurgie Digestive};
+        
+        % Page title
+        \node[anchor=north east, text=white, font=\bfseries\large] 
+            at ([xshift=-1.5cm, yshift=-1cm]current page.north east) {#1};
+        
+        % Decorative line
+        \draw[smcdGold, line width=2pt] 
+            ([yshift=-2.2cm]current page.north west) -- ([yshift=-2.2cm]current page.north east);
+        
+        % Decorative elements
+        \foreach \i in {1,...,5} {
+            \fill[white, opacity=0.1] ([xshift=\i*3cm, yshift=-1cm]current page.north west) circle (0.3cm);
+        }
+    \end{tikzpicture}
+}
+
+% Footer
+\newcommand{\pageFooter}{
+    \begin{tikzpicture}[remember picture, overlay]
+        \fill[smcdBlue] 
+            (current page.south west) rectangle ([yshift=1cm]current page.south east);
+        \node[anchor=south, text=white, font=\footnotesize] 
+            at ([yshift=0.3cm]current page.south) {Congrès National SMCD 2026 | 26-27 Juin 2026 | Hôtel Marriott Casablanca};
+    \end{tikzpicture}
+}
+
+% Styled box for content
+\newtcolorbox{infobox}[2][]{
+    enhanced,
+    colback=white,
+    colframe=smcdTeal,
+    coltitle=white,
+    fonttitle=\bfseries,
+    title=#2,
+    attach boxed title to top left={yshift=-2mm, xshift=5mm},
+    boxed title style={colback=smcdTeal, rounded corners},
+    rounded corners,
+    shadow={2mm}{-2mm}{0mm}{black!20},
+    #1
+}
+
+\newtcolorbox{highlightbox}[1][]{
+    enhanced,
+    colback=smcdLight,
+    colframe=smcdCyan,
+    boxrule=1pt,
+    left=10pt,
+    right=10pt,
+    top=10pt,
+    bottom=10pt,
+    rounded corners,
+    #1
+}
+
+% ============================================
+% DOCUMENT START
+% ============================================
+\begin{document}
+\pagestyle{empty}
+
+% ============================================
+% PAGE 1 - COUVERTURE (AFFICHE DOSSIER)
+% ============================================
+\begin{tikzpicture}[remember picture, overlay]
+    % Insert the affiche as full page without white margins
+    \node[anchor=center, inner sep=0pt] at (current page.center) {
+        \includegraphics[width=\paperwidth,height=\paperheight]{afficheDossier.png}
+    };
+\end{tikzpicture}
+
+\newpage
+
+% ============================================
+% PAGE 2 - AFFICHE SMCD
+% ============================================
+\begin{tikzpicture}[remember picture, overlay]
+    % Insert the affiche SMCD as full page without white margins
+    \node[anchor=center, inner sep=0pt] at (current page.center) {
+        \includegraphics[width=\paperwidth,height=\paperheight]{afficheSmcd.png}
+    };
+\end{tikzpicture}
+
+\newpage
+
+% ============================================
+% PAGE 3 - SOMMAIRE
+% ============================================
+\newgeometry{top=3cm, bottom=2cm, left=1.5cm, right=1.5cm}
+\pageHeader{Sommaire}
+\pageFooter
+
+\vspace*{2.5cm}
+
+\begin{center}
+    {\color{smcdBlue}\fontsize{48}{52}\selectfont\bfseries Sommaire}
+\end{center}
+
+\vspace{1.5cm}
+
+\begin{flushleft}
+{\color{smcdBlue}\fontsize{16}{20}\selectfont
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{@{}l l@{}}
+\textbf{04.} & \textbf{Mot du Président} \\
+\textbf{05-06.} & \textbf{Membres du Bureau} \\
+\textbf{07.} & \textbf{Objectifs de la SMCD} \\
+\textbf{08-09.} & \textbf{Objectifs du Congrès} \\
+\textbf{10-11.} & \textbf{Fiche Technique} \\
+\textbf{12.} & \textbf{Formules de Sponsoring} \\
+\textbf{13.} & \textbf{Sponsor Platinium} \\
+\textbf{14.} & \textbf{Sponsor Gold} \\
+\textbf{15.} & \textbf{Sponsor Silver} \\
+\textbf{16.} & \textbf{Autres Prestations} \\
+\textbf{17.} & \textbf{Marketing \& Publicité} \\
+\textbf{18.} & \textbf{Calendrier des Stands} \\
+\textbf{19.} & \textbf{Formulaire de Réservation} \\
+\textbf{20.} & \textbf{Termes \& Conditions} \\
+\textbf{21.} & \textbf{Contact}
+\end{tabular}
+}
+\end{flushleft}
+
+\newpage
+
+% ============================================
+% PAGE 4 - MOT DU PRÉSIDENT
+% ============================================
+\newgeometry{top=3cm, bottom=2cm, left=2.5cm, right=2.5cm}
+\pageHeader{Mot du Président}
+\pageFooter
+
+\vspace*{2cm}
+
+\begin{center}
+    {\color{smcdBlue}\fontsize{28}{32}\selectfont\bfseries Mot du Président}
+\end{center}
+
+\vspace{1.5cm}
+
+% Insérer ici le contenu du message du président
+\begin{tcolorbox}[
+    enhanced,
+    colback=white,
+    colframe=smcdTeal,
+    boxrule=1pt,
+    left=20pt,
+    right=20pt,
+    top=20pt,
+    bottom=20pt,
+    rounded corners
+]
+\setstretch{1.5}
+{\large
+Chers Confrères et Consoeurs,
+
+\vspace{0.5cm}
+
+C'est avec un grand plaisir et honneur que nous vous invitons au Congrès National de la Société Marocaine de Chirurgie Digestive (SMCD) qui se tiendra les 26 et 27 juin 2026 à l'Hôtel Marriott Casablanca.
+
+\vspace{0.5cm}
+
+% Ajouter le reste du message du président ici...
+
+}
+\end{tcolorbox}
+
+\restoregeometry
+\newpage
+
+% ============================================
+% PAGE 5 - MEMBRES DU BUREAU
+% ============================================
+\newgeometry{top=3cm, bottom=2cm, left=2.5cm, right=2.5cm}
+\pageHeader{Membres du Bureau}
+\pageFooter
+
+\vspace*{1.5cm}
+
+\begin{center}
+    {\color{smcdBlue}\fontsize{28}{32}\selectfont\bfseries Membres du Bureau}\\[0.4cm]
+    {\color{smcdGray}\Large Gouvernance de la SMCD}
+\end{center}
+
+\vspace{1cm}
+
+% President
+\begin{center}
+\begin{tikzpicture}
+    \node[fill=smcdBlue, rounded corners=10pt, inner sep=18pt, text=white, font=\LARGE\bfseries] 
+        (pres) {Président : Pr. FADIL Abdelaziz};
+    \draw[smcdGold, line width=2pt] ([xshift=-0.5cm]pres.south west) -- ([xshift=0.5cm]pres.south east);
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.8cm}
+
+% Vice-présidents
+\begin{center}
+\begin{tcolorbox}[
+    enhanced,
+    colback=smcdLight,
+    colframe=smcdTeal,
+    width=16cm,
+    title={\faUsers\quad Vice-Présidents},
+    fonttitle=\bfseries\Large,
+    coltitle=white,
+    attach boxed title to top center={yshift=-3mm},
+    boxed title style={colback=smcdTeal, rounded corners},
+    top=15pt,
+    bottom=15pt,
+    left=10pt,
+    right=10pt
+]
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{p{4.8cm}p{4.8cm}p{4.8cm}}
+\centering\large\textbf{CHEHAB Farid -} & \centering\large\textbf{BENISSA Nadia -} & \centering\arraybackslash\large\textbf{RADHI Noureddine}
+\end{tabular}
+\end{center}
+\end{tcolorbox}
+\end{center}
+
+\vspace{0.6cm}
+
+% Secretariat & Trésorerie
+\begin{center}
+\begin{tikzpicture}
+    % Secrétariat
+    \node[fill=gradientStart, rounded corners=8pt, inner sep=15pt, text=white, 
+          font=\normalsize, text width=6.8cm, align=center] (sec) at (0,0) {
+        \textbf{\large\faEdit\quad Secrétariat}\\[8pt]
+        Secrétaire Général:\\
+        \textbf{ELHATTABI Khalid}\\[5pt]
+        Secrétaire Adjoint:\\
+        \textbf{BOUZIANE Mohammed}
+    };
+    
+    % Trésorerie
+    \node[fill=smcdTeal, rounded corners=8pt, inner sep=15pt, text=white, 
+          font=\normalsize, text width=6.8cm, align=center] (tres) at (8.2,0) {
+        \textbf{\large\faDollar\quad Trésorerie}\\[8pt]
+        Trésorier:\\
+        \textbf{BENSARDI FatimaZahra}\\[5pt]
+        Trésorier Adjoint:\\
+        \textbf{EL BAKOURI Abdelilah}
+    };
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.8cm}
+
+% Assesseurs
+\begin{center}
+\begin{tcolorbox}[
+    enhanced,
+    colback=white,
+    colframe=smcdGold,
+    width=17cm,
+    title={\faUserTie\quad Assesseurs},
+    fonttitle=\bfseries\Large,
+    coltitle=smcdDark,
+    attach boxed title to top center={yshift=-3mm},
+    boxed title style={colback=smcdGold, rounded corners},
+    top=15pt,
+    bottom=15pt,
+    left=15pt,
+    right=15pt
+]
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{p{3.5cm}p{3.8cm}p{3.8cm}p{4.2cm}}
+\large\textbf{SAIR} & \centering \large\textbf{KAFIH} & \centering \large\textbf{KHARROUB} & \centering\arraybackslash \large\textbf{BOUFETTAL} \\
+Khalid & \centering Mohammed & \centering El Khadir & \centering\arraybackslash Rachid \\[12pt]
+\large\textbf{HAJRI} & \centering \large\textbf{ELOUFIR} & \centering\arraybackslash \large\textbf{AISSE} & \\
+Amal & \centering Mouhcine & \centering\arraybackslash Larbi & \\
+\end{tabular}
+\end{tcolorbox}
+\end{center}
+
+\restoregeometry
+\newpage
+
+% ============================================
+% PAGE 6 - PHOTO COLLAGE PLEINE PAGE A4
+% ============================================
+
+\clearpage
+\thispagestyle{empty} % enlève header/footer
+
+\newgeometry{
+  top=0cm,
+  bottom=0cm,
+  left=0cm,
+  right=0cm
+}
+
+\noindent
+\includegraphics[
+  width=\paperwidth,
+  height=\paperheight
+]{collage_congres_smcd.png}
+
+\restoregeometry
+\clearpage
+
+
+% ============================================
+% PAGE 7 - OBJECTIFS DE LA SMCD
+% ============================================
+\newgeometry{top=3cm, bottom=2cm, left=1.5cm, right=1.5cm}
+\pageHeader{Objectifs de la SMCD}
+\pageFooter
+\drawDecorations
+
+\vspace*{2.5cm}
+
+\begin{center}
+    {\color{smcdBlue}\fontsize{22}{26}\selectfont\bfseries Objectifs de la SMCD}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{tcolorbox}[
+    enhanced,
+    colback=smcdLight,
+    colframe=smcdTeal,
+    boxrule=0pt,
+    borderline west={4pt}{0pt}{smcdTeal},
+    left=15pt,
+    right=15pt,
+    top=10pt,
+    bottom=10pt
+]
+\textit{La Société Marocaine de Chirurgie Digestive a pour mission de contribuer activement à l'amélioration de la prise en charge des pathologies chirurgicales digestives au Maroc, à travers une démarche scientifique, pédagogique et collaborative.}
+\end{tcolorbox}
+
+\vspace{0.4cm}
+
+% Objective 1
+\begin{tcolorbox}[
+    enhanced,
+    colback=white,
+    colframe=smcdBlue,
+    title={\faLightbulb\quad Promotion de l'innovation chirurgicale},
+    fonttitle=\bfseries,
+    coltitle=white,
+    boxed title style={colback=smcdBlue},
+    rounded corners,
+    shadow={1mm}{-1mm}{0mm}{black!15}
+]
+La SMCD œuvre pour l'intégration des techniques chirurgicales innovantes et des avancées technologiques les plus récentes en chirurgie digestive. À travers ses congrès, ateliers et sessions scientifiques, elle favorise le partage d'expertises nationales et internationales, contribuant ainsi à l'amélioration continue de la qualité et de la sécurité des soins offerts aux patients.
+\end{tcolorbox}
+
+\vspace{0.3cm}
+
+% Objective 2
+\begin{tcolorbox}[
+    enhanced,
+    colback=white,
+    colframe=smcdTeal,
+    title={\faGraduationCap\quad Soutien à la recherche scientifique et aux jeunes générations},
+    fonttitle=\bfseries,
+    coltitle=white,
+    boxed title style={colback=smcdTeal},
+    rounded corners,
+    shadow={1mm}{-1mm}{0mm}{black!15}
+]
+La société encourage la recherche clinique et fondamentale en chirurgie digestive, en soutenant les projets innovants et en valorisant les travaux scientifiques des jeunes chirurgiens. Elle s'engage également à accompagner la nouvelle génération à travers des programmes de formation, des bourses, des prix scientifiques et des opportunités d'échanges académiques.
+\end{tcolorbox}
+
+\vspace{0.3cm}
+
+% Objective 3
+\begin{tcolorbox}[
+    enhanced,
+    colback=white,
+    colframe=smcdCyan,
+    title={\faHandshake\quad Renforcement des liens entre les spécialités},
+    fonttitle=\bfseries,
+    coltitle=white,
+    boxed title style={colback=smcdCyan},
+    rounded corners,
+    shadow={1mm}{-1mm}{0mm}{black!15}
+]
+La SMCD joue un rôle fédérateur en favorisant une collaboration étroite entre les différentes spécialités chirurgicales ainsi qu'avec les disciplines médico-techniques et oncologiques. Cette approche multidisciplinaire vise à optimiser la prise en charge globale des patients atteints de pathologies digestives complexes.
+\end{tcolorbox}
+
+\vspace{0.3cm}
+
+% Objective 4
+\begin{tcolorbox}[
+    enhanced,
+    colback=white,
+    colframe=smcdGold!80!black,
+    title={\faChartLine\quad Développement de la formation continue},
+    fonttitle=\bfseries,
+    coltitle=white,
+    boxed title style={colback=smcdGold!80!black},
+    rounded corners,
+    shadow={1mm}{-1mm}{0mm}{black!15}
+]
+La société s'inscrit dans une dynamique de formation médicale continue, en proposant des programmes éducatifs réguliers conformes aux standards internationaux. Elle participe activement à la réflexion et à l'élaboration de stratégies nationales et de recommandations de bonnes pratiques pour la prise en charge des pathologies chirurgicales digestives, en adéquation avec les réalités du système de santé marocain.
+\end{tcolorbox}
+
+\restoregeometry
+\newpage
+
+% ============================================
+% PAGE 8 - OBJECTIFS DU CONGRÈS
+% ============================================
+\newgeometry{top=3cm, bottom=2cm, left=1.5cm, right=1.5cm}
+\pageHeader{Objectifs du Congrès}
+\pageFooter
+\drawDecorations
+
+\vspace*{2.5cm}
+
+\begin{center}
+    {\color{smcdBlue}\fontsize{22}{26}\selectfont\bfseries Objectifs du Congrès}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{tcolorbox}[
+    enhanced,
+    colback=smcdBlue!5,
+    colframe=smcdBlue,
+    boxrule=0pt,
+    borderline west={4pt}{0pt}{smcdBlue},
+    left=15pt, right=15pt, top=10pt, bottom=10pt
+]
+\small
+La Société Marocaine de Chirurgie Digestive organise son congrès national annuel les \textbf{26 et 27 juin 2026} à \textbf{Casablanca}, rendez-vous scientifique majeur réunissant les chirurgiens digestifs, autres spécialistes médico-chirurgicaux et acteurs de la santé autour d'un programme à forte valeur scientifique.
+
+\vspace{0.2cm}
+Cette édition sera consacrée à deux thématiques d'actualité et à fort impact clinique : \textbf{le cancer de l'estomac} et \textbf{les urgences biliaires lithiasiques}, pathologies fréquentes, complexes et nécessitant une prise en charge multidisciplinaire et technologiquement avancée.
+\end{tcolorbox}
+
+\vspace{0.4cm}
+
+% Objective 1
+\begin{tikzpicture}
+    \node[fill=smcdBlue, circle, text=white, font=\bfseries\Large, minimum size=1cm] (num) {1};
+    \node[right=0.3cm of num, text=smcdBlue, font=\large\bfseries] {Élévation du niveau scientifique et harmonisation des pratiques};
+\end{tikzpicture}
+
+\vspace{0.2cm}
+\hspace{1.5cm}\begin{minipage}{15cm}
+\small
+Le congrès a pour objectif principal de renforcer les compétences scientifiques et pratiques du chirurgien marocain, à travers des communications, tables rondes, conférences d'experts et discussions interactives. Les échanges permettront de confronter les expériences, d'actualiser les connaissances et de promouvoir des pratiques conformes aux recommandations internationales, adaptées au contexte national.
+\end{minipage}
+
+\vspace{0.5cm}
+
+% Objective 2
+\begin{tikzpicture}
+    \node[fill=smcdTeal, circle, text=white, font=\bfseries\Large, minimum size=1cm] (num) {2};
+    \node[right=0.3cm of num, text=smcdTeal, font=\large\bfseries] {Mise en lumière des innovations thérapeutiques et technologiques};
+\end{tikzpicture}
+
+\vspace{0.2cm}
+\hspace{1.5cm}\begin{minipage}{15cm}
+\small
+Les thématiques choisies offrent une plateforme idéale pour la présentation des innovations en matière de médicaments, de dispositifs médicaux, d'équipements chirurgicaux et de technologies mini-invasives.
+
+\vspace{0.2cm}
+Le congrès constitue ainsi une opportunité unique pour les partenaires industriels de :
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+    \item[\textcolor{smcdTeal}{\ding{51}}] Valoriser leurs solutions thérapeutiques et technologiques,
+    \item[\textcolor{smcdTeal}{\ding{51}}] Démontrer leur impact dans l'amélioration du parcours patient,
+    \item[\textcolor{smcdTeal}{\ding{51}}] Accompagner l'évolution des standards de prise en charge en chirurgie digestive.
+\end{itemize}
+\end{minipage}
+
+\vspace{0.5cm}
+
+% Objective 3 (preview)
+\begin{tikzpicture}
+    \node[fill=smcdCyan, circle, text=white, font=\bfseries\Large, minimum size=1cm] (num) {3};
+    \node[right=0.3cm of num, text=smcdCyan, font=\large\bfseries, text width=13cm] {Promotion de l'approche multidisciplinaire};
+\end{tikzpicture}
+
+\vspace{0.2cm}
+\hspace{1.5cm}\begin{minipage}{15cm}
+\small
+La prise en charge du cancer gastrique et des urgences biliaires lithiasiques implique une collaboration étroite entre chirurgiens, gastro-entérologues, oncologues, radiologues, anesthésistes-réanimateurs et industriels de santé. Le congrès favorisera cette synergie, en mettant en avant le rôle essentiel des traitements médicamenteux, des dispositifs médicaux et des équipements de pointe dans l'optimisation des résultats cliniques.
+\end{minipage}
+
+\restoregeometry
+\newpage
+
+% ============================================
+% PAGE 9 - SUITE OBJECTIFS DU CONGRÈS
+% ============================================
+\newgeometry{top=3cm, bottom=2cm, left=1.5cm, right=1.5cm}
+\pageHeader{Objectifs du Congrès}
+\pageFooter
+\drawDecorations
+
+\vspace*{2.5cm}
+
+% Objective 4
+\begin{tikzpicture}
+    \node[fill=smcdGold!80!black, circle, text=white, font=\bfseries\Large, minimum size=1cm] (num) {4};
+    \node[right=0.3cm of num, text=smcdGold!80!black, font=\large\bfseries, text width=13cm] {Renforcement du partenariat entre la SMCD et l'industrie de la santé};
+\end{tikzpicture}
+
+\vspace{0.2cm}
+\hspace{1.5cm}\begin{minipage}{15cm}
+\small
+À travers ce congrès, la SMCD souhaite construire des partenariats durables et éthiques avec les sociétés pharmaceutiques et de matériel médical, fondés sur un objectif commun : l'amélioration de la qualité des soins.
+
+\vspace{0.3cm}
+\begin{tcolorbox}[
+    enhanced,
+    colback=smcdGold!10,
+    colframe=smcdGold,
+    boxrule=1pt,
+    rounded corners
+]
+\textbf{Le sponsoring du congrès offre aux partenaires :}
+\begin{itemize}[leftmargin=*, itemsep=3pt]
+    \item[\textcolor{smcdGold!80!black}{\faBullseye}] Une \textbf{visibilité ciblée} auprès d'un public décisionnaire (chirurgiens, chefs de service, prescripteurs),
+    \item[\textcolor{smcdGold!80!black}{\faAward}] Un \textbf{positionnement} en tant qu'acteur engagé dans la formation médicale continue,
+    \item[\textcolor{smcdGold!80!black}{\faRocket}] Une \textbf{participation active} au développement de la chirurgie digestive au Maroc.
+\end{itemize}
+\end{tcolorbox}
+\end{minipage}
+
+\vspace{0.6cm}
+
+% Objective 5
+\begin{tikzpicture}
+    \node[fill=gradientStart, circle, text=white, font=\bfseries\Large, minimum size=1cm] (num) {5};
+    \node[right=0.3cm of num, text=gradientStart, font=\large\bfseries, text width=13cm] {Œuvrer pour le développement professionnel continu};
+\end{tikzpicture}
+
+\vspace{0.2cm}
+\hspace{1.5cm}\begin{minipage}{15cm}
+\small
+Le congrès constitue également un espace privilégié de formation médicale continue, contribuant au développement des compétences des jeunes chirurgiens et internes. Le soutien des partenaires industriels permet de garantir la qualité scientifique de l'événement et d'encourager la transmission du savoir et de l'innovation.
+\end{minipage}
+
+\vspace{1cm}
+
+% Summary visual
+\begin{center}
+\begin{tikzpicture}
+    % Central circle
+    \node[circle, fill=smcdBlue, text=white, font=\bfseries, minimum size=3cm, align=center] (center) at (0,0) {CONGRÈS\\SMCD\\2026};
+    
+    % Surrounding elements
+    \node[fill=smcdTeal, rounded corners, text=white, font=\footnotesize\bfseries, inner sep=8pt] (a) at (4, 2) {Innovation};
+    \node[fill=smcdCyan, rounded corners, text=white, font=\footnotesize\bfseries, inner sep=8pt] (b) at (4, -2) {Partenariat};
+    \node[fill=smcdGold!80!black, rounded corners, text=white, font=\footnotesize\bfseries, inner sep=8pt] (c) at (-4, 2) {Formation};
+    \node[fill=gradientStart, rounded corners, text=white, font=\footnotesize\bfseries, inner sep=8pt] (d) at (-4, -2) {Excellence};
+    
+    % Connecting lines
+    \draw[->, thick, smcdTeal] (center) -- (a);
+    \draw[->, thick, smcdCyan] (center) -- (b);
+    \draw[->, thick, smcdGold!80!black] (center) -- (c);
+    \draw[->, thick, gradientStart] (center) -- (d);
+\end{tikzpicture}
+\end{center}
+
+\restoregeometry
+\newpage
+
+% ============================================
+% PAGE 10 - FICHE TECHNIQUE
+% ============================================
+\newgeometry{top=3cm, bottom=2cm, left=1.5cm, right=1.5cm}
+\pageHeader{Fiche Technique}
+\pageFooter
+
+\vspace*{1.5cm}
+
+\begin{center}
+    {\color{smcdBlue}\fontsize{32}{36}\selectfont\bfseries Attentes du congrès national de chirurgie 2026}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{center}
+    {\color{smcdTeal}\Large\bfseries Quelques chiffres}
+\end{center}
+
+\vspace{1cm}
+
+% Visual statistics circles with icons
+\begin{center}
+\begin{tikzpicture}
+    % Top row - 2 circles
+    % 15% Autres spécialités
+    \node[circle, draw=smcdTeal, line width=3pt, minimum size=3.5cm, align=center] (circle1) at (-4,3) {};
+    \node[text=smcdTeal, font=\fontsize{10}{12}\selectfont] at ([yshift=1.2cm]circle1.center) {\faUserMd};
+    \node[text=smcdDark, font=\huge\bfseries] at (circle1.center) {15\%};
+    \node[text=smcdGray, font=\footnotesize, text width=3cm, align=center] at ([yshift=-1cm]circle1.center) {Autres \\spécialités};
+    
+    % 80% Chirurgiens
+    \node[circle, draw=smcdBlue, line width=3pt, minimum size=3.5cm, align=center] (circle2) at (4,3) {};
+    \node[text=smcdBlue, font=\fontsize{10}{12}\selectfont] at ([yshift=1.2cm]circle2.center) {\faUserMd};
+    \node[text=smcdDark, font=\huge\bfseries] at (circle2.center) {80\%};
+    \node[text=smcdGray, font=\footnotesize, text width=3cm, align=center] at ([yshift=-1cm]circle2.center) {Chirurgiens \\ nationaux };
+    
+    % Center - Main large circle: +300 participants
+    \node[circle, draw=smcdGray!30, fill=white, line width=4pt, minimum size=5.5cm, align=center] (mainCircle) at (0,-0.5) {};
+    \node[text=smcdDark, font=\fontsize{48}{52}\selectfont\bfseries] at ([yshift=0.3cm]mainCircle.center) {+300};
+    \node[text=smcdGray, font=\large] at ([yshift=-0.8cm]mainCircle.center) {PARTICIPANTS};
+    
+    % Bottom row - 2 circles
+    % +30 Sponsors
+    \node[circle, draw=smcdCyan, line width=3pt, minimum size=3.5cm, align=center] (circle3) at (-4,-4) {};
+    \node[text=smcdCyan, font=\fontsize{10}{12}\selectfont] at ([yshift=1.2cm]circle3.center) {\faBuilding};
+    \node[text=smcdDark, font=\huge\bfseries] at (circle3.center) {+30\ };
+    \node[text=smcdGray, font=\footnotesize, text width=3cm, align=center] at ([yshift=-1cm]circle3.center) {Sponsors\\ };
+    
+    % 5% Internationaux
+    \node[circle, draw=smcdTeal, line width=3pt, minimum size=3.5cm, align=center] (circle4) at (4,-4) {};
+    \node[text=smcdTeal, font=\fontsize{10}{12}\selectfont] at ([yshift=1.2cm]circle4.center) {\faGlobe};
+    \node[text=smcdDark, font=\huge\bfseries] at (circle4.center) {5\%};
+    \node[text=smcdGray, font=\footnotesize, text width=3cm, align=center] at ([yshift=-1cm]circle4.center) {Internationaux};
+    
+    % Arrows connecting to center
+    \draw[->, smcdBlue!40, line width=2pt] (circle1.south) -- (mainCircle.north west);
+    \draw[->, smcdBlue!40, line width=2pt] (circle2.south) -- (mainCircle.north east);
+    \draw[->, smcdCyan!40, line width=2pt] (circle3.north) -- (mainCircle.south west);
+    \draw[->, smcdTeal!40, line width=2pt] (circle4.north) -- (mainCircle.south east);
+\end{tikzpicture}
+\end{center}
+
+\restoregeometry
+\newpage
+
+% ============================================
+% PAGE 11 - FICHE TECHNIQUE DÉTAILS
+% ============================================
+\newgeometry{top=3cm, bottom=2cm, left=2cm, right=2cm}
+\pageHeader{Fiche Technique}
+\pageFooter
+
+\vspace*{0.8cm}
+
+\begin{center}
+    {\color{smcdBlue}\fontsize{22}{26}\selectfont\bfseries Congrès National de la Société Marocaine
+de Chirurgie Digestive SMCD 2026}
+\end{center}
+
+\vspace{0.3cm}
+
+% Main info table with modern design - compact version
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|>{\cellcolor{smcdDark}\color{white}\bfseries}p{4.5cm}|p{10.5cm}|}
+\hline
+\normalsize Événement & \normalsize\textbf{Congrès National SMCD 2026} \\
+\hline
+\normalsize Dates & \normalsize\textbf{26-27 Juin 2026} \\
+\hline
+\normalsize Lieu & \normalsize\textbf{Casablanca} — \textcolor{smcdTeal}{\textbf{Hôtel Marriott Casablanca}} \\
+\hline
+\normalsize Participants attendus & \normalsize\textbf{300+ professionnels de santé} \\
+\hline
+\normalsize Thèmes principaux & \normalsize Cancer de l'estomac\\
+& \normalsize Urgences biliaires lithiasiques \\
+\hline
+\normalsize Séances Thématiques & \normalsize Hepatobiliaire\\
+& \normalsize Colorectale\\
+& \normalsize Pancréas\\
+& \normalsize Oesogastrique\\
+& \normalsize Pariétale\\
+& \normalsize Robotique\\
+& \normalsize Urgences \\
+\hline
+\normalsize Langue & \normalsize\textbf{Français / Anglais} \\
+\hline
+\normalsize Types de sessions & \normalsize Conférences, Ateliers pratiques, Symposiums, Tables rondes \\
+\hline
+\end{tabular}
+\end{center}
+
+\restoregeometry
+\newpage
+
+% ============================================
+% PAGE 12 - FORMULES DE SPONSORING
+% ============================================
+\newgeometry{top=3cm, bottom=2cm, left=1.5cm, right=1.5cm}
+\pageHeader{Formules de Sponsoring}
+\pageFooter
+
+\vspace*{2.5cm}
+
+\begin{center}
+    {\color{smcdBlue}\fontsize{22}{26}\selectfont\bfseries Formules de Sponsoring}\\[0.3cm]
+    {\color{smcdGray}\large En sponsorisant notre congrès, vous pouvez bénéficier :}
+\end{center}
+
+\vspace{0.5cm}
+
+% Two columns
+\begin{center}
+\begin{tikzpicture}
+    % Avant la manifestation
+    \node[fill=smcdBlue, rounded corners=10pt, inner sep=0pt, minimum width=8cm, minimum height=9.5cm, anchor=north] (avant) at (0,0) {};
+    \node[anchor=north, text=white, font=\Large\bfseries] at ([yshift=-0.5cm]avant.north) {\faCalendar};
+    \node[anchor=north, text=white, font=\Large\bfseries] at ([yshift=-1.1cm]avant.north) {Avant la manifestation};
+    \node[anchor=north, text=white, font=\small, text width=7cm, align=left] at ([yshift=-1.85cm]avant.north) {
+        \begin{itemize}[leftmargin=*, itemsep=4pt, label=\textcolor{smcdCyan}{\faCheck}]
+            \item Logo sur tous les documents imprimés (invitations, programmes, flyers)
+            \item Logo sur la campagne Outdoor (affiches, banderoles)
+            \item Association aux insertions publicitaires
+            \item Page publicitaire dans le bulletin officiel
+            \item Bannière et bouton sur www.smcd.com
+        \end{itemize}
+    };
+    
+    % Pendant la manifestation
+    \node[fill=smcdTeal, rounded corners=10pt, inner sep=0pt, minimum width=8cm, minimum height=9.5cm, anchor=north] (pendant) at (8.8,0) {};
+    \node[anchor=north, text=white, font=\Large\bfseries] at ([yshift=-0.5cm]pendant.north) {\faCalendar};
+    \node[anchor=north, text=white, font=\Large\bfseries] at ([yshift=-1.1cm]pendant.north) {Pendant la manifestation};
+    \node[anchor=north, text=white, font=\small, text width=7cm, align=left] at ([yshift=-1.85cm]pendant.north) {
+        \begin{itemize}[leftmargin=*, itemsep=4pt, label=\textcolor{smcdGold}{\faCheck}]
+            \item Surface d'exposition avec emplacement privilégié
+            \item Logo sur les bannières à l'accueil
+            \item Logo dans les salles de travail
+            \item Visibilité maximale auprès des participants
+        \end{itemize}
+    };
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.8cm}
+
+% Sponsoring levels preview
+\begin{center}
+{\color{smcdBlue}\large\bfseries Nous proposons les formules de sponsoring suivantes :}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tikzpicture}
+    % Platinium
+    \node[fill=platinumColor, rounded corners=8pt, inner sep=15pt, minimum width=4.5cm, minimum height=2.5cm] (plat) at (0,0) {};
+    \node[text=smcdDark, font=\bfseries\large] at ([yshift=0.3cm]plat.center) {PLATINIUM};
+    \node[text=smcdDark, font=\Large\bfseries] at ([yshift=-0.5cm]plat.center) {250 000 MAD};
+    \draw[smcdGold, line width=3pt] ([yshift=-0.1cm]plat.south west) -- ([yshift=-0.1cm]plat.south east);
+    
+    % Gold
+    \node[fill=goldColor, rounded corners=8pt, inner sep=15pt, minimum width=4.5cm, minimum height=2.5cm] (gold) at (5.5,0) {};
+    \node[text=smcdDark, font=\bfseries\large] at ([yshift=0.3cm]gold.center) {GOLD};
+    \node[text=smcdDark, font=\Large\bfseries] at ([yshift=-0.5cm]gold.center) {200 000 MAD};
+    \draw[smcdGold!80!black, line width=3pt] ([yshift=-0.1cm]gold.south west) -- ([yshift=-0.1cm]gold.south east);
+    
+    % Silver
+    \node[fill=silverColor, rounded corners=8pt, inner sep=15pt, minimum width=4.5cm, minimum height=2.5cm] (silver) at (11,0) {};
+    \node[text=smcdDark, font=\bfseries\large] at ([yshift=0.3cm]silver.center) {SILVER};
+    \node[text=smcdDark, font=\Large\bfseries] at ([yshift=-0.5cm]silver.center) {120 000 MAD};
+    \draw[smcdGray, line width=3pt] ([yshift=-0.1cm]silver.south west) -- ([yshift=-0.1cm]silver.south east);
+\end{tikzpicture}
+\end{center}
+
+\restoregeometry
+\newpage
+
+% ============================================
+% PAGE 13 - SPONSOR PLATINIUM
+% ============================================
+\newgeometry{top=3cm, bottom=2cm, left=1.5cm, right=1.5cm}
+\pageHeader{Sponsor Platinium}
+\pageFooter
+
+\vspace*{2.5cm}
+
+% Title with price
+\begin{center}
+\begin{tikzpicture}
+    \node[fill=platinumColor, rounded corners=15pt, inner sep=20pt, minimum width=14cm] (title) {
+        \begin{minipage}{12cm}
+        \centering
+        {\color{smcdDark}\fontsize{28}{32}\selectfont\bfseries SPONSOR PLATINIUM}\\[10pt]
+        {\color{smcdBlue}\fontsize{24}{28}\selectfont\bfseries 250 000 MAD}
+        \end{minipage}
+    };
+    \draw[smcdGold, line width=4pt] (title.south west) -- (title.south east);
+    
+    % Crown icon - aligned with the price text
+    \node[text=smcdGold, font=\fontsize{30}{30}] at ([xshift=-5.5cm, yshift=-0.5cm]title.center) {\faCrown};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[
+    enhanced,
+    colback=white,
+    colframe=smcdGold!50!platinumColor,
+    boxrule=2pt,
+    rounded corners,
+    shadow={2mm}{-2mm}{0mm}{black!15}
+]
+\begin{itemize}[leftmargin=*, itemsep=8pt, label=\textcolor{smcdGold}{\faGem}]
+    \item \textbf{Priorité N°1} de choix de l'emplacement du stand
+    \item Dénomination officielle : \textbf{Sponsor Platine}
+    \item \textbf{Projection du logo} et publicité sur l'écran de la grande salle lors des présentations scientifiques
+    \item Votre logo en \textbf{grand format} sur les éléments de communication suivants :
+    \begin{itemize}[leftmargin=2cm, itemsep=3pt, label=\textcolor{smcdTeal}{\faCheckCircle}]
+        \item Panneau de remerciement à l'accueil du congrès
+        \item Panneau de remerciement à l'entrée de l'exposition
+        \item Panneau de remerciement dans la zone e-communication
+        \item Page de remerciement des sponsors dans le programme définitif
+    \end{itemize}
+    \item Possibilité de disposer des \textbf{encarts publicitaires} sur le présentoir à l'accueil du congrès
+    \item \textbf{Stand d'exposition de 18 m²}
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+% Visual representation
+\begin{center}
+\begin{tikzpicture}
+    % Stand visual
+    \node[draw=smcdGold, line width=2pt, fill=platinumColor!30, minimum width=4cm, minimum height=3cm, rounded corners] (stand) at (0,0) {};
+    \node[text=smcdDark, font=\bfseries] at (stand.center) {18 m²};
+    \node[text=smcdGray, font=\footnotesize] at ([yshift=-0.5cm]stand.center) {Stand Premium};
+    
+    % Benefits icons
+    \node[circle, fill=smcdGold, text=white, font=\large, minimum size=1.2cm] at (5, 1) {\faEye};
+    \node[text=smcdDark, font=\small, text width=3cm, align=center] at (5, -0.3) {Visibilité\\Maximale};
+    
+    \node[circle, fill=smcdBlue, text=white, font=\large, minimum size=1.2cm] at (8.5, 1) {\faMapMarkerAlt};
+    \node[text=smcdDark, font=\small, text width=3cm, align=center] at (8.5, -0.3) {Emplacement\\Prioritaire};
+    
+    \node[circle, fill=smcdTeal, text=white, font=\large, minimum size=1.2cm] at (12, 1) {\faTv};
+    \node[text=smcdDark, font=\small, text width=3cm, align=center] at (12, -0.3) {Projection\\Grande Salle};
+\end{tikzpicture}
+\end{center}
+
+\restoregeometry
+\newpage
+
+% ============================================
+% PAGE 14 - SPONSOR GOLD
+% ============================================
+\newgeometry{top=3cm, bottom=2cm, left=1.5cm, right=1.5cm}
+\pageHeader{Sponsor Gold}
+\pageFooter
+
+\vspace*{2.5cm}
+
+% Title with price
+\begin{center}
+\begin{tikzpicture}
+    \node[fill=goldColor, rounded corners=15pt, inner sep=20pt, minimum width=14cm] (title) {
+        \begin{minipage}{12cm}
+        \centering
+        {\color{smcdDark}\fontsize{28}{32}\selectfont\bfseries SPONSOR GOLD}\\[10pt]
+        {\color{smcdBlue}\fontsize{24}{28}\selectfont\bfseries 200 000 MAD}
+        \end{minipage}
+    };
+    \draw[smcdGold!70!black, line width=4pt] (title.south west) -- (title.south east);
+    
+    % Medal icon
+    \node[text=smcdGold!70!black, font=\fontsize{30}{30}] at ([xshift=-5.5cm]title.center) {\faMedal};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[
+    enhanced,
+    colback=white,
+    colframe=goldColor!80!black,
+    boxrule=2pt,
+    rounded corners,
+    shadow={2mm}{-2mm}{0mm}{black!15}
+]
+\begin{itemize}[leftmargin=*, itemsep=8pt, label=\textcolor{goldColor!80!black}{\faMedal}]
+    \item \textbf{Priorité N°2} de choix de l'emplacement du stand
+    \item Dénomination officielle : \textbf{Sponsor Or}
+    \item Votre logo en \textbf{moyen format} affiché sur les éléments de communication suivants :
+    \begin{itemize}[leftmargin=2cm, itemsep=3pt, label=\textcolor{smcdTeal}{\faCheckCircle}]
+        \item Panneau de remerciement à l'accueil du congrès
+        \item Panneau de remerciement à l'entrée de l'exposition
+        \item Panneau de remerciement dans la zone e-communication
+        \item Diapositive sponsors interséance
+        \item Page de remerciement des sponsors dans le programme définitif
+    \end{itemize}
+    \item Possibilité de disposer des \textbf{encarts publicitaires} sur le présentoir à l'accueil du congrès
+    \item \textbf{Stand d'exposition de 12 m²}
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+% Visual representation
+\begin{center}
+\begin{tikzpicture}
+    % Stand visual
+    \node[draw=goldColor!80!black, line width=2pt, fill=goldColor!20, minimum width=3.5cm, minimum height=2.5cm, rounded corners] (stand) at (0,0) {};
+    \node[text=smcdDark, font=\bfseries] at (stand.center) {12 m²};
+    \node[text=smcdGray, font=\footnotesize] at ([yshift=-0.4cm]stand.center) {Stand Gold};
+    
+    % Benefits icons
+    \node[circle, fill=goldColor, text=smcdDark, font=\large, minimum size=1.2cm] at (5, 0.8) {\faAward};
+    \node[text=smcdDark, font=\small, text width=3cm, align=center] at (5, -0.5) {Reconnaissance\\Officielle};
+    
+    \node[circle, fill=smcdBlue, text=white, font=\large, minimum size=1.2cm] at (8.5, 0.8) {\faBullhorn};
+    \node[text=smcdDark, font=\small, text width=3cm, align=center] at (8.5, -0.5) {Communication\\Multi-supports};
+    
+    \node[circle, fill=smcdTeal, text=white, font=\large, minimum size=1.2cm] at (12, 0.8) {\faHandshake};
+    \node[text=smcdDark, font=\small, text width=3cm, align=center] at (12, -0.5) {Networking\\Privilégié};
+\end{tikzpicture}
+\end{center}
+
+\restoregeometry
+\newpage
+
+% ============================================
+% PAGE 15 - SPONSOR SILVER + AVANTAGES
+% ============================================
+\newgeometry{top=3cm, bottom=2cm, left=1.5cm, right=1.5cm}
+\pageHeader{Sponsor Silver}
+\pageFooter
+
+\vspace*{2.5cm}
+
+% Title with price
+\begin{center}
+\begin{tikzpicture}
+    \node[fill=silverColor, rounded corners=15pt, inner sep=20pt, minimum width=14cm] (title) {
+        \begin{minipage}{12cm}
+        \centering
+        {\color{smcdDark}\fontsize{28}{32}\selectfont\bfseries SPONSOR SILVER}\\[10pt]
+        {\color{smcdBlue}\fontsize{24}{28}\selectfont\bfseries 120 000 MAD}
+        \end{minipage}
+    };
+    \draw[smcdGray, line width=4pt] (title.south west) -- (title.south east);
+    
+    % Star icon
+    \node[text=smcdGray, font=\fontsize{30}{30}] at ([xshift=-5.5cm]title.center) {\faStar};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{tcolorbox}[
+    enhanced,
+    colback=white,
+    colframe=silverColor!80!black,
+    boxrule=2pt,
+    rounded corners,
+    shadow={2mm}{-2mm}{0mm}{black!15}
+]
+\begin{itemize}[leftmargin=*, itemsep=6pt, label=\textcolor{smcdGray}{\faStar}]
+    \item \textbf{Priorité N°3} de choix de l'emplacement du stand
+    \item Dénomination officielle : \textbf{Sponsor Argent}
+    \item Votre logo en \textbf{petit format} affiché sur les éléments de communication suivants :
+    \begin{itemize}[leftmargin=2cm, itemsep=2pt, label=\textcolor{smcdTeal}{\faCheckCircle}]
+        \item Panneau de remerciement à l'accueil du congrès
+        \item Panneau de remerciement à l'entrée de l'exposition
+        \item Panneau de remerciement dans la zone e-communication
+        \item Diapositive sponsors interséance
+        \item Page de remerciement des sponsors dans le programme définitif
+    \end{itemize}
+    \item \textbf{Stand d'exposition de 9 m²}
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+% Advantages table
+\begin{center}
+{\color{smcdBlue}\Large\bfseries Avantages Associés}\\[0.3cm]
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|>{\columncolor{smcdBlue}\color{white}\bfseries\centering}p{4cm}|>{\centering}p{3cm}|>{\centering}p{3cm}|>{\centering\arraybackslash}p{4cm}|}
+\hline
+\rowcolor{smcdBlue}
+\color{white}\textbf{Sponsoring} & \color{white}\textbf{Badges} & \color{white}\textbf{Déjeuners} & \color{white}\textbf{Saccoches Congrès} \\
+\hline
+\cellcolor{platinumColor}\textcolor{smcdDark}{Sponsor Platine} & 8 & 4 & 4 \\
+\hline
+\cellcolor{goldColor}\textcolor{smcdDark}{Sponsor Or} & 5 & 2 & 2 \\
+\hline
+\cellcolor{silverColor}\textcolor{smcdDark}{Sponsor Argent} & 3 & 1 & 1 \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.4cm}
+
+% Visual comparison
+\begin{center}
+\begin{tikzpicture}
+    % Platinium
+    \node[draw=smcdGold, line width=2pt, fill=platinumColor!20, minimum width=2.2cm, minimum height=1.8cm, rounded corners] at (0,0) {\textbf{18 m²}};
+    \node[font=\footnotesize\bfseries] at (0,-1.3) {PLATINIUM};
+    
+    % Gold
+    \node[draw=goldColor!80!black, line width=2pt, fill=goldColor!20, minimum width=1.8cm, minimum height=1.5cm, rounded corners] at (4.5,0) {\textbf{12 m²}};
+    \node[font=\footnotesize\bfseries] at (4.5,-1.3) {GOLD};
+    
+    % Silver
+    \node[draw=smcdGray, line width=2pt, fill=silverColor!20, minimum width=1.4cm, minimum height=1.2cm, rounded corners] at (9,0) {\textbf{9 m²}};
+    \node[font=\footnotesize\bfseries] at (9,-1.3) {SILVER};
+\end{tikzpicture}
+\end{center}
+
+\restoregeometry
+\newpage
+
+% ============================================
+% PAGE 16 - AUTRES TARIFS
+% ============================================
+\newgeometry{top=3cm, bottom=2cm, left=1.5cm, right=1.5cm}
+\pageHeader{Autres Tarifs}
+\pageFooter
+
+\vspace*{2.5cm}
+
+\begin{center}
+    {\color{smcdBlue}\fontsize{22}{26}\selectfont\bfseries Autres Tarifs}
+\end{center}
+
+\vspace{0.4cm}
+
+% Inscription tariffs
+\begin{tcolorbox}[
+    enhanced,
+    colback=white,
+    colframe=smcdBlue,
+    title={\faTag\quad Tarifs d'inscription},
+    fonttitle=\bfseries\large,
+    coltitle=white,
+    boxed title style={colback=smcdBlue}
+]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|l|>{\centering}p{4.5cm}|>{\centering\arraybackslash}p{4.5cm}|}
+\hline
+\rowcolor{smcdBlue!20}
+& \textbf{Avant le 30 mars 2026} & \textbf{Après le 30 mars 2026} \\
+\hline
+\textbf{Internes / Résidents} & 2 000 MAD & 2 500 MAD \\
+\hline
+\textbf{Chirurgiens} & 3 000 MAD & 3 500 MAD \\
+\hline
+\end{tabular}
+\end{tcolorbox}
+
+\vspace{0.4cm}
+
+% Location de Stand
+\begin{tcolorbox}[
+    enhanced,
+    colback=white,
+    colframe=smcdTeal,
+    title={\faStore\quad Location de Stand},
+    fonttitle=\bfseries\large,
+    coltitle=white,
+    boxed title style={colback=smcdTeal}
+]
+Location de Stand durant les deux jours de la manifestation : à partir de \textbf{30 000 MAD} (4 m²), en fonction de la localisation et de la superficie du stand.
+\end{tcolorbox}
+
+\vspace{0.4cm}
+
+% Sessions parrainées
+\begin{tcolorbox}[
+    enhanced,
+    colback=white,
+    colframe=smcdCyan,
+    title={\faChalkboardTeacher\quad Sessions Parrainées},
+    fonttitle=\bfseries\large,
+    coltitle=white,
+    boxed title style={colback=smcdCyan}
+]
+\begin{itemize}[leftmargin=*, itemsep=5pt, label=\textcolor{smcdCyan}{\faArrowRight}]
+    \item Organisation d'un \textbf{Atelier} : \textbf{40 000 MAD}
+    \item Organisation d'un \textbf{Symposium} : \textbf{50 000 MAD}
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.4cm}
+
+% Prise en charge
+\begin{tcolorbox}[
+    enhanced,
+    colback=white,
+    colframe=smcdGold!80!black,
+    title={\faUtensils\quad Prise en charge de congressistes},
+    fonttitle=\bfseries\large,
+    coltitle=white,
+    boxed title style={colback=smcdGold!80!black}
+]
+\textbf{Inscription :} L'inscription donne accès aux séances du congrès, aux pauses café et déjeuners.
+\vspace{0.3cm}
+\begin{center}
+\begin{tikzpicture}
+    \node[fill=smcdLight, rounded corners, inner sep=12pt] at (0,0) {
+        \textbf{Repas conjoint :} 400 MAD
+    };
+    \node[fill=smcdGold!20, rounded corners, inner sep=12pt] at (7,0) {
+        \textbf{Dîner de clôture :} 700 MAD \textit{(option)}
+    };
+\end{tikzpicture}
+\end{center}
+\end{tcolorbox}
+
+\restoregeometry
+\newpage
+
+% ============================================
+% PAGE 17 - MARKETING & PUBLICITÉ
+% ============================================
+\newgeometry{top=3cm, bottom=2cm, left=1.5cm, right=1.5cm}
+\pageHeader{Marketing \& Publicité}
+\pageFooter
+
+\vspace*{2.5cm}
+
+\begin{center}
+    {\color{smcdBlue}\fontsize{22}{26}\selectfont\bfseries Marketing \& Publicité}
+\end{center}
+
+\vspace{0.5cm}
+
+% Marketing options grid
+\begin{center}
+\begin{tikzpicture}
+    % Row 1
+    % Logo website
+    \node[fill=smcdBlue, rounded corners=10pt, minimum width=7.8cm, minimum height=3.5cm, anchor=north west] (logo) at (0,0) {};
+    \node[anchor=north, text=white, font=\bfseries] at ([yshift=-0.3cm]logo.north) {\faGlobe\quad Logo sur le site web};
+    \node[anchor=north, text=smcdGold, font=\Large\bfseries] at ([yshift=-1cm]logo.north) {10 000 MAD};
+    \node[anchor=north, text=white, font=\scriptsize, text width=6.5cm, align=center] at ([yshift=-1.8cm]logo.north) {+ Lien vers votre site internet\\Redirection automatique des congressistes};
+    
+    % Emailing
+    \node[fill=smcdTeal, rounded corners=10pt, minimum width=7.8cm, minimum height=3.5cm, anchor=north west] (email) at (8.5,0) {};
+    \node[anchor=north, text=white, font=\bfseries] at ([yshift=-0.3cm]email.north) {\faEnvelope\quad Emailing personnalisé};
+    \node[anchor=north, text=smcdGold, font=\Large\bfseries] at ([yshift=-1cm]email.north) {10 000 MAD};
+    \node[anchor=north, text=white, font=\scriptsize, text width=6.5cm, align=center] at ([yshift=-1.8cm]email.north) {Envoi à tous les inscrits\\avant l'ouverture du congrès};
+    
+    % Row 2
+    % Synopsis
+    \node[fill=smcdBlue, rounded corners=10pt, minimum width=7.8cm, minimum height=3.5cm, anchor=north west] (synopsis) at (0,-4) {};
+    \node[anchor=north, text=white, font=\bfseries] at ([yshift=-0.3cm]synopsis.north) {\faBook\quad Synopsis du programme};
+    \node[anchor=north, text=smcdGold, font=\Large\bfseries] at ([yshift=-1cm]synopsis.north) {15 000 MAD};
+    \node[anchor=north, text=white, font=\scriptsize, text width=6.5cm, align=center] at ([yshift=-1.8cm]synopsis.north) {Publicité exclusive sur 2ème ou\\3ème de couverture};
+    
+    % Stylos
+    \node[fill=smcdGold!80!black, rounded corners=10pt, minimum width=7.8cm, minimum height=3.5cm, anchor=north west] (stylos) at (8.5,-4) {};
+    \node[anchor=north, text=white, font=\bfseries] at ([yshift=-0.3cm]stylos.north) {\faPen\quad Stylos du congrès};
+    \node[anchor=north, text=white, font=\Large\bfseries] at ([yshift=-1cm]stylos.north) {10 000 MAD};
+    \node[anchor=north, text=white, font=\scriptsize, text width=6.5cm, align=center] at ([yshift=-1.8cm]stylos.north) {Personnalisez les stylos\\à vos couleurs (fournis par vos soins)};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.8cm}
+
+% Custom project
+\begin{tcolorbox}[
+    enhanced,
+    colback=smcdLight,
+    colframe=smcdBlue,
+    boxrule=2pt,
+    rounded corners,
+    title={\faLightbulb\quad Projet Personnalisé},
+    fonttitle=\bfseries\large,
+    coltitle=white,
+    boxed title style={colback=smcdBlue}
+]
+\begin{center}
+\textbf{Vous avez un projet de partenariat qui ne fait pas partie de la liste ci-dessus ?}\\[0.3cm]
+\textit{N'hésitez pas à nous en faire part pour que nous puissions étudier ensemble votre projet !}\\[0.3cm]
+{\color{smcdTeal}\faEnvelope\quad smcdcasa@gmail.com}
+\end{center}
+\end{tcolorbox}
+
+\restoregeometry
+\newpage
+
+% ============================================
+% PAGE 18 - CALENDRIER DES STANDS
+% ============================================
+\newgeometry{top=3cm, bottom=2cm, left=1.5cm, right=1.5cm}
+\pageHeader{Calendrier des Stands}
+\pageFooter
+
+\vspace*{2.5cm}
+
+\begin{center}
+    {\color{smcdBlue}\fontsize{24}{28}\selectfont\bfseries Calendrier des Stands}\\[0.3cm]
+    {\color{smcdGray}\large Installation, Ouverture \& Démontage}
+\end{center}
+
+\vspace{1cm}
+
+\begin{center}
+\begin{tikzpicture}
+    % Installation
+    \node[fill=smcdBlue, rounded corners=15pt, minimum width=14cm, minimum height=3cm] (install) at (0,6) {};
+    \node[text=white, font=\fontsize{16}{18}\bfseries] at ([xshift=-2.5cm, yshift=0.2cm]install.center) {\faTools\quad Installation des stands};
+    \node[text=smcdGold, font=\large\bfseries] at ([xshift=-2.5cm, yshift=-0.5cm]install.center) {Jeudi 25 juin 2026};
+    
+    % Opening Day 1
+    \node[fill=smcdTeal, rounded corners=15pt, minimum width=14cm, minimum height=3cm] (open1) at (0,2.5) {};
+    \node[text=white, font=\fontsize{14}{16}\bfseries] at ([xshift=-3.5cm, yshift=0.2cm]open1.center) {\faDoorOpen\quad Ouverture Jour 1};
+    \node[text=white, font=\normalsize] at ([xshift=-3.5cm, yshift=-0.4cm]open1.center) {Vendredi 26 juin 2026};
+    \node[text=smcdGold, font=\large\bfseries] at ([xshift=3cm]open1.center) {08h - 18h};
+    
+    % Opening Day 2
+    \node[fill=smcdCyan, rounded corners=15pt, minimum width=14cm, minimum height=3cm] (open2) at (0,-1) {};
+    \node[text=white, font=\fontsize{14}{16}\bfseries] at ([xshift=-3.5cm, yshift=0.2cm]open2.center) {\faDoorOpen\quad Ouverture Jour 2};
+    \node[text=white, font=\normalsize] at ([xshift=-3.5cm, yshift=-0.4cm]open2.center) {Samedi 27 juin 2026};
+    \node[text=smcdGold, font=\large\bfseries] at ([xshift=3cm]open2.center) {08h - 18h};
+    
+    % Dismantling
+    \node[fill=smcdGold!80!black, rounded corners=15pt, minimum width=14cm, minimum height=3cm] (dismantle) at (0,-4.5) {};
+    \node[text=white, font=\fontsize{16}{18}\bfseries] at ([xshift=-2cm, yshift=0.2cm]dismantle.center) {\faBox\quad Démontage des stands};
+    \node[text=white, font=\large\bfseries] at ([xshift=-2cm, yshift=-0.5cm]dismantle.center) {Samedi 27 juin 2026 à 18h};
+    
+    % Connecting arrows
+    \draw[-{Stealth[scale=1.5]}, line width=3pt, smcdGray] (install.south) -- (open1.north);
+    \draw[-{Stealth[scale=1.5]}, line width=3pt, smcdGray] (open1.south) -- (open2.north);
+    \draw[-{Stealth[scale=1.5]}, line width=3pt, smcdGray] (open2.south) -- (dismantle.north);
+\end{tikzpicture}
+\end{center}
+
+\vspace{1cm}
+
+% Note
+\begin{tcolorbox}[
+    enhanced,
+    colback=smcdLight,
+    colframe=smcdBlue,
+    boxrule=1pt,
+    rounded corners
+]
+\begin{center}
+\textbf{\faInfoCircle\quad Note importante}\\[0.2cm]
+\textit{Le planning de montage pourrait subir des modifications selon les besoins organisationnels du congrès.}
+\end{center}
+\end{tcolorbox}
+
+\restoregeometry
+\newpage
+
+% ============================================
+% PAGE 19 - FORMULAIRE DE RÉSERVATION (SINGLE PAGE)
+% ============================================
+\newgeometry{top=1.5cm, bottom=1.5cm, left=1.8cm, right=1.8cm}
+\pageHeader{Formulaire de Réservation}
+\pageFooter
+
+\vspace*{1cm}
+
+\begin{center}
+{\color{smcdBlue}\fontsize{20}{24}\selectfont\bfseries Formulaire de Réservation}
+\end{center}
+
+\vspace{0.4cm}
+
+\begin{tcolorbox}[
+    enhanced,
+    colback=white,
+    colframe=smcdTeal,
+    boxrule=2pt,
+    left=12pt,
+    right=12pt,
+    top=10pt,
+    bottom=10pt,
+    rounded corners
+]
+
+{\footnotesize
+\textbf{\color{smcdBlue}Raison sociale} \textit{(tous les champs sont obligatoires)}
+
+\vspace{0.25cm}
+
+\begin{tabular}{@{}p{6.8cm}p{6.8cm}@{}}
+\textbf{Nom :} \dotfill & \textbf{Prénom :} \dotfill \\[0.35cm]
+\textbf{Fonction :} \dotfill & \textbf{GSM :} \dotfill \\[0.35cm]
+\textbf{Tél. :} \dotfill & \textbf{Email :} \dotfill \\[0.35cm]
+\end{tabular}
+
+\textbf{Adresse :} \dotfill \\[0.15cm]
+\dotfill \\[0.35cm]
+
+\begin{tabular}{@{}p{6.8cm}p{6.8cm}@{}}
+\textbf{Code postal :} \dotfill & \textbf{Ville :} \dotfill \\[0.35cm]
+\end{tabular}
+
+\vspace{0.35cm}
+
+\textbf{\color{smcdBlue}Coordonnées de facturation si différentes} \textit{(tous les champs sont obligatoires)}
+
+\vspace{0.25cm}
+
+\textbf{Nom de la société :} \dotfill \\[0.35cm]
+
+\textbf{Contact :} \dotfill \\[0.35cm]
+
+\textbf{Adresse :} \dotfill \\[0.15cm]
+\dotfill \\[0.35cm]
+
+\begin{tabular}{@{}p{6.8cm}p{6.8cm}@{}}
+\textbf{Code postal :} \dotfill & \textbf{Ville :} \dotfill \\[0.35cm]
+\end{tabular}
+
+\textbf{Pays :} \dotfill \\[0.35cm]
+
+\textbf{Votre n° de référence commande (si nécessaire) :} \dotfill \\[0.35cm]
+}
+\end{tcolorbox}
+
+\vspace{0.4cm}
+
+\begin{center}
+\begin{tcolorbox}[
+    enhanced,
+    colback=smcdLight,
+    colframe=smcdGold,
+    boxrule=2pt,
+    width=14cm,
+    rounded corners
+]
+\centering
+{\color{smcdBlue}\bfseries\footnotesize À adresser rempli, signé et cacheté par email ou par courrier à :}\\[0.15cm]
+{\color{smcdTeal}\bfseries Trésorier du congrès}\\[0.15cm]
+Ou à déposer au siège de la Société Marocaine de Chirurgie Digestive,\\
+Hôpital Ibn Rochd de Casablanca.
+\end{tcolorbox}
+\end{center}
+
+\restoregeometry
+\newpage
+
+% ============================================
+% PAGE 20 - TERMES & CONDITIONS GÉNÉRALES (SINGLE PAGE)
+% ============================================
+\newgeometry{top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm}
+\pageHeader{Termes \& Conditions}
+\pageFooter
+
+\vspace*{0.8cm}
+
+\begin{center}
+{\color{smcdBlue}\fontsize{18}{22}\selectfont\bfseries TERMES \& CONDITIONS GÉNÉRALES}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{multicols}{2}
+\setlength{\columnseprule}{0.4pt}
+\def\columnseprulecolor{\color{smcdTeal}}
+\setlength{\columnsep}{0.7cm}
+
+\begin{tcolorbox}[
+    enhanced,
+    colback=smcdLight,
+    colframe=smcdTeal,
+    boxrule=1pt,
+    title={\textbf{Article 1 - Réservation}},
+    fonttitle=\bfseries\scriptsize,
+    coltitle=smcdDark,
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=smcdTeal, rounded corners},
+    top=5pt,
+    bottom=5pt,
+    left=5pt,
+    right=5pt
+]
+{\scriptsize
+La réservation doit être faite sur le plan d'exposition 2D selon disponibilité (1er confirmé, 1er servi). Le plan des stands est disponible sur les sites web. Les sponsors Platinum, Gold et Silver auront la priorité pour la réservation.
+}
+\end{tcolorbox}
+
+\vspace{0.15cm}
+
+\begin{tcolorbox}[
+    enhanced,
+    colback=smcdLight,
+    colframe=smcdTeal,
+    boxrule=1pt,
+    title={\textbf{Article 2 - Les tarifs}},
+    fonttitle=\bfseries\scriptsize,
+    coltitle=smcdDark,
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=smcdTeal, rounded corners},
+    top=5pt,
+    bottom=5pt,
+    left=5pt,
+    right=5pt
+]
+{\scriptsize
+Les tarifs sont fixés selon le métrage et la visibilité des stands (Frais de sponsoring) : 1er confirmé, 1er servi.
+}
+\end{tcolorbox}
+
+\vspace{0.15cm}
+
+\begin{tcolorbox}[
+    enhanced,
+    colback=smcdLight,
+    colframe=smcdTeal,
+    boxrule=1pt,
+    title={\textbf{Article 3 - Gestion des espaces}},
+    fonttitle=\bfseries\scriptsize,
+    coltitle=smcdDark,
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=smcdTeal, rounded corners},
+    top=5pt,
+    bottom=5pt,
+    left=5pt,
+    right=5pt
+]
+{\scriptsize
+Pour une bonne gestion ergonomique de l'espace d'exposition, les recommandations, à respecter scrupuleusement, sont mentionnées sur le plan d'exposition.
+}
+\end{tcolorbox}
+
+\vspace{0.15cm}
+
+\begin{tcolorbox}[
+    enhanced,
+    colback=smcdLight,
+    colframe=smcdTeal,
+    boxrule=1pt,
+    title={\textbf{Article 4 - Délais}},
+    fonttitle=\bfseries\scriptsize,
+    coltitle=smcdDark,
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=smcdTeal, rounded corners},
+    top=5pt,
+    bottom=5pt,
+    left=5pt,
+    right=5pt
+]
+{\scriptsize
+L'agence organisatrice doit avoir les coordonnées de l'agence constructrice du stand du sponsor pour une bonne optimisation de la logistique organisationnelle et la préparation des badges de l'équipe technique.
+
+\textbf{NB :} La maquette du stand (validée par le comité d'organisation, l'agence Beyond Com et le sponsor) doit être finalisée au moins 2 semaines avant le congrès.
+}
+\end{tcolorbox}
+
+\columnbreak
+
+\begin{tcolorbox}[
+    enhanced,
+    colback=smcdLight,
+    colframe=smcdTeal,
+    boxrule=1pt,
+    title={\textbf{Article 5 - Montage}},
+    fonttitle=\bfseries\scriptsize,
+    coltitle=smcdDark,
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=smcdTeal, rounded corners},
+    top=5pt,
+    bottom=5pt,
+    left=5pt,
+    right=5pt
+]
+{\scriptsize
+La date et l'heure du 'montage et démontage' des stands doivent être respectées selon le planning envoyé par l'agence organisatrice. La priorité sera accordée pour les sponsors Platinum et Gold pour l'affichage et la visualisation de leurs logos et produits. L'équipe de l'agence Beyond Com est à votre disposition pour tout complément d'information. Les sponsors doivent transmettre tous les éléments nécessaires (logos, etc.) au moins 10 jours avant l'événement.
+}
+\end{tcolorbox}
+
+\vspace{0.15cm}
+
+\begin{tcolorbox}[
+    enhanced,
+    colback=smcdLight,
+    colframe=smcdTeal,
+    boxrule=1pt,
+    title={\textbf{Article 6 - Modification}},
+    fonttitle=\bfseries\scriptsize,
+    coltitle=smcdDark,
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=smcdTeal, rounded corners},
+    top=5pt,
+    bottom=5pt,
+    left=5pt,
+    right=5pt
+]
+{\scriptsize
+Le plan d'exposition pourrait subir des modifications pour des raisons logistiques.
+}
+\end{tcolorbox}
+
+\vspace{0.15cm}
+
+\begin{tcolorbox}[
+    enhanced,
+    colback=smcdLight,
+    colframe=smcdTeal,
+    boxrule=1pt,
+    title={\textbf{Article 7 - Confirmation}},
+    fonttitle=\bfseries\scriptsize,
+    coltitle=smcdDark,
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=smcdTeal, rounded corners},
+    top=5pt,
+    bottom=5pt,
+    left=5pt,
+    right=5pt
+]
+{\scriptsize
+La confirmation d'un espace stand doit être faite par écrit selon un formulaire à télécharger de la plateforme d'inscription en ligne. Le lien est disponible sur les sites web.
+}
+\end{tcolorbox}
+
+\vspace{0.15cm}
+
+\begin{tcolorbox}[
+    enhanced,
+    colback=smcdLight,
+    colframe=smcdTeal,
+    boxrule=1pt,
+    title={\textbf{Article 8 - Exhibition manager}},
+    fonttitle=\bfseries\scriptsize,
+    coltitle=smcdDark,
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=smcdTeal, rounded corners},
+    top=5pt,
+    bottom=5pt,
+    left=5pt,
+    right=5pt
+]
+{\scriptsize
+L'agence organisatrice met à votre disposition un responsable 'Exhibition manager' pour une meilleure assistance au cours du congrès.
+}
+\end{tcolorbox}
+
+\end{multicols}
+
+\restoregeometry
+\newpage
+
+
+% ============================================
+% PAGE 21 - CONTACT
+% ============================================
+\begin{tikzpicture}[remember picture, overlay]
+    % Gradient background
+    \shade[top color=smcdDark, bottom color=smcdBlue] 
+        (current page.south west) rectangle (current page.north east);
+    
+    % Decorative elements
+    \fill[smcdTeal, opacity=0.1] ([xshift=8cm, yshift=-5cm]current page.north east) circle (10cm);
+    \fill[smcdCyan, opacity=0.08] ([xshift=-5cm, yshift=3cm]current page.south west) circle (12cm);
+    
+    % Header
+    \node[anchor=north, text=white, font=\fontsize{32}{36}\selectfont\bfseries] 
+        at ([yshift=-2cm]current page.north) {SMCD};
+    \node[anchor=north, text=smcdCyan, font=\normalsize] 
+        at ([yshift=-3.3cm]current page.north) {Société Marocaine de Chirurgie Digestive};
+    
+    % Contact title
+    \node[anchor=north, text=smcdGold, font=\fontsize{28}{32}\selectfont\bfseries] 
+        at ([yshift=-4cm]current page.north) {Contact};
+    
+    % Contact details grid (email and website) - slightly more space under title
+    \node[text=white, font=\large] at ([yshift=-6.2cm]current page.north) {
+        \begin{tabular}{rl}
+            \textcolor{smcdGold}{\faEnvelope} & \textbf{smcdcasa@gmail.com} \\[8pt]
+            \textcolor{smcdGold}{\faGlobe} & \textbf{www.smcd.com} \\
+        \end{tabular}
+    };
+    
+    % Address box - well positioned in middle
+    \node[fill=smcdTeal, fill opacity=0.85, rounded corners=10pt, inner sep=18pt, 
+          text=white, text width=12cm, align=center] (address) 
+        at ([yshift=-9.5cm]current page.north) {
+            {\large\bfseries\faMapMarkerAlt\quad Adresse}\\[8pt]
+            {\large Société Marocaine de Chirurgie Digestive}\\
+            {\large CHU Ibn Rochd – Casablanca}\\
+            {\large Rue des Hôpitaux, Casablanca}
+        };
+    
+    % Phone numbers - closer to address box
+    \node[text=white, font=\large] at ([yshift=-13cm]current page.north) {
+        \begin{tabular}{rll}
+            \textcolor{smcdGold}{\faPhone} & \textbf{Président :} & 00212 661 176 899 \\[8pt]
+            \textcolor{smcdGold}{\faPhone} & \textbf{Trésorier :} & 00212 661 230 833 \\[8pt]
+            \textcolor{smcdGold}{\faPhone} & \textbf{Trésorier adjoint :} & 00212 664 286 771 \\
+        \end{tabular}
+    };
+    
+    % Bottom decoration
+    \node[fill=smcdGold, rounded corners=8pt, inner sep=15pt, 
+          text=smcdDark, font=\large\bfseries] 
+        at ([yshift=3cm]current page.south) {Nous vous remercions pour votre confiance et votre soutien};
+    
+    % Social icons (decorative)
+    \foreach \icon/\x in {\faFacebook/-2, \faTwitter/0, \faLinkedin/2} {
+        \node[text=white, opacity=0.5, font=\Large] at ([xshift=\x cm, yshift=1.2cm]current page.south) {\icon};
+    }
+\end{tikzpicture}
+
+\end{document}
+
+
+
+
+
+
+

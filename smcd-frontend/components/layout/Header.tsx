@@ -49,11 +49,11 @@ export default function Header() {
         {
             label: 'Le Congrès',
             children: [
-                { label: 'À propos', path: '/about' },
+                { label: 'Objectifs SMCD', path: '/about' },
                 { label: 'Thématiques', path: '/thematiques' },
                 { label: 'Programme', path: '/programme' },
                 { label: 'Comité Scientifique', path: '/comite-scientifique' },
-                { label: 'Comité d\'Organisation', path: '/comite-organisation' },
+                { label: 'Membres du Bureau', path: '/comite-organisation' },
             ]
         },
         { label: 'Intervenants', path: ROUTES.SPEAKERS },
@@ -66,7 +66,13 @@ export default function Header() {
                 { label: 'Archives', path: '/archives' },
             ]
         },
-        { label: 'Partenaires', path: ROUTES.SPONSORS },
+        {
+            label: 'Sponsoring',
+            children: [
+                { label: 'Formules de Sponsoring', path: '/sponsoring' },
+                { label: 'Nos Partenaires', path: ROUTES.SPONSORS },
+            ]
+        },
         { label: 'Contact', path: ROUTES.CONTACT },
     ];
 
@@ -90,11 +96,12 @@ export default function Header() {
                         <Link href={ROUTES.HOME} className="flex items-center group">
                             <div className="h-14 w-auto flex items-center">
                                 <Image
-                                    src="/smcd-logo.png"
+                                    src="/logoSmcd.png"
                                     alt="SMCD - Société Marocaine de Chirurgie Digestive"
                                     width={140}
                                     height={56}
-                                    className="object-contain h-14 w-auto"
+                                    className="object-contain"
+                                    style={{ width: 'auto', height: '56px' }}
                                     priority
                                 />
                             </div>

@@ -111,8 +111,21 @@ public class SecurityConfig {
                         
                         // Endpoints publics - Speakers
                         .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/speakers").permitAll()
+                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/speakers/**").permitAll()
                         .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/speakers/filters").permitAll()
                         .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/speakers/{id}").permitAll()
+                        
+                        // Endpoints publics - Archives
+                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/archives").permitAll()
+                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/archives/**").permitAll()
+                        
+                        // Endpoints publics - Sponsors
+                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/sponsors").permitAll()
+                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/sponsors/**").permitAll()
+                        
+                        // Endpoints publics - Documents
+                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/documents/public").permitAll()
+                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/documents/public/**").permitAll()
                         
                         // Endpoints de test (à retirer en production)
                         .requestMatchers("/api/test/**").permitAll()

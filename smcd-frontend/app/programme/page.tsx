@@ -42,7 +42,7 @@ export default function ProgrammePage() {
                                 Congrès National De Chirurgie Digestive
                             </h2>
                             <p className="text-xl text-teal-600 font-semibold">
-                                26 et 27 Juin 2026 - Casablanca
+                                26 et 27 Juin 2026 - Hôtel Marriott Casablanca
                             </p>
                         </div>
 

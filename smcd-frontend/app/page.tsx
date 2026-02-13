@@ -101,20 +101,20 @@ export default function HomePage() {
         >
           {/* Background Image */}
           <div className="absolute inset-0">
-            {/* Hero Image - Hassan II Mosque, Casablanca */}
+            {/* Hero Image - Affiche SMCD 2026 */}
             <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{ backgroundImage: 'url(/hero-casablanca.jpg)' }}
+              style={{ backgroundImage: 'url(/afficheSmcd.png)' }}
             />
 
-            {/* Premium Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0A1628]/80 via-[#0A1628]/60 to-[#0A1628]/95" />
+            {/* Premium Gradient Overlay - Plus léger en haut pour voir l'affiche */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0A1628]/40 via-[#0A1628]/50 to-[#0A1628]/95" />
 
-            {/* Additional overlay for better text readability */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0A1628]/70 via-transparent to-[#0A1628]/70" />
+            {/* Additional overlay for better text readability - léger */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A1628]/30 via-transparent to-[#0A1628]/30" />
 
             {/* Subtle animated glow */}
-            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#00D4AA]/10 rounded-full blur-[150px] animate-pulse" />
+            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#00D4AA]/5 rounded-full blur-[150px] animate-pulse" />
 
             {/* Bottom fade for seamless transition */}
             <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0A1628] to-transparent" />
@@ -140,7 +140,10 @@ export default function HomePage() {
             </h1>
 
             {/* Subtitle */}
-            <p className="max-w-2xl mx-auto text-xl md:text-2xl text-white/60 font-light mb-12 leading-relaxed">
+            <p className="max-w-2xl mx-auto text-xl md:text-2xl text-white/60 font-light mb-6 leading-relaxed">
+              &quot;Le cancer de l'estomac. Les urgences biliaires lithiasiques&quot;
+            </p>
+            <p className="max-w-2xl mx-auto text-lg text-white/50 font-light mb-12 leading-relaxed">
               L'événement incontournable de la chirurgie digestive au Maroc.
               Innovation, Excellence, Partage.
             </p>
@@ -216,51 +219,51 @@ export default function HomePage() {
 
             {/* Bento Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Card 1 - Large */}
+              {/* Card 1 - Large - Cancer de l'estomac */}
               <div className="lg:col-span-2 group relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#1E3A5F] to-[#0D2847] p-8 md:p-12 border border-white/5 transition-all duration-500 hover:border-[#00D4AA]/30">
                 <div className="absolute top-0 right-0 w-80 h-80 bg-[#00D4AA]/10 rounded-full blur-[100px] transition-all duration-500 group-hover:bg-[#00D4AA]/20" />
                 <div className="relative z-10">
                   <div className="w-16 h-16 mb-8 rounded-2xl bg-[#00D4AA]/10 flex items-center justify-center">
                     <svg className="w-8 h-8 text-[#00D4AA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                   </div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Chirurgie Robotique</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Le Cancer de l'Estomac</h3>
                   <p className="text-white/60 text-lg leading-relaxed max-w-xl">
-                    La robotique en chirurgie viscérale et digestive, au service de la précision et du geste sûr.
-                    Découvrez les dernières avancées technologiques.
+                    Pathologie fréquente et complexe nécessitant une prise en charge multidisciplinaire et technologiquement avancée. 
+                    Découvrez les dernières avancées diagnostiques et thérapeutiques.
                   </p>
                 </div>
               </div>
 
-              {/* Card 2 */}
+              {/* Card 2 - Urgences biliaires */}
               <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#1E3A5F] to-[#0D2847] p-8 border border-white/5 transition-all duration-500 hover:border-[#FF6B35]/30">
                 <div className="absolute top-0 right-0 w-40 h-40 bg-[#FF6B35]/10 rounded-full blur-[80px] transition-all duration-500 group-hover:bg-[#FF6B35]/20" />
                 <div className="relative z-10">
                   <div className="w-14 h-14 mb-6 rounded-xl bg-[#FF6B35]/10 flex items-center justify-center">
                     <svg className="w-7 h-7 text-[#FF6B35]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3">Intelligence Artificielle</h3>
+                  <h3 className="text-xl font-bold text-white mb-3">Les Urgences Biliaires Lithiasiques</h3>
                   <p className="text-white/60 leading-relaxed">
-                    L'IA comme partenaire du chirurgien pour analyser, anticiper et décider.
+                    Prise en charge des urgences biliaires avec les techniques les plus récentes.
                   </p>
                 </div>
               </div>
 
-              {/* Card 3 */}
+              {/* Card 3 - Approche multidisciplinaire */}
               <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#1E3A5F] to-[#0D2847] p-8 border border-white/5 transition-all duration-500 hover:border-purple-500/30">
                 <div className="absolute top-0 right-0 w-40 h-40 bg-purple-500/10 rounded-full blur-[80px] transition-all duration-500 group-hover:bg-purple-500/20" />
                 <div className="relative z-10">
                   <div className="w-14 h-14 mb-6 rounded-xl bg-purple-500/10 flex items-center justify-center">
                     <svg className="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3">Nouvelles Énergies</h3>
+                  <h3 className="text-xl font-bold text-white mb-3">Approche Multidisciplinaire</h3>
                   <p className="text-white/60 leading-relaxed">
-                    Le laser en chirurgie colorectale et proctologique.
+                    Collaboration entre chirurgiens, gastro-entérologues, oncologues et radiologues.
                   </p>
                 </div>
               </div>
@@ -269,7 +272,7 @@ export default function HomePage() {
               <div className="lg:col-span-2 rounded-3xl bg-gradient-to-r from-[#00D4AA]/10 to-[#00D4AA]/5 p-8 md:p-12 border border-[#00D4AA]/20">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                   {[
-                    { value: '500+', label: 'Participants' },
+                    { value: '300+', label: 'Participants' },
                     { value: '50+', label: 'Intervenants' },
                     { value: '100+', label: 'Communications' },
                     { value: '2', label: 'Jours' },

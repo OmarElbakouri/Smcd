@@ -27,11 +27,11 @@ export default function Footer() {
 
     const footerLinks = {
         congress: [
-            { href: '/about', label: 'À propos' },
+            { href: '/about', label: 'Objectifs SMCD' },
             { href: '/thematiques', label: 'Thématiques' },
             { href: '/programme', label: 'Programme' },
             { href: ROUTES.SPEAKERS, label: 'Intervenants' },
-            { href: ROUTES.SPONSORS, label: 'Partenaires' },
+            { href: '/comite-organisation', label: 'Membres du Bureau' },
         ],
         resources: [
             { href: ROUTES.VIDEOS, label: 'Vidéothèque' },
@@ -41,8 +41,8 @@ export default function Footer() {
         ],
         submissions: [
             { href: '/abstracts/submit', label: 'Soumettre un Abstract' },
-            { href: '/eposters/upload', label: 'Soumettre un E-Poster' },
-            { href: '/videos/upload', label: 'Soumettre une Vidéo' },
+            { href: '/sponsoring', label: 'Dossier Sponsoring' },
+            { href: ROUTES.SPONSORS, label: 'Nos Partenaires' },
             { href: ROUTES.CONTACT, label: 'Contact' },
         ],
     };
@@ -127,7 +127,8 @@ export default function Footer() {
                                 alt="SMCD - Société Marocaine de Chirurgie Digestive"
                                 width={160}
                                 height={64}
-                                className="object-contain h-16 w-auto rounded-lg"
+                                className="object-contain rounded-lg"
+                                style={{ width: 'auto', height: '64px' }}
                             />
                         </div>
                         <p className="text-white/40 text-sm leading-relaxed mb-6">

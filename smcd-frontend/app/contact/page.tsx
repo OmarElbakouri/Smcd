@@ -178,15 +178,56 @@ export default function ContactPage() {
                                         </div>
                                     </div>
 
-                                    {/* Phone */}
+                                    {/* Phone - President */}
                                     <div className="flex items-start space-x-4">
                                         <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-teal-400 rounded-xl flex items-center justify-center flex-shrink-0">
                                             <PhoneOutlined className="text-white text-xl" />
                                         </div>
                                         <div>
-                                            <h3 className="font-semibold text-gray-900">Téléphone</h3>
-                                            <a href={`tel:${CONGRESS_INFO.phone}`} className="text-blue-600 hover:underline">
-                                                {CONGRESS_INFO.phone}
+                                            <h3 className="font-semibold text-gray-900">Président</h3>
+                                            <a href="tel:00212661176899" className="text-blue-600 hover:underline">
+                                                00212 661 176 899
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    {/* Phone - Trésorier */}
+                                    <div className="flex items-start space-x-4">
+                                        <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-cyan-400 rounded-xl flex items-center justify-center flex-shrink-0">
+                                            <PhoneOutlined className="text-white text-xl" />
+                                        </div>
+                                        <div>
+                                            <h3 className="font-semibold text-gray-900">Trésorier</h3>
+                                            <a href="tel:00212661230833" className="text-blue-600 hover:underline">
+                                                00212 661 230 833
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    {/* Phone - Trésorier adjoint */}
+                                    <div className="flex items-start space-x-4">
+                                        <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-400 rounded-xl flex items-center justify-center flex-shrink-0">
+                                            <PhoneOutlined className="text-white text-xl" />
+                                        </div>
+                                        <div>
+                                            <h3 className="font-semibold text-gray-900">Trésorier adjoint</h3>
+                                            <a href="tel:00212664286771" className="text-blue-600 hover:underline">
+                                                00212 664 286 771
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    {/* Website */}
+                                    <div className="flex items-start space-x-4">
+                                        <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-yellow-400 rounded-xl flex items-center justify-center flex-shrink-0">
+                                            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h3 className="font-semibold text-gray-900">Site web</h3>
+                                            <a href="https://www.smcd.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                                                www.smcd.com
                                             </a>
                                         </div>
                                     </div>
@@ -198,7 +239,8 @@ export default function ContactPage() {
                                         </div>
                                         <div>
                                             <h3 className="font-semibold text-gray-900">Adresse</h3>
-                                            <p className="text-gray-600">{CONGRESS_INFO.address}</p>
+                                            <p className="text-gray-600">CHU Ibn Rochd – Casablanca</p>
+                                            <p className="text-gray-600">Rue des Hôpitaux, Casablanca</p>
                                         </div>
                                     </div>
                                 </div>
