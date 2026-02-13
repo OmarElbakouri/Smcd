@@ -22,7 +22,7 @@ export default function AboutPage() {
                         <div className="absolute bottom-20 left-[30%] w-1 h-1 bg-cyan-300/30 rounded-full" />
                         <div className="absolute bottom-32 right-[25%] w-2 h-2 bg-white/10 rounded-full" />
                     </div>
-                    
+
                     <div className="container mx-auto px-4 relative z-10 text-center">
                         <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 italic">
                             Objectifs de la SMCD
@@ -233,7 +233,11 @@ export default function AboutPage() {
                                         </tr>
                                         <tr>
                                             <td className="py-3 font-semibold text-gray-700">Thèmes principaux</td>
-                                            <td className="py-3 text-gray-600">Chirurgie digestive, innovations, recherche</td>
+                                            <td className="py-3 text-gray-600">Le cancer de l&apos;estomac, Les urgences biliaires lithiasiques</td>
+                                        </tr>
+                                        <tr>
+                                            <td className="py-3 font-semibold text-gray-700">Répartition</td>
+                                            <td className="py-3 text-gray-600">80% Chirurgiens · 15% Autres spécialités · 5% Internationaux · +30 Sponsors</td>
                                         </tr>
                                         <tr>
                                             <td className="py-3 font-semibold text-gray-700">Langue</td>
@@ -241,7 +245,7 @@ export default function AboutPage() {
                                         </tr>
                                         <tr>
                                             <td className="py-3 font-semibold text-gray-700">Type de sessions</td>
-                                            <td className="py-3 text-gray-600">Conférences, ateliers, symposiums</td>
+                                            <td className="py-3 text-gray-600">Conférences, Ateliers pratiques, Symposiums, Tables rondes</td>
                                         </tr>
                                     </tbody>
                                 </table>

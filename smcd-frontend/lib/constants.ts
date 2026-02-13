@@ -189,8 +189,8 @@ export const CONGRESS_STATS = {
   internationauxLabel: 'Internationaux',
   anesthesistes: '15%',
   anesthesistesLabel: 'Anesthésistes',
-  societesExposantes: '+23%',
-  societesExposantesLabel: 'Sociétés exposantes',
+  societesExposantes: '+30',
+  societesExposantesLabel: 'Sponsors',
   langues: 'Français / Anglais',
   typeSessions: 'Conférences, Ateliers pratiques, Symposiums, Tables rondes',
 } as const;

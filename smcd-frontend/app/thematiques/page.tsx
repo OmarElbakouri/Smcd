@@ -17,7 +17,7 @@ export default function ThematiquesPage() {
                         <div className="absolute bottom-20 left-[30%] w-1 h-1 bg-cyan-300/30 rounded-full" />
                         <div className="absolute bottom-32 right-[25%] w-2 h-2 bg-white/10 rounded-full" />
                     </div>
-                    
+
                     <div className="container mx-auto px-4 relative z-10 text-center">
                         <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 italic">
                             Thématiques du Congrès 2026
@@ -46,8 +46,8 @@ export default function ThematiquesPage() {
                                 26 – 27 JUIN 2026 • HÔTEL MARRIOTT CASABLANCA
                             </h2>
                             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                                Cette édition sera consacrée à deux thématiques d&apos;actualité et à fort impact clinique, 
-                                pathologies fréquentes, complexes et nécessitant une prise en charge multidisciplinaire 
+                                Cette édition sera consacrée à deux thématiques d&apos;actualité et à fort impact clinique,
+                                pathologies fréquentes, complexes et nécessitant une prise en charge multidisciplinaire
                                 et technologiquement avancée.
                             </p>
                         </div>
@@ -67,8 +67,8 @@ export default function ThematiquesPage() {
                                         Le Cancer de l&apos;Estomac
                                     </h3>
                                     <p className="text-white/70 text-lg leading-relaxed">
-                                        Pathologie fréquente et complexe nécessitant une prise en charge multidisciplinaire. 
-                                        Nous aborderons les avancées diagnostiques, les nouvelles stratégies thérapeutiques 
+                                        Pathologie fréquente et complexe nécessitant une prise en charge multidisciplinaire.
+                                        Nous aborderons les avancées diagnostiques, les nouvelles stratégies thérapeutiques
                                         et les innovations chirurgicales.
                                     </p>
                                     <ul className="mt-6 space-y-2">
@@ -113,7 +113,7 @@ export default function ThematiquesPage() {
                                         Les Urgences Biliaires Lithiasiques
                                     </h3>
                                     <p className="text-white/80 text-lg leading-relaxed">
-                                        Prise en charge des situations d&apos;urgence liées aux lithiases biliaires avec 
+                                        Prise en charge des situations d&apos;urgence liées aux lithiases biliaires avec
                                         les techniques les plus récentes et les protocoles de traitement optimisés.
                                     </p>
                                     <ul className="mt-6 space-y-2">
@@ -146,6 +146,61 @@ export default function ThematiquesPage() {
                             </div>
                         </div>
 
+                        {/* Séances Thématiques Détaillées */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                            {/* Sessions Cancer de l'estomac */}
+                            <div className="bg-gradient-to-br from-[#f0f9ff] to-[#e0f2fe] rounded-2xl p-8">
+                                <h3 className="text-lg font-bold text-[#0a1628] mb-6 flex items-center gap-2">
+                                    <span className="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center">
+                                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                                        </svg>
+                                    </span>
+                                    Séances — Cancer de l&apos;Estomac
+                                </h3>
+                                <ul className="space-y-3">
+                                    {[
+                                        'Place de l\'écho-endoscopie digestive dans le bilan d\'extension du cancer de l\'estomac',
+                                        'Stratégie thérapeutique du cancer de l\'estomac',
+                                        'Place du curage ganglionnaire dans le cancer de l\'estomac',
+                                        'Gastrectomie pour cancer sous cœlioscopie',
+                                        'Prise en charge nutritionnelle et chirurgie bariatrique du cancer de l\'estomac',
+                                    ].map((session, i) => (
+                                        <li key={i} className="flex items-start gap-3">
+                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-cyan-500 flex-shrink-0" />
+                                            <span className="text-gray-700 text-sm leading-relaxed">{session}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            {/* Sessions Urgences biliaires */}
+                            <div className="bg-gradient-to-br from-[#fff7ed] to-[#ffedd5] rounded-2xl p-8">
+                                <h3 className="text-lg font-bold text-[#0a1628] mb-6 flex items-center gap-2">
+                                    <span className="w-8 h-8 rounded-lg bg-orange-500 flex items-center justify-center">
+                                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                                        </svg>
+                                    </span>
+                                    Séances — Urgences Biliaires Lithiasiques
+                                </h3>
+                                <ul className="space-y-3">
+                                    {[
+                                        'Cholécystite aiguë lithiasique : du diagnostic à la cholécystectomie',
+                                        'Techniques de safe cholecystectomy (Critical View of Safety)',
+                                        'Angiocholite aiguë : prise en charge médico-chirurgicale',
+                                        'Pancréatite aiguë biliaire : guidelines et protocoles actuels',
+                                        'Complications biliaires post-chirurgicales',
+                                    ].map((session, i) => (
+                                        <li key={i} className="flex items-start gap-3">
+                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-orange-500 flex-shrink-0" />
+                                            <span className="text-gray-700 text-sm leading-relaxed">{session}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+
                         {/* Approche multidisciplinaire */}
                         <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-3xl p-8 md:p-12 mb-12">
                             <div className="text-center mb-8">
@@ -153,7 +208,7 @@ export default function ThematiquesPage() {
                                     Approche Multidisciplinaire
                                 </h3>
                                 <p className="text-gray-600 max-w-2xl mx-auto">
-                                    La prise en charge du cancer gastrique et des urgences biliaires lithiasiques 
+                                    La prise en charge du cancer gastrique et des urgences biliaires lithiasiques
                                     implique une collaboration étroite entre différentes spécialités.
                                 </p>
                             </div>
@@ -167,7 +222,7 @@ export default function ThematiquesPage() {
                                     { name: 'Anesthésistes-Réanimateurs', icon: '💉' },
                                     { name: 'Industriels de santé', icon: '🏭' },
                                 ].map((item, index) => (
-                                    <div 
+                                    <div
                                         key={index}
                                         className="bg-white rounded-xl p-4 text-center shadow-sm hover:shadow-md transition-shadow"
                                     >

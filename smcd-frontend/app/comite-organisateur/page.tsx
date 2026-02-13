@@ -3,15 +3,15 @@
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
-const scientifiqueMembers = [
-    { nom: 'FADIL Abdelaziz', role: 'Président', highlight: true },
-    { nom: 'ELHATTABI Khalid', role: 'Coordinateur' },
-    { nom: 'CHEHAB Farid', role: 'Membre' },
-    { nom: 'BENISSA Nadia', role: 'Membre' },
-    { nom: 'RADHI Noureddine', role: 'Membre' },
-    { nom: 'BENSARDI FatimaZahra', role: 'Membre' },
-    { nom: 'EL BAKOURI Abdelilah', role: 'Membre' },
-    { nom: 'BOUZIANE Mohammed', role: 'Membre' },
+const comiteMembers = [
+    { nom: 'FADIL Abdelaziz', role: 'Président du congrès', highlight: true },
+    { nom: 'ELHATTABI Khalid', role: 'Secrétaire général' },
+    { nom: 'BENSARDI FatimaZahra', role: 'Trésorière' },
+    { nom: 'EL BAKOURI Abdelilah', role: 'Trésorier adjoint' },
+    { nom: 'BOUZIANE Mohammed', role: 'Secrétaire adjoint' },
+    { nom: 'CHEHAB Farid', role: 'Vice-président' },
+    { nom: 'BENISSA Nadia', role: 'Vice-présidente' },
+    { nom: 'RADHI Noureddine', role: 'Vice-président' },
     { nom: 'SAIR Khalid', role: 'Membre' },
     { nom: 'KAFIH Mohammed', role: 'Membre' },
     { nom: 'KHARROUB El Khadir', role: 'Membre' },
@@ -21,7 +21,7 @@ const scientifiqueMembers = [
     { nom: 'AISSE Larbi', role: 'Membre' },
 ];
 
-export default function ComiteScientifiquePage() {
+export default function ComiteOrganisateurPage() {
     return (
         <>
             <Header />
@@ -34,7 +34,7 @@ export default function ComiteScientifiquePage() {
                     </div>
                     <div className="container mx-auto px-4 relative z-10 text-center">
                         <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 italic">
-                            Comité Scientifique
+                            Comité d&apos;Organisation
                         </h1>
                         <p className="text-xl text-gray-300 max-w-3xl mx-auto">
                             Société Marocaine de Chirurgie Digestive
@@ -44,7 +44,7 @@ export default function ComiteScientifiquePage() {
                             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                             </svg>
-                            <span>Comité Scientifique</span>
+                            <span>Comité d&apos;Organisation</span>
                         </div>
                     </div>
                 </section>
@@ -54,29 +54,29 @@ export default function ComiteScientifiquePage() {
                         <div className="max-w-6xl mx-auto">
                             <div className="mb-12 flex justify-center">
                                 <div className="bg-gradient-to-br from-[#0a1628] to-[#1a365d] rounded-2xl p-8 text-center shadow-xl max-w-sm">
-                                    <div className="w-24 h-24 mx-auto bg-gradient-to-br from-purple-400 to-indigo-500 rounded-full flex items-center justify-center mb-4">
+                                    <div className="w-24 h-24 mx-auto bg-gradient-to-br from-cyan-400 to-teal-500 rounded-full flex items-center justify-center mb-4">
                                         <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
                                             <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                                         </svg>
                                     </div>
-                                    <h3 className="text-xl font-bold text-white mb-2">Pr {scientifiqueMembers[0].nom}</h3>
-                                    <span className="inline-block px-4 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm font-medium">
-                                        {scientifiqueMembers[0].role}
+                                    <h3 className="text-xl font-bold text-white mb-2">Pr {comiteMembers[0].nom}</h3>
+                                    <span className="inline-block px-4 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm font-medium">
+                                        {comiteMembers[0].role}
                                     </span>
                                 </div>
                             </div>
 
-                            <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">Membres du Comité Scientifique</h2>
+                            <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">Membres du Comité</h2>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                                {scientifiqueMembers.slice(1).map((membre, index) => (
-                                    <div key={index} className="border border-gray-200 rounded-xl p-6 text-center hover:shadow-lg hover:border-purple-300 transition-all duration-300 bg-white">
-                                        <div className="w-16 h-16 mx-auto bg-gradient-to-br from-purple-100 to-indigo-100 rounded-full flex items-center justify-center mb-3">
-                                            <svg className="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                                {comiteMembers.slice(1).map((membre, index) => (
+                                    <div key={index} className="border border-gray-200 rounded-xl p-6 text-center hover:shadow-lg hover:border-teal-300 transition-all duration-300 bg-white">
+                                        <div className="w-16 h-16 mx-auto bg-gradient-to-br from-blue-100 to-teal-100 rounded-full flex items-center justify-center mb-3">
+                                            <svg className="w-8 h-8 text-teal-600" fill="currentColor" viewBox="0 0 24 24">
                                                 <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                                             </svg>
                                         </div>
                                         <p className="text-gray-800 font-semibold">{membre.nom}</p>
-                                        <span className="text-xs text-purple-600 font-medium">{membre.role}</span>
+                                        <span className="text-xs text-teal-600 font-medium">{membre.role}</span>
                                     </div>
                                 ))}
                             </div>

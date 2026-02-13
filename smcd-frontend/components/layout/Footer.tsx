@@ -32,6 +32,7 @@ export default function Footer() {
             { href: '/programme', label: 'Programme' },
             { href: ROUTES.SPEAKERS, label: 'Intervenants' },
             { href: '/comite-organisation', label: 'Membres du Bureau' },
+            { href: '/comite-organisateur', label: 'Comité d\'Organisation' },
         ],
         resources: [
             { href: ROUTES.VIDEOS, label: 'Vidéothèque' },

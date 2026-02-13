@@ -54,6 +54,7 @@ export default function Header() {
                 { label: 'Programme', path: '/programme' },
                 { label: 'Comité Scientifique', path: '/comite-scientifique' },
                 { label: 'Membres du Bureau', path: '/comite-organisation' },
+                { label: 'Comité d\'Organisation', path: '/comite-organisateur' },
             ]
         },
         { label: 'Intervenants', path: ROUTES.SPEAKERS },

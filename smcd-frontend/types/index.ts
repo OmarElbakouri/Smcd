@@ -550,3 +550,106 @@ export interface VideoStats {
     topVideos: Video[];
     videosRecentes: Video[];
 }
+
+// ============ TYPES POUR LE CONTENU STATIQUE ============
+
+export interface ContenuStatique {
+    id?: number;
+    cle: string;
+    titreFr?: string;
+    titreEn?: string;
+    contenuFr?: string;
+    contenuEn?: string;
+    imageUrl?: string;
+    imagePublicId?: string;
+    dateModification?: string;
+    modifiePar?: string;
+}
+
+// ============ TYPES POUR LES DOCUMENTS ============
+
+export interface Document {
+    id: number;
+    titre: string;
+    slug?: string;
+    description?: string;
+    descriptionCourte?: string;
+    fichierUrl: string;
+    fichierPublicId?: string;
+    tailleFichier?: number;
+    nomFichierOriginal?: string;
+    formatFichier?: string;
+    type?: TypeDocument;
+    annee: number;
+    langue: string;
+    visibilite?: string;
+    publie: boolean;
+    ordre: number;
+    featured: boolean;
+    nombreTelechargements: number;
+    datePublication?: string;
+    dateExpiration?: string;
+    dateModification?: string;
+}
+
+// ============ TYPES POUR LES SPONSORS ============
+
+export interface Sponsor {
+    id: number;
+    nom: string;
+    nomCourt?: string;
+    slug?: string;
+    logoUrl: string;
+    logoPublicId?: string;
+    description?: string;
+    descriptionCourte?: string;
+    niveau: NiveauSponsor;
+    categorie?: string;
+    annee: number;
+    siteWeb?: string;
+    email?: string;
+    telephone?: string;
+    ordre: number;
+    active: boolean;
+    nombreClics: number;
+    datePartenariat?: string;
+    dateModification?: string;
+}
+
+// ============ TYPES POUR LES ARCHIVES ============
+
+export interface Archive {
+    id: number;
+    annee: number;
+    theme?: string;
+    lieu?: string;
+    dateDebut?: string;
+    dateFin?: string;
+    description?: string;
+    imageUrl?: string;
+    imagePublicId?: string;
+    urlExterne?: string;
+    nombreParticipants?: number;
+    nombreAbstracts?: number;
+    dateCreation?: string;
+    dateModification?: string;
+}
+
+// ============ TYPES POUR LA NEWSLETTER ============
+
+export interface NewsletterSubscriber {
+    id: number;
+    email: string;
+    nom?: string;
+    prenom?: string;
+    actif: boolean;
+    origine?: string;
+    dateInscription: string;
+    dateDesinscription?: string;
+    tokenDesinscription?: string;
+}
+
+export interface NewsletterStats {
+    totalActifs: number;
+    nouveauxCetteSemaine: number;
+}

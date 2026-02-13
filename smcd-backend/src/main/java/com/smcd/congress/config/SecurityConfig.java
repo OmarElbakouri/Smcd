@@ -158,7 +158,10 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(Arrays.asList(
                 "http://localhost:3000",      // Dev local
                 "http://127.0.0.1:3000",      // Dev local alternative
-                "https://smcd-frontend.vercel.app" // Production Vercel (à ajuster)
+                "https://smcd-frontend.vercel.app", // Production Vercel
+                "https://smcdmaroc.com",      // Production VPS
+                "https://www.smcdmaroc.com",  // Production VPS www
+                "http://76.13.52.106"         // VPS IP direct
         ));
         
         // Méthodes HTTP autorisées

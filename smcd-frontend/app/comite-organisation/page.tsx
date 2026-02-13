@@ -46,7 +46,7 @@ export default function ComiteOrganisationPage() {
                         <div className="absolute bottom-20 left-[30%] w-1 h-1 bg-cyan-300/30 rounded-full" />
                         <div className="absolute bottom-32 right-[25%] w-2 h-2 bg-white/10 rounded-full" />
                     </div>
-                    
+
                     <div className="container mx-auto px-4 relative z-10 text-center">
                         <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 italic">
                             Membres du Bureau
@@ -68,7 +68,7 @@ export default function ComiteOrganisationPage() {
                 <section className="py-16">
                     <div className="container mx-auto px-4">
                         <div className="max-w-6xl mx-auto">
-                            
+
                             {/* Président */}
                             <div className="mb-12">
                                 <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">Président</h2>
@@ -92,7 +92,7 @@ export default function ComiteOrganisationPage() {
                                 <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">Vice-Présidents</h2>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                                     {bureauMembers.vicePresidents.map((membre, index) => (
-                                        <div 
+                                        <div
                                             key={index}
                                             className="border border-gray-200 rounded-xl p-6 text-center hover:shadow-lg hover:border-teal-300 transition-all duration-300 bg-white"
                                         >
@@ -116,7 +116,7 @@ export default function ComiteOrganisationPage() {
                                         <h2 className="text-xl font-bold text-gray-900 text-center mb-6">Secrétariat</h2>
                                         <div className="space-y-4">
                                             {bureauMembers.secretariat.map((membre, index) => (
-                                                <div 
+                                                <div
                                                     key={index}
                                                     className={`rounded-xl p-4 text-center ${membre.highlight ? 'bg-white shadow-md' : 'bg-white/50'}`}
                                                 >
@@ -134,7 +134,7 @@ export default function ComiteOrganisationPage() {
                                         <h2 className="text-xl font-bold text-gray-900 text-center mb-6">Trésorerie</h2>
                                         <div className="space-y-4">
                                             {bureauMembers.tresorerie.map((membre, index) => (
-                                                <div 
+                                                <div
                                                     key={index}
                                                     className="bg-white/80 rounded-xl p-4 text-center"
                                                 >
@@ -152,7 +152,7 @@ export default function ComiteOrganisationPage() {
                                 <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">Assesseurs</h2>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                                     {bureauMembers.assesseurs.map((membre, index) => (
-                                        <div 
+                                        <div
                                             key={index}
                                             className="border border-gray-200 rounded-xl p-4 text-center hover:shadow-lg hover:border-purple-300 transition-all duration-300 bg-white"
                                         >

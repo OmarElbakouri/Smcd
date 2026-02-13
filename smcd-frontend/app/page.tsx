@@ -93,7 +93,7 @@ export default function HomePage() {
 
       <main className="flex-grow">
         {/* ================================================
-            HERO SECTION - Cinematic & Bold
+            HERO SECTION - Congress Poster Style
             ================================================ */}
         <section
           ref={heroRef}
@@ -101,55 +101,98 @@ export default function HomePage() {
         >
           {/* Background Image */}
           <div className="absolute inset-0">
-            {/* Hero Image - Affiche SMCD 2026 */}
             <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
               style={{ backgroundImage: 'url(/afficheSmcd.png)' }}
             />
-
-            {/* Premium Gradient Overlay - Plus léger en haut pour voir l'affiche */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0A1628]/40 via-[#0A1628]/50 to-[#0A1628]/95" />
-
-            {/* Additional overlay for better text readability - léger */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0A1628]/30 via-transparent to-[#0A1628]/30" />
-
-            {/* Subtle animated glow */}
-            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#00D4AA]/5 rounded-full blur-[150px] animate-pulse" />
-
-            {/* Bottom fade for seamless transition */}
+            {/* Overlay for readability */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0A1628]/50 via-[#0A1628]/40 to-[#0A1628]/95" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A1628]/50 via-transparent to-[#0A1628]/60" />
+            {/* Bottom fade */}
             <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0A1628] to-transparent" />
           </div>
 
-          {/* Content */}
-          <div className={`relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-32 text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          {/* Poster Content */}
+          <div className={`relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 pt-28 pb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
 
-            {/* Event Badge */}
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 mb-8 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-              <span className="w-2 h-2 bg-[#00D4AA] rounded-full animate-pulse" />
-              <span className="text-sm font-medium text-white/80 tracking-wide uppercase">
-                {CONGRESS_INFO.dates} • {CONGRESS_INFO.location}
-              </span>
+            {/* Top Bar - Organization Logos */}
+            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 mb-12">
+              <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10">
+                <Image src="/logoSmcd.png" alt="SMCD" width={50} height={50} className="object-contain" />
+                <div className="text-left">
+                  <p className="text-white text-xs font-bold leading-tight">الجمعية المغربية</p>
+                  <p className="text-white text-xs font-bold leading-tight">للجراحة الهضمية</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10">
+                <Image src="/smcd-logo.png" alt="SMCD Logo" width={50} height={50} className="object-contain" />
+                <div className="text-left">
+                  <p className="text-white text-xs font-bold leading-tight">Société Marocaine de</p>
+                  <p className="text-white text-xs font-bold leading-tight">Chirurgie Digestive</p>
+                </div>
+              </div>
             </div>
 
-            {/* Main Title */}
-            <h1 className="heading-xl text-white mb-8">
-              <span className="block">Congrès National de</span>
-              <span className="block gradient-text">
-                Chirurgie Digestive
-              </span>
-            </h1>
+            {/* Main Poster Grid - Title Left / Themes Right */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-12">
 
-            {/* Subtitle */}
-            <p className="max-w-2xl mx-auto text-xl md:text-2xl text-white/60 font-light mb-6 leading-relaxed">
-              &quot;Le cancer de l'estomac. Les urgences biliaires lithiasiques&quot;
-            </p>
-            <p className="max-w-2xl mx-auto text-lg text-white/50 font-light mb-12 leading-relaxed">
-              L'événement incontournable de la chirurgie digestive au Maroc.
-              Innovation, Excellence, Partage.
-            </p>
+              {/* Left Side - Congress Title */}
+              <div className="text-left">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-4">
+                  Congrès<br />
+                  National de<br />
+                  <span className="gradient-text text-5xl md:text-6xl lg:text-7xl">Chirurgie</span><br />
+                  <span className="gradient-text text-5xl md:text-6xl lg:text-7xl">Digestive</span>
+                </h1>
+                <div className="w-24 h-1.5 bg-gradient-to-r from-[#00D4AA] to-cyan-400 rounded-full mt-4 mb-6" />
+                <p className="text-lg text-white/50 font-light max-w-md">
+                  L&apos;événement incontournable de la chirurgie digestive au Maroc.
+                  Innovation, Excellence, Partage.
+                </p>
+              </div>
+
+              {/* Right Side - Event Themes */}
+              <div className="space-y-6">
+                {/* Séances plénières */}
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+                  <h3 className="text-lg font-bold text-[#00D4AA] mb-3 flex items-center gap-2">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" /></svg>
+                    Séances plénières :
+                  </h3>
+                  <ul className="space-y-1.5 text-white/80 text-sm ml-7">
+                    <li>- Le cancer de l&apos;estomac</li>
+                    <li>- Les urgences biliaires lithiasiques</li>
+                  </ul>
+                </div>
+
+                {/* Tables rondes */}
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+                  <h3 className="text-lg font-bold text-[#00D4AA] mb-3 flex items-center gap-2">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" /></svg>
+                    Tables rondes
+                  </h3>
+                  <ul className="space-y-1.5 text-white/80 text-sm ml-7">
+                    <li>- Communications orales</li>
+                    <li>- E-Posters</li>
+                  </ul>
+                </div>
+
+                {/* Venue Card */}
+                <div className="bg-gradient-to-r from-[#00D4AA]/15 to-cyan-500/10 backdrop-blur-sm rounded-2xl p-6 border border-[#00D4AA]/20">
+                  <div className="flex items-center gap-3 mb-3">
+                    <svg className="w-6 h-6 text-[#00D4AA]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" /></svg>
+                    <div>
+                      <p className="text-white font-bold text-lg">{CONGRESS_INFO.venue}</p>
+                      <p className="text-white/60 text-sm">{CONGRESS_INFO.location}</p>
+                    </div>
+                  </div>
+                  <p className="text-[#00D4AA] font-bold text-xl tracking-wide">{CONGRESS_INFO.dates}</p>
+                </div>
+              </div>
+            </div>
 
             {/* Countdown Timer */}
-            <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-16">
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-10">
               {[
                 { value: timeLeft.days, label: 'Jours' },
                 { value: timeLeft.hours, label: 'Heures' },
@@ -158,9 +201,9 @@ export default function HomePage() {
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="group flex flex-col items-center p-6 md:p-8 glass-card min-w-[100px] md:min-w-[130px] transition-all duration-300 hover:bg-white/10"
+                  className="group flex flex-col items-center p-5 md:p-7 glass-card min-w-[90px] md:min-w-[120px] transition-all duration-300 hover:bg-white/10"
                 >
-                  <span className="text-4xl md:text-6xl font-bold text-white tabular-nums">
+                  <span className="text-3xl md:text-5xl font-bold text-white tabular-nums">
                     {String(item.value).padStart(2, '0')}
                   </span>
                   <span className="text-xs md:text-sm text-white/50 uppercase tracking-wider mt-2 font-medium">
@@ -230,7 +273,7 @@ export default function HomePage() {
                   </div>
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Le Cancer de l'Estomac</h3>
                   <p className="text-white/60 text-lg leading-relaxed max-w-xl">
-                    Pathologie fréquente et complexe nécessitant une prise en charge multidisciplinaire et technologiquement avancée. 
+                    Pathologie fréquente et complexe nécessitant une prise en charge multidisciplinaire et technologiquement avancée.
                     Découvrez les dernières avancées diagnostiques et thérapeutiques.
                   </p>
                 </div>
@@ -273,8 +316,8 @@ export default function HomePage() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                   {[
                     { value: '300+', label: 'Participants' },
-                    { value: '50+', label: 'Intervenants' },
-                    { value: '100+', label: 'Communications' },
+                    { value: '+30', label: 'Sponsors' },
+                    { value: '80%', label: 'Chirurgiens' },
                     { value: '2', label: 'Jours' },
                   ].map((stat, i) => (
                     <div key={i} className="text-center">
