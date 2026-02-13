@@ -14,10 +14,17 @@ export const metadata: Metadata = {
   keywords: ['chirurgie', 'digestive', 'congrès', 'Maroc', 'SMCD', 'médecine', 'chirurgien', 'abstract', 'poster'],
   authors: [{ name: 'SMCD' }],
   creator: 'Société Marocaine de Chirurgie Digestive',
+  icons: {
+    icon: [
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
-    url: 'https://smcd.ma',
+    url: 'https://smcdmaroc.com',
     siteName: 'SMCD Congrès 2026',
     title: 'SMCD - Congrès National de Chirurgie Digestive 2026',
     description: 'Rejoignez-nous pour le Congrès National de Chirurgie Digestive 2026 à Casablanca, Maroc.',
