@@ -18,7 +18,7 @@ export default function ProgrammePage() {
                         <div className="absolute bottom-20 left-[30%] w-1 h-1 bg-cyan-300/30 rounded-full" />
                         <div className="absolute bottom-32 right-[25%] w-2 h-2 bg-white/10 rounded-full" />
                     </div>
-                    
+
                     <div className="container mx-auto px-4 relative z-10 text-center">
                         <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 italic">
                             Programme Du Congrès
@@ -35,7 +35,7 @@ export default function ProgrammePage() {
 
                 {/* Contenu */}
                 <section className="py-16">
-                    <div className="container mx-auto px-4 max-w-5xl">
+                    <div className="container mx-auto px-4 max-w-6xl">
                         {/* Titre */}
                         <div className="text-center mb-12">
                             <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
@@ -46,72 +46,87 @@ export default function ProgrammePage() {
                             </p>
                         </div>
 
-                        {/* Programme Jour 1 */}
+                        {/* Programme Jour 1 - Vendredi */}
                         <div className="mb-12">
                             <div className="bg-gradient-to-r from-teal-500 to-cyan-500 text-white px-6 py-3 rounded-t-xl">
                                 <h3 className="text-xl font-bold">
                                     📅 Vendredi 26 Juin 2026
                                 </h3>
                             </div>
-                            <div className="border border-gray-200 border-t-0 rounded-b-xl overflow-hidden">
+                            <div className="border border-gray-200 border-t-0 rounded-b-xl overflow-hidden overflow-x-auto">
                                 <table className="w-full">
+                                    <thead>
+                                        <tr className="bg-gray-100 border-b border-gray-200">
+                                            <th className="px-4 py-3 text-left text-gray-600 font-semibold w-36">Horaire</th>
+                                            <th className="px-4 py-3 text-left text-teal-700 font-semibold">🏛️ Salle 1</th>
+                                            <th className="px-4 py-3 text-left text-purple-700 font-semibold">🏛️ Salle 2</th>
+                                        </tr>
+                                    </thead>
                                     <tbody>
                                         <tr className="border-b border-gray-100">
-                                            <td className="px-4 py-3 text-gray-500 font-medium w-32">08:00 - 08:30</td>
-                                            <td className="px-4 py-3 text-gray-800">Accueil et inscription</td>
-                                        </tr>
-                                        <tr className="border-b border-gray-100 bg-gray-50">
-                                            <td className="px-4 py-3 text-gray-500 font-medium">08:30 - 09:00</td>
-                                            <td className="px-4 py-3 text-gray-800 font-semibold">Cérémonie d&apos;ouverture</td>
-                                        </tr>
-                                        <tr className="border-b border-gray-100">
-                                            <td className="px-4 py-3 text-gray-500 font-medium">09:00 - 10:30</td>
-                                            <td className="px-4 py-3">
-                                                <span className="font-semibold text-teal-600">Séance Plénière 1</span>
+                                            <td className="px-4 py-3 text-gray-500 font-medium align-top">08h30 - 10h30</td>
+                                            <td className="px-4 py-3 align-top">
+                                                <span className="font-semibold text-teal-600">SESSION 1</span>
                                                 <br />
-                                                <span className="text-gray-600">Chirurgie colorectale avancée</span>
+                                                <span className="text-gray-600">Chirurgie des métastases hépatiques</span>
+                                            </td>
+                                            <td className="px-4 py-3 align-top">
+                                                <span className="font-semibold text-purple-600">SESSION 2</span>
+                                                <br />
+                                                <span className="text-gray-600">Urgences</span>
                                             </td>
                                         </tr>
                                         <tr className="border-b border-gray-100 bg-amber-50">
-                                            <td className="px-4 py-3 text-gray-500 font-medium">10:30 - 11:00</td>
-                                            <td className="px-4 py-3 text-gray-600 italic">☕ Pause café - Visite des stands</td>
+                                            <td colSpan={3} className="px-4 py-3 text-gray-600 italic text-center">☕ 10h30 - 11h00 : Pause Café, Visite des Stands</td>
                                         </tr>
                                         <tr className="border-b border-gray-100">
-                                            <td className="px-4 py-3 text-gray-500 font-medium">11:00 - 12:30</td>
-                                            <td className="px-4 py-3">
-                                                <span className="font-semibold text-teal-600">FMC 1</span>
+                                            <td className="px-4 py-3 text-gray-500 font-medium align-top">11h00 - 13h00</td>
+                                            <td className="px-4 py-3 align-top">
+                                                <span className="font-semibold text-teal-600">SESSION 3</span>
                                                 <br />
-                                                <span className="text-gray-600">Cancers du tube digestif</span>
+                                                <span className="text-gray-600">Session Rectum</span>
+                                            </td>
+                                            <td className="px-4 py-3 align-top">
+                                                <span className="font-semibold text-purple-600">SESSION 4</span>
+                                                <br />
+                                                <span className="text-gray-600">Chirurgie Pancréatique</span>
                                             </td>
                                         </tr>
                                         <tr className="border-b border-gray-100 bg-amber-50">
-                                            <td className="px-4 py-3 text-gray-500 font-medium">12:30 - 14:00</td>
-                                            <td className="px-4 py-3 text-gray-600 italic">🍽️ Déjeuner</td>
+                                            <td colSpan={3} className="px-4 py-3 text-gray-600 italic text-center">🍽️ 12h30 - 14h30 : Pause Déjeuner</td>
                                         </tr>
                                         <tr className="border-b border-gray-100">
-                                            <td className="px-4 py-3 text-gray-500 font-medium">14:00 - 15:30</td>
-                                            <td className="px-4 py-3">
-                                                <span className="font-semibold text-purple-600">🤖 Live Surgery - Chirurgie Robotique</span>
+                                            <td className="px-4 py-3 text-gray-500 font-medium align-top">15h00 - 16h30</td>
+                                            <td className="px-4 py-3 align-top">
+                                                <span className="font-semibold text-teal-600">SESSION 5</span>
+                                                <br />
+                                                <span className="text-gray-600">Chirurgie Robotique</span>
+                                            </td>
+                                            <td className="px-4 py-3 align-top">
+                                                <span className="font-semibold text-purple-600">SESSION 6</span>
+                                                <br />
+                                                <span className="text-gray-600">Face à face en chirurgie colorectale</span>
                                             </td>
                                         </tr>
                                         <tr className="border-b border-gray-100 bg-amber-50">
-                                            <td className="px-4 py-3 text-gray-500 font-medium">15:30 - 16:00</td>
-                                            <td className="px-4 py-3 text-gray-600 italic">☕ Pause café</td>
+                                            <td colSpan={3} className="px-4 py-3 text-gray-600 italic text-center">☕ 16h30 - 17h00 : Pause Café, Visite des Stands</td>
                                         </tr>
                                         <tr className="border-b border-gray-100">
-                                            <td className="px-4 py-3 text-gray-500 font-medium">16:00 - 17:30</td>
-                                            <td className="px-4 py-3">
-                                                <span className="font-semibold text-teal-600">Séances Thématiques Parallèles</span>
+                                            <td className="px-4 py-3 text-gray-500 font-medium align-top">17h00 - 19h00</td>
+                                            <td className="px-4 py-3 align-top">
+                                                <span className="font-semibold text-teal-600">SESSION 7</span>
                                                 <br />
-                                                <span className="text-gray-600">• Chirurgie hépatique</span>
+                                                <span className="text-gray-600">Chirurgie bariatrique</span>
+                                            </td>
+                                            <td className="px-4 py-3 align-top">
+                                                <span className="font-semibold text-purple-600">SESSION 8</span>
                                                 <br />
-                                                <span className="text-gray-600">• Chirurgie bariatrique</span>
+                                                <span className="text-gray-600">Chirurgie pariétale</span>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td className="px-4 py-3 text-gray-500 font-medium">17:30 - 18:30</td>
-                                            <td className="px-4 py-3">
-                                                <span className="font-semibold text-gray-800">Session E-Posters</span>
+                                        <tr className="bg-gray-50">
+                                            <td colSpan={3} className="px-4 py-3 text-center">
+                                                <span className="font-semibold text-gray-800">🎊 Inauguration officielle du congrès</span>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -119,70 +134,87 @@ export default function ProgrammePage() {
                             </div>
                         </div>
 
-                        {/* Programme Jour 2 */}
+                        {/* Programme Jour 2 - Samedi */}
                         <div className="mb-12">
                             <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-t-xl">
                                 <h3 className="text-xl font-bold">
                                     📅 Samedi 27 Juin 2026
                                 </h3>
                             </div>
-                            <div className="border border-gray-200 border-t-0 rounded-b-xl overflow-hidden">
+                            <div className="border border-gray-200 border-t-0 rounded-b-xl overflow-hidden overflow-x-auto">
                                 <table className="w-full">
+                                    <thead>
+                                        <tr className="bg-gray-100 border-b border-gray-200">
+                                            <th className="px-4 py-3 text-left text-gray-600 font-semibold w-36">Horaire</th>
+                                            <th className="px-4 py-3 text-left text-teal-700 font-semibold">🏛️ Salle 1</th>
+                                            <th className="px-4 py-3 text-left text-purple-700 font-semibold">🏛️ Salle 2</th>
+                                        </tr>
+                                    </thead>
                                     <tbody>
                                         <tr className="border-b border-gray-100">
-                                            <td className="px-4 py-3 text-gray-500 font-medium w-32">08:30 - 10:00</td>
-                                            <td className="px-4 py-3">
-                                                <span className="font-semibold text-teal-600">Séance Plénière 2</span>
+                                            <td className="px-4 py-3 text-gray-500 font-medium align-top">08h30 - 10h30</td>
+                                            <td className="px-4 py-3 align-top">
+                                                <span className="font-semibold text-teal-600">SESSION 1</span>
                                                 <br />
-                                                <span className="text-gray-600">Pathologies hépatobiliaires complexes</span>
+                                                <span className="text-gray-600">Cas cliniques</span>
+                                            </td>
+                                            <td className="px-4 py-3 align-top">
+                                                <span className="font-semibold text-purple-600">SESSION 2</span>
+                                                <br />
+                                                <span className="text-gray-600">Vidéos divers</span>
                                             </td>
                                         </tr>
                                         <tr className="border-b border-gray-100 bg-amber-50">
-                                            <td className="px-4 py-3 text-gray-500 font-medium">10:00 - 10:30</td>
-                                            <td className="px-4 py-3 text-gray-600 italic">☕ Pause café</td>
+                                            <td colSpan={3} className="px-4 py-3 text-gray-600 italic text-center">☕ 10h30 - 11h00 : Pause Café, Visite des Stands</td>
                                         </tr>
                                         <tr className="border-b border-gray-100">
-                                            <td className="px-4 py-3 text-gray-500 font-medium">10:30 - 12:00</td>
-                                            <td className="px-4 py-3">
-                                                <span className="font-semibold text-teal-600">FMC 2</span>
+                                            <td className="px-4 py-3 text-gray-500 font-medium align-top">11h00 - 12h30</td>
+                                            <td className="px-4 py-3 align-top">
+                                                <span className="font-semibold text-teal-600">SESSION 3</span>
                                                 <br />
-                                                <span className="text-gray-600">Chirurgie bariatrique et métabolique</span>
+                                                <span className="text-gray-600">Cancer de l&apos;estomac</span>
+                                            </td>
+                                            <td className="px-4 py-3 align-top">
+                                                <span className="font-semibold text-purple-600">SESSION 4</span>
+                                                <br />
+                                                <span className="text-gray-600">Communications libres</span>
                                             </td>
                                         </tr>
                                         <tr className="border-b border-gray-100 bg-amber-50">
-                                            <td className="px-4 py-3 text-gray-500 font-medium">12:00 - 13:30</td>
-                                            <td className="px-4 py-3 text-gray-600 italic">🍽️ Déjeuner</td>
+                                            <td colSpan={3} className="px-4 py-3 text-gray-600 italic text-center">🍽️ 12h30 - 14h30 : Pause Déjeuner</td>
                                         </tr>
                                         <tr className="border-b border-gray-100">
-                                            <td className="px-4 py-3 text-gray-500 font-medium">13:30 - 15:00</td>
-                                            <td className="px-4 py-3">
-                                                <span className="font-semibold text-teal-600">Séances Thématiques Parallèles</span>
+                                            <td className="px-4 py-3 text-gray-500 font-medium align-top">14h30 - 16h00</td>
+                                            <td className="px-4 py-3 align-top">
+                                                <span className="font-semibold text-teal-600">SESSION 5</span>
                                                 <br />
-                                                <span className="text-gray-600">• Chirurgie pancréatique</span>
+                                                <span className="text-gray-600">Urgences biliaires lithiasiques</span>
+                                            </td>
+                                            <td className="px-4 py-3 align-top">
+                                                <span className="font-semibold text-purple-600">SESSION 6</span>
                                                 <br />
-                                                <span className="text-gray-600">• Proctologie</span>
+                                                <span className="text-gray-600">Chirurgie endocrinienne</span>
                                             </td>
                                         </tr>
                                         <tr className="border-b border-gray-100 bg-amber-50">
-                                            <td className="px-4 py-3 text-gray-500 font-medium">15:00 - 15:30</td>
-                                            <td className="px-4 py-3 text-gray-600 italic">☕ Pause café</td>
+                                            <td colSpan={3} className="px-4 py-3 text-gray-600 italic text-center">☕ 16h30 - 17h00 : Pause Café, Visite des Stands</td>
                                         </tr>
                                         <tr className="border-b border-gray-100">
-                                            <td className="px-4 py-3 text-gray-500 font-medium">15:30 - 16:30</td>
-                                            <td className="px-4 py-3">
-                                                <span className="font-semibold text-gray-800">Communications libres</span>
+                                            <td className="px-4 py-3 text-gray-500 font-medium align-top">16h30 - 18h00</td>
+                                            <td className="px-4 py-3 align-top">
+                                                <span className="font-semibold text-teal-600">SESSION 7</span>
+                                                <br />
+                                                <span className="text-gray-600">Vidéos : comment je fais ?</span>
+                                            </td>
+                                            <td className="px-4 py-3 align-top">
+                                                <span className="font-semibold text-purple-600">SESSION 8</span>
+                                                <br />
+                                                <span className="text-gray-600">Traumatismes de l&apos;abdomen</span>
                                             </td>
                                         </tr>
-                                        <tr className="border-b border-gray-100">
-                                            <td className="px-4 py-3 text-gray-500 font-medium">16:30 - 17:00</td>
-                                            <td className="px-4 py-3">
-                                                <span className="font-semibold text-gray-800">Remise des prix</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className="px-4 py-3 text-gray-500 font-medium">17:00</td>
-                                            <td className="px-4 py-3">
-                                                <span className="font-semibold text-purple-600">Cérémonie de clôture</span>
+                                        <tr className="bg-gray-50">
+                                            <td colSpan={3} className="px-4 py-3 text-center">
+                                                <span className="font-semibold text-purple-600">🎓 Clôture du congrès</span>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -193,10 +225,10 @@ export default function ProgrammePage() {
                         {/* Note */}
                         <div className="bg-gray-50 rounded-xl p-6 text-center">
                             <p className="text-gray-600">
-                                <span className="font-semibold text-gray-800">📋 Note :</span> Le programme détaillé sera disponible prochainement.
+                                <span className="font-semibold text-gray-800">📋 Note :</span> Le programme détaillé avec les intervenants sera disponible prochainement.
                             </p>
                             <p className="text-sm text-gray-500 mt-2">
-                                Dernière mise à jour : Janvier 2026
+                                Dernière mise à jour : Février 2026
                             </p>
                         </div>
                     </div>
