@@ -19,6 +19,10 @@ const comiteMembers = [
     { nom: 'HAJRI Amal', role: 'Membre' },
     { nom: 'ELOUFIR Mouhcine', role: 'Membre' },
     { nom: 'AISSE Larbi', role: 'Membre' },
+    { nom: 'MAJD Abdessamad', role: 'Membre' },
+    { nom: 'ESSAIDI Zakaria', role: 'Membre' },
+    { nom: 'KHADIJA Kamal', role: 'Membre' },
+    { nom: 'CHOUKRI Mehdi', role: 'Membre' },
 ];
 
 export default function ComiteOrganisateurPage() {
@@ -60,9 +64,6 @@ export default function ComiteOrganisateurPage() {
                                         </svg>
                                     </div>
                                     <h3 className="text-xl font-bold text-white mb-2">Pr {comiteMembers[0].nom}</h3>
-                                    <span className="inline-block px-4 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm font-medium">
-                                        {comiteMembers[0].role}
-                                    </span>
                                 </div>
                             </div>
 
@@ -76,7 +77,6 @@ export default function ComiteOrganisateurPage() {
                                             </svg>
                                         </div>
                                         <p className="text-gray-800 font-semibold">{membre.nom}</p>
-                                        <span className="text-xs text-teal-600 font-medium">{membre.role}</span>
                                     </div>
                                 ))}
                             </div>

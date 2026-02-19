@@ -60,9 +60,6 @@ export default function ComiteScientifiquePage() {
                                         </svg>
                                     </div>
                                     <h3 className="text-xl font-bold text-white mb-2">Pr {scientifiqueMembers[0].nom}</h3>
-                                    <span className="inline-block px-4 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm font-medium">
-                                        {scientifiqueMembers[0].role}
-                                    </span>
                                 </div>
                             </div>
 
@@ -76,7 +73,6 @@ export default function ComiteScientifiquePage() {
                                             </svg>
                                         </div>
                                         <p className="text-gray-800 font-semibold">{membre.nom}</p>
-                                        <span className="text-xs text-purple-600 font-medium">{membre.role}</span>
                                     </div>
                                 ))}
                             </div>

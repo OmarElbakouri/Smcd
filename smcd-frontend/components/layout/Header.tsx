@@ -214,10 +214,10 @@ export default function Header() {
 
                 {/* Mobile Menu */}
                 <div
-                    className={`lg:hidden overflow-hidden transition-all duration-300 ${isMobileMenuOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'
+                    className={`lg:hidden overflow-hidden transition-all duration-300 ${isMobileMenuOpen ? 'max-h-[calc(100vh-5rem)] opacity-100' : 'max-h-0 opacity-0'
                         }`}
                 >
-                    <div className="bg-white border-t border-gray-100">
+                    <div className="bg-white border-t border-gray-100 max-h-[calc(100vh-5rem)] overflow-y-auto">
                         <nav className="max-w-7xl mx-auto px-6 py-6 space-y-2">
                             {navItems.map((item) => (
                                 item.children ? (

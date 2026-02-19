@@ -29,6 +29,11 @@ const bureauMembers = {
         { nom: 'HAJRI Amal', role: 'Assesseur' },
         { nom: 'ELOUFIR Mouhcine', role: 'Assesseur' },
         { nom: 'AISSE Larbi', role: 'Assesseur' },
+        { nom: 'KHADIJA Kamal', role: 'Assesseur' },
+        { nom: 'CHOUKRI Mehdi', role: 'Assesseur' },
+        { nom: 'MAJD Abdessamad', role: 'Assesseur' },
+        { nom: 'ESSAIDI Zakaria', role: 'Assesseur' },
+        { nom: 'ELWASSI Anass', role: 'Assesseur' },
     ],
 };
 

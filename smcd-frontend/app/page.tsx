@@ -177,6 +177,25 @@ export default function HomePage() {
                   </ul>
                 </div>
 
+                {/* Séances thématiques */}
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+                  <h3 className="text-lg font-bold text-[#FF6B35] mb-3 flex items-center gap-2">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" /></svg>
+                    Séances thématiques :
+                  </h3>
+                  <ul className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-white/80 text-sm ml-7">
+                    <li>- Hepatobiliaire</li>
+                    <li>- Colorectale</li>
+                    <li>- Pancreas</li>
+                    <li>- Œsogastrique</li>
+                    <li>- Pariétale</li>
+                    <li>- Robotique</li>
+                    <li>- Bariatrique</li>
+                    <li>- Urgences</li>
+                    <li>- Endocrinienne</li>
+                  </ul>
+                </div>
+
                 {/* Venue Card */}
                 <div className="bg-gradient-to-r from-[#00D4AA]/15 to-cyan-500/10 backdrop-blur-sm rounded-2xl p-6 border border-[#00D4AA]/20">
                   <div className="flex items-center gap-3 mb-3">
@@ -350,25 +369,12 @@ export default function HomePage() {
 
                   {/* Main image container */}
                   <div className="relative h-full rounded-[2rem] overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 shadow-2xl">
-                    {president?.photoUrl ? (
-                      <Image
-                        src={president.photoUrl}
-                        alt={president.nomComplet || 'Président'}
-                        fill
-                        className="object-cover"
-                      />
-                    ) : (
-                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#1E3A5F] to-[#0A1628]">
-                        <div className="text-center p-8">
-                          <div className="w-24 h-24 mx-auto rounded-full bg-[#00D4AA]/20 flex items-center justify-center mb-4">
-                            <svg className="w-12 h-12 text-[#00D4AA]" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                            </svg>
-                          </div>
-                          <p className="text-white/60 text-sm">Photo du Président</p>
-                        </div>
-                      </div>
-                    )}
+                    <Image
+                      src={president?.photoUrl || '/president-fadil.jpg'}
+                      alt={president?.nomComplet || 'Pr. Abdelaziz FADIL'}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                 </div>
               </div>
@@ -383,29 +389,31 @@ export default function HomePage() {
                   Bienvenue au <span className="gradient-text">Congrès 2026</span>
                 </h2>
 
-                {president ? (
-                  <>
-                    <p className="text-2xl font-semibold text-[#1E3A5F] mb-2">
-                      {president.nomComplet}
-                    </p>
-                    <p className="text-gray-500 mb-8">
-                      {president.specialite} • {president.institution}
-                    </p>
-                    <div className="prose prose-lg text-gray-600 mb-8">
-                      <p className="leading-relaxed text-lg">
-                        {president.messagePresident || "Le message du président sera bientôt disponible."}
-                      </p>
-                    </div>
-                  </>
-                ) : (
-                  <div className="prose prose-lg text-gray-600 mb-8">
-                    <p className="leading-relaxed text-lg">
-                      Chers collègues, c'est avec un immense plaisir que je vous accueille au Congrès National
-                      de Chirurgie Digestive {CONGRESS_INFO.year}. Cette édition s'annonce exceptionnelle avec
-                      des thématiques à la pointe de l'innovation chirurgicale.
-                    </p>
-                  </div>
-                )}
+                <p className="text-2xl font-semibold text-[#1E3A5F] mb-2">
+                  {president?.nomComplet || 'Pr. Abdelaziz FADIL'}
+                </p>
+                <p className="text-gray-500 mb-8">
+                  {president ? `${president.specialite} • ${president.institution}` : 'Président de la Société Marocaine de Chirurgie Digestive (SMCD)'}
+                </p>
+                <div className="prose prose-lg text-gray-600 mb-8 max-h-[400px] overflow-y-auto pr-2">
+                  <p className="leading-relaxed text-base text-justify">
+                    {president?.messagePresident || `C'est avec un engagement fort et une conviction partagée que je vous annonce, en tant que Président de la Société Marocaine de Chirurgie Digestive (SMCD), la tenue de notre Congrès de Chirurgie, qui se déroulera à l'hôtel Mariott de Casablanca, les 26 et 27 juin 2026. Cet événement scientifique majeur se veut un lieu de convergence entre innovation technologique, expertise clinique et exigences du terrain, au service d'une chirurgie digestive moderne, efficace et responsable.
+
+Le programme de cette édition réunira des experts reconnus, de jeunes talents prometteurs et l'ensemble des acteurs de l'écosystème chirurgical autour de sessions scientifiques de haut niveau, de démonstrations pratiques et de débats structurants, favorisant le dialogue entre cliniciens, chercheurs et partenaires industriels.
+
+Notre discipline connaît une transformation profonde portée par des avancées technologiques rapides : chirurgie mini-invasive avancée, robotique, imagerie per-opératoire, modélisation 3D, analyse de données et intelligence artificielle, qui redéfinissent nos stratégies opératoires et nos standards de qualité.
+
+Une attention particulière sera portée au cancer de l'estomac, pathologie exigeante par sa complexité technique et son enjeu pronostique. Les évolutions récentes en matière de stadification, de stratégies péri-opératoires, de techniques mini-invasives et robot-assistées, ainsi que l'optimisation des parcours de soins, feront l'objet de riches discussions multidisciplinaires avec des experts nationaux et internationaux.
+
+Parallèlement, le congrès revendique un ancrage résolument pratique, en accordant une place centrale aux urgences biliaires lithiasiques : indications opératoires, timing, choix techniques, gestion des complications et organisation des parcours en contexte d'urgence.
+
+En complément, d'autres séances thématiques seront organisées autour des chirurgies, pancréatique, hépato-biliaire, colo-rectale, oeso-gastrique, pariétale, métabolique et des urgences digestives, avec une séance dédiée à la place de la robotique en chirurgie digestive.
+
+Enfin, la réussite de ce congrès reposera sur la qualité des échanges entre tous les acteurs, notamment les partenaires industriels, technologiques et pharmaceutiques, dont le rôle est essentiel pour soutenir l'innovation, améliorer les pratiques et répondre aux enjeux cliniques actuels. Je vous remercie sincèrement de l'intérêt porté à cet événement et de la confiance accordée à la SMCD, et serais honoré de pouvoir compter sur votre engagement pour faire de cette édition un événement de référence.
+
+Au plaisir de vous retrouver bientôt.`}
+                  </p>
+                </div>
 
                 <Link
                   href="/about"
