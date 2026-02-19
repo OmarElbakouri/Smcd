@@ -117,11 +117,17 @@ export default function HomePage() {
 
             {/* Top Bar - Organization Logos */}
             <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 mb-12">
+              {/* Appel à communications Box */}
+              <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10 animate-pulse">
+                <p className="text-[#00D4AA] text-xs font-bold leading-tight uppercase mb-1">Appel à communications</p>
+                <p className="text-white text-xs font-bold leading-tight">Date limite: 31 Mars 2026</p>
+              </div>
+
               <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10">
                 <Image src="/logoSmcd.png" alt="SMCD" width={50} height={50} className="object-contain" />
                 <div className="text-left">
                   <p className="text-white text-xs font-bold leading-tight">الجمعية المغربية</p>
-                  <p className="text-white text-xs font-bold leading-tight">للجراحة الهضمية</p>
+                  <p className="text-white text-xs font-bold leading-tight">لجراحة الجهاز الهضمي</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10">

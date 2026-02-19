@@ -52,20 +52,9 @@ export default function ComiteScientifiquePage() {
                 <section className="py-16">
                     <div className="container mx-auto px-4">
                         <div className="max-w-6xl mx-auto">
-                            <div className="mb-12 flex justify-center">
-                                <div className="bg-gradient-to-br from-[#0a1628] to-[#1a365d] rounded-2xl p-8 text-center shadow-xl max-w-sm">
-                                    <div className="w-24 h-24 mx-auto bg-gradient-to-br from-purple-400 to-indigo-500 rounded-full flex items-center justify-center mb-4">
-                                        <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                                        </svg>
-                                    </div>
-                                    <h3 className="text-xl font-bold text-white mb-2">Pr {scientifiqueMembers[0].nom}</h3>
-                                </div>
-                            </div>
-
                             <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">Membres du Comité Scientifique</h2>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                                {scientifiqueMembers.slice(1).map((membre, index) => (
+                                {scientifiqueMembers.map((membre, index) => (
                                     <div key={index} className="border border-gray-200 rounded-xl p-6 text-center hover:shadow-lg hover:border-purple-300 transition-all duration-300 bg-white">
                                         <div className="w-16 h-16 mx-auto bg-gradient-to-br from-purple-100 to-indigo-100 rounded-full flex items-center justify-center mb-3">
                                             <svg className="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 24 24">

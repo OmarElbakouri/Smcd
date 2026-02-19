@@ -29,11 +29,6 @@ const bureauMembers = {
         { nom: 'HAJRI Amal', role: 'Assesseur' },
         { nom: 'ELOUFIR Mouhcine', role: 'Assesseur' },
         { nom: 'AISSE Larbi', role: 'Assesseur' },
-        { nom: 'KHADIJA Kamal', role: 'Assesseur' },
-        { nom: 'CHOUKRI Mehdi', role: 'Assesseur' },
-        { nom: 'MAJD Abdessamad', role: 'Assesseur' },
-        { nom: 'ESSAIDI Zakaria', role: 'Assesseur' },
-        { nom: 'ELWASSI Anass', role: 'Assesseur' },
     ],
 };
 
@@ -95,7 +90,7 @@ export default function ComiteOrganisationPage() {
                             {/* Vice-Présidents */}
                             <div className="mb-12">
                                 <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">Vice-Présidents</h2>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                                <div className="flex flex-wrap justify-center gap-4">
                                     {bureauMembers.vicePresidents.map((membre, index) => (
                                         <div
                                             key={index}
@@ -168,55 +163,7 @@ export default function ComiteOrganisationPage() {
                                 </div>
                             </div>
 
-                            {/* Tableau récapitulatif */}
-                            <div className="mt-16">
-                                <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">Tableau Récapitulatif</h2>
-                                <div className="overflow-x-auto">
-                                    <table className="w-full bg-white rounded-2xl shadow-lg overflow-hidden">
-                                        <thead className="bg-gradient-to-r from-[#0a1628] to-[#1a365d] text-white">
-                                            <tr>
-                                                <th className="px-6 py-4 text-left">Fonction</th>
-                                                <th className="px-6 py-4 text-left">Nom</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="divide-y divide-gray-100">
-                                            <tr className="bg-cyan-50">
-                                                <td className="px-6 py-4 font-semibold text-cyan-700">Président</td>
-                                                <td className="px-6 py-4">FADIL Abdelaziz</td>
-                                            </tr>
-                                            <tr>
-                                                <td className="px-6 py-4 font-semibold text-gray-700" rowSpan={4}>Vice-présidents</td>
-                                                <td className="px-6 py-4">CHEHAB Farid</td>
-                                            </tr>
-                                            <tr>
-                                                <td className="px-6 py-4">EL HATTABI Khalid</td>
-                                            </tr>
-                                            <tr>
-                                                <td className="px-6 py-4">BENISSA Nadia</td>
-                                            </tr>
-                                            <tr>
-                                                <td className="px-6 py-4">RADHI Noureddine</td>
-                                            </tr>
-                                            <tr className="bg-blue-50">
-                                                <td className="px-6 py-4 font-semibold text-blue-700">Secrétaire général</td>
-                                                <td className="px-6 py-4">EL HATTABI Khalid</td>
-                                            </tr>
-                                            <tr>
-                                                <td className="px-6 py-4 font-semibold text-gray-700">Trésorier</td>
-                                                <td className="px-6 py-4">BENSARDI FatimaZahra</td>
-                                            </tr>
-                                            <tr>
-                                                <td className="px-6 py-4 font-semibold text-gray-700">Trésorier adjoint</td>
-                                                <td className="px-6 py-4">EL BAKOURI Abdelilah</td>
-                                            </tr>
-                                            <tr>
-                                                <td className="px-6 py-4 font-semibold text-gray-700">Secrétaire adjoint</td>
-                                                <td className="px-6 py-4">BOUZIANE Mohamed</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </section>
