@@ -117,11 +117,7 @@ export default function HomePage() {
 
             {/* Top Bar - Organization Logos */}
             <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 mb-12">
-              {/* Appel à communications Box */}
-              <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10 animate-pulse">
-                <p className="text-[#00D4AA] text-xs font-bold leading-tight uppercase mb-1">Appel à communications</p>
-                <p className="text-white text-xs font-bold leading-tight">Date limite: 31 Mars 2026</p>
-              </div>
+              {/* Appel à communications Box removed from here to avoid duplication */}
 
               <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10">
                 <Image src="/logoSmcd.png" alt="SMCD" width={50} height={50} className="object-contain" />
@@ -144,11 +140,19 @@ export default function HomePage() {
 
               {/* Left Side - Congress Title */}
               <div className="text-left">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-4">
-                  Congrès<br />
-                  National de<br />
-                  <span className="gradient-text text-5xl md:text-6xl lg:text-7xl">Chirurgie</span><br />
-                  <span className="gradient-text text-5xl md:text-6xl lg:text-7xl">Digestive</span>
+                <div className="mb-8 pr-4">
+                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-2 leading-tight uppercase">
+                    Appel à <br />
+                    <span className="gradient-text animate-[pulse_2s_ease-in-out_infinite]">communications</span>
+                  </h2>
+                  <div className="inline-block bg-[#00D4AA] text-[#0A1628] px-5 py-2 rounded-lg font-black text-lg md:text-2xl mt-4 animate-bounce shadow-[0_0_20px_rgba(0,212,170,0.5)]">
+                    Date limite: 31 Mars 2026
+                  </div>
+                </div>
+
+                <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-white/80 leading-tight mb-4">
+                  Congrès de<br />
+                  <span className="text-2xl md:text-3xl lg:text-4xl">Chirurgie SMCD 2026</span>
                 </h1>
                 <div className="w-24 h-1.5 bg-gradient-to-r from-[#00D4AA] to-cyan-400 rounded-full mt-4 mb-6" />
                 <p className="text-lg text-white/50 font-light max-w-md">
