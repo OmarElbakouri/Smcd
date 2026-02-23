@@ -9,7 +9,7 @@ import { CONGRESS_INFO, ROUTES } from '@/lib/constants';
 interface NavItem {
     label: string;
     path?: string;
-    children?: { label: string; path: string }[];
+    children?: { label: string; path: string; external?: boolean }[];
 }
 
 /**
@@ -71,6 +71,7 @@ export default function Header() {
             label: 'Sponsoring',
             children: [
                 { label: 'Formules de Sponsoring', path: '/sponsoring' },
+                { label: 'Dossier Sponsoring', path: '/dossier-sponsoring.pdf', external: true },
                 { label: 'Nos Partenaires', path: ROUTES.SPONSORS },
             ]
         },
@@ -144,16 +145,28 @@ export default function Header() {
                                         >
                                             <div className="py-2">
                                                 {item.children.map((child) => (
-                                                    <Link
-                                                        key={child.path}
-                                                        href={child.path}
-                                                        className={`block px-4 py-3 text-sm transition-colors ${pathname === child.path
-                                                            ? 'bg-[#00D4AA]/10 text-[#00D4AA] font-medium'
-                                                            : 'text-gray-600 hover:bg-gray-50 hover:text-[#0A1628]'
-                                                            }`}
-                                                    >
-                                                        {child.label}
-                                                    </Link>
+                                                    child.external ? (
+                                                        <a
+                                                            key={child.path}
+                                                            href={child.path}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="block px-4 py-3 text-sm transition-colors text-gray-600 hover:bg-gray-50 hover:text-[#0A1628]"
+                                                        >
+                                                            {child.label}
+                                                        </a>
+                                                    ) : (
+                                                        <Link
+                                                            key={child.path}
+                                                            href={child.path}
+                                                            className={`block px-4 py-3 text-sm transition-colors ${pathname === child.path
+                                                                ? 'bg-[#00D4AA]/10 text-[#00D4AA] font-medium'
+                                                                : 'text-gray-600 hover:bg-gray-50 hover:text-[#0A1628]'
+                                                                }`}
+                                                        >
+                                                            {child.label}
+                                                        </Link>
+                                                    )
                                                 ))}
                                             </div>
                                         </div>
@@ -226,17 +239,30 @@ export default function Header() {
                                             {item.label}
                                         </div>
                                         {item.children.map((child) => (
-                                            <Link
-                                                key={child.path}
-                                                href={child.path}
-                                                onClick={() => setIsMobileMenuOpen(false)}
-                                                className={`block px-4 py-3 rounded-lg text-sm font-medium ${pathname === child.path
-                                                    ? 'bg-[#00D4AA]/10 text-[#00D4AA]'
-                                                    : 'text-gray-600 hover:bg-gray-50'
-                                                    }`}
-                                            >
-                                                {child.label}
-                                            </Link>
+                                            child.external ? (
+                                                <a
+                                                    key={child.path}
+                                                    href={child.path}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    onClick={() => setIsMobileMenuOpen(false)}
+                                                    className="block px-4 py-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50"
+                                                >
+                                                    {child.label}
+                                                </a>
+                                            ) : (
+                                                <Link
+                                                    key={child.path}
+                                                    href={child.path}
+                                                    onClick={() => setIsMobileMenuOpen(false)}
+                                                    className={`block px-4 py-3 rounded-lg text-sm font-medium ${pathname === child.path
+                                                        ? 'bg-[#00D4AA]/10 text-[#00D4AA]'
+                                                        : 'text-gray-600 hover:bg-gray-50'
+                                                        }`}
+                                                >
+                                                    {child.label}
+                                                </Link>
+                                            )
                                         ))}
                                     </div>
                                 ) : (

@@ -145,6 +145,7 @@ export default function HomePage() {
                     Appel à <br />
                     <span className="gradient-text animate-[pulse_2s_ease-in-out_infinite]">communications</span>
                   </h2>
+                  <p className="text-white/80 text-lg md:text-xl font-medium mt-1">(Orale, affichée et vidéo (7min))</p>
                   <div className="inline-block bg-[#00D4AA] text-[#0A1628] px-5 py-2 rounded-lg font-black text-lg md:text-2xl mt-4 animate-bounce shadow-[0_0_20px_rgba(0,212,170,0.5)]">
                     Date limite: 31 Mars 2026
                   </div>
@@ -175,18 +176,6 @@ export default function HomePage() {
                   </ul>
                 </div>
 
-                {/* Tables rondes */}
-                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                  <h3 className="text-lg font-bold text-[#00D4AA] mb-3 flex items-center gap-2">
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" /></svg>
-                    Tables rondes
-                  </h3>
-                  <ul className="space-y-1.5 text-white/80 text-sm ml-7">
-                    <li>- Communications orales</li>
-                    <li>- E-Posters</li>
-                  </ul>
-                </div>
-
                 {/* Séances thématiques */}
                 <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
                   <h3 className="text-lg font-bold text-[#FF6B35] mb-3 flex items-center gap-2">
@@ -203,8 +192,25 @@ export default function HomePage() {
                     <li>- Bariatrique</li>
                     <li>- Urgences</li>
                     <li>- Endocrinienne</li>
+                    <li>- Autres</li>
                   </ul>
                 </div>
+
+                {/* Pré-Programme */}
+                <Link
+                  href="/programme"
+                  className="block bg-gradient-to-r from-[#00D4AA]/20 to-cyan-500/15 backdrop-blur-sm rounded-2xl p-5 border border-[#00D4AA]/30 hover:border-[#00D4AA]/60 transition-all duration-300 group cursor-pointer"
+                >
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-bold text-[#00D4AA] flex items-center gap-2">
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z" /></svg>
+                      Pré-Programme
+                    </h3>
+                    <svg className="w-5 h-5 text-[#00D4AA] transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </div>
+                </Link>
 
                 {/* Venue Card */}
                 <div className="bg-gradient-to-r from-[#00D4AA]/15 to-cyan-500/10 backdrop-blur-sm rounded-2xl p-6 border border-[#00D4AA]/20">
@@ -215,8 +221,19 @@ export default function HomePage() {
                       <p className="text-white/60 text-sm">{CONGRESS_INFO.location}</p>
                     </div>
                   </div>
-                  <p className="text-[#00D4AA] font-bold text-xl tracking-wide">{CONGRESS_INFO.dates}</p>
+                  <p className="text-[#00D4AA] font-bold text-xl tracking-wide text-center">{CONGRESS_INFO.dates}</p>
                 </div>
+
+                {/* Inscription Button */}
+                <Link
+                  href="/sponsoring#autres-tarifs"
+                  className="block bg-[#00D4AA] hover:bg-[#00C49A] text-[#0A1628] text-center font-bold text-lg rounded-2xl p-4 transition-all duration-300 shadow-[0_0_20px_rgba(0,212,170,0.3)] hover:shadow-[0_0_30px_rgba(0,212,170,0.5)] group"
+                >
+                  Inscription
+                  <svg className="inline-block ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </Link>
               </div>
             </div>
 
@@ -301,10 +318,6 @@ export default function HomePage() {
                     </svg>
                   </div>
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Le Cancer de l'Estomac</h3>
-                  <p className="text-white/60 text-lg leading-relaxed max-w-xl">
-                    Pathologie fréquente et complexe nécessitant une prise en charge multidisciplinaire et technologiquement avancée.
-                    Découvrez les dernières avancées diagnostiques et thérapeutiques.
-                  </p>
                 </div>
               </div>
 
@@ -318,9 +331,6 @@ export default function HomePage() {
                     </svg>
                   </div>
                   <h3 className="text-xl font-bold text-white mb-3">Les Urgences Biliaires Lithiasiques</h3>
-                  <p className="text-white/60 leading-relaxed">
-                    Prise en charge des urgences biliaires avec les techniques les plus récentes.
-                  </p>
                 </div>
               </div>
 
@@ -334,14 +344,18 @@ export default function HomePage() {
                     </svg>
                   </div>
                   <h3 className="text-xl font-bold text-white mb-3">Approche Multidisciplinaire</h3>
-                  <p className="text-white/60 leading-relaxed">
-                    Collaboration entre chirurgiens, gastro-entérologues, oncologues et radiologues.
-                  </p>
                 </div>
               </div>
 
+              {/* Attentes du Congrès Header */}
+              <div className="lg:col-span-3 text-center mt-4">
+                <h3 className="text-2xl md:text-3xl font-bold text-white">
+                  Attentes du <span className="gradient-text">Congrès :</span>
+                </h3>
+              </div>
+
               {/* Card 4 - Stats */}
-              <div className="lg:col-span-2 rounded-3xl bg-gradient-to-r from-[#00D4AA]/10 to-[#00D4AA]/5 p-8 md:p-12 border border-[#00D4AA]/20">
+              <div className="lg:col-span-3 rounded-3xl bg-gradient-to-r from-[#00D4AA]/10 to-[#00D4AA]/5 p-8 md:p-12 border border-[#00D4AA]/20 max-w-3xl mx-auto w-full">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                   {[
                     { value: '300+', label: 'Participants' },

@@ -66,37 +66,6 @@ export default function ThematiquesPage() {
                                     <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
                                         Le Cancer de l&apos;Estomac
                                     </h3>
-                                    <p className="text-white/70 text-lg leading-relaxed">
-                                        Pathologie fréquente et complexe nécessitant une prise en charge multidisciplinaire.
-                                        Nous aborderons les avancées diagnostiques, les nouvelles stratégies thérapeutiques
-                                        et les innovations chirurgicales.
-                                    </p>
-                                    <ul className="mt-6 space-y-2">
-                                        <li className="flex items-center gap-2 text-white/60">
-                                            <svg className="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                            </svg>
-                                            Diagnostic précoce et staging
-                                        </li>
-                                        <li className="flex items-center gap-2 text-white/60">
-                                            <svg className="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                            </svg>
-                                            Chirurgie curative et palliative
-                                        </li>
-                                        <li className="flex items-center gap-2 text-white/60">
-                                            <svg className="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                            </svg>
-                                            Traitements néoadjuvants et adjuvants
-                                        </li>
-                                        <li className="flex items-center gap-2 text-white/60">
-                                            <svg className="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                            </svg>
-                                            Approche multidisciplinaire
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
 
@@ -112,122 +81,33 @@ export default function ThematiquesPage() {
                                     <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
                                         Les Urgences Biliaires Lithiasiques
                                     </h3>
-                                    <p className="text-white/80 text-lg leading-relaxed">
-                                        Prise en charge des situations d&apos;urgence liées aux lithiases biliaires avec
-                                        les techniques les plus récentes et les protocoles de traitement optimisés.
-                                    </p>
-                                    <ul className="mt-6 space-y-2">
-                                        <li className="flex items-center gap-2 text-white/70">
-                                            <svg className="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                            </svg>
-                                            Cholécystite aiguë lithiasique
-                                        </li>
-                                        <li className="flex items-center gap-2 text-white/70">
-                                            <svg className="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                            </svg>
-                                            Angiocholite et migration lithiasique
-                                        </li>
-                                        <li className="flex items-center gap-2 text-white/70">
-                                            <svg className="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                            </svg>
-                                            Pancréatite aiguë biliaire
-                                        </li>
-                                        <li className="flex items-center gap-2 text-white/70">
-                                            <svg className="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                            </svg>
-                                            Chirurgie laparoscopique d&apos;urgence
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Séances Thématiques Détaillées */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                            {/* Sessions Cancer de l'estomac */}
-                            <div className="bg-gradient-to-br from-[#f0f9ff] to-[#e0f2fe] rounded-2xl p-8">
-                                <h3 className="text-lg font-bold text-[#0a1628] mb-6 flex items-center gap-2">
-                                    <span className="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center">
-                                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
-                                        </svg>
-                                    </span>
-                                    Séances — Cancer de l&apos;Estomac
-                                </h3>
-                                <ul className="space-y-3">
-                                    {[
-                                        'Place de l\'écho-endoscopie digestive dans le bilan d\'extension du cancer de l\'estomac',
-                                        'Stratégie thérapeutique du cancer de l\'estomac',
-                                        'Place du curage ganglionnaire dans le cancer de l\'estomac',
-                                        'Gastrectomie pour cancer sous cœlioscopie',
-                                        'Prise en charge nutritionnelle et chirurgie bariatrique du cancer de l\'estomac',
-                                    ].map((session, i) => (
-                                        <li key={i} className="flex items-start gap-3">
-                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-cyan-500 flex-shrink-0" />
-                                            <span className="text-gray-700 text-sm leading-relaxed">{session}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-
-                            {/* Sessions Urgences biliaires */}
-                            <div className="bg-gradient-to-br from-[#fff7ed] to-[#ffedd5] rounded-2xl p-8">
-                                <h3 className="text-lg font-bold text-[#0a1628] mb-6 flex items-center gap-2">
-                                    <span className="w-8 h-8 rounded-lg bg-orange-500 flex items-center justify-center">
-                                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
-                                        </svg>
-                                    </span>
-                                    Séances — Urgences Biliaires Lithiasiques
-                                </h3>
-                                <ul className="space-y-3">
-                                    {[
-                                        'Cholécystite aiguë lithiasique : du diagnostic à la cholécystectomie',
-                                        'Techniques de safe cholecystectomy (Critical View of Safety)',
-                                        'Angiocholite aiguë : prise en charge médico-chirurgicale',
-                                        'Pancréatite aiguë biliaire : guidelines et protocoles actuels',
-                                        'Complications biliaires post-chirurgicales',
-                                    ].map((session, i) => (
-                                        <li key={i} className="flex items-start gap-3">
-                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-orange-500 flex-shrink-0" />
-                                            <span className="text-gray-700 text-sm leading-relaxed">{session}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
-
-                        {/* Approche multidisciplinaire */}
-                        <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-3xl p-8 md:p-12 mb-12">
-                            <div className="text-center mb-8">
-                                <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                                    Approche Multidisciplinaire
-                                </h3>
-                                <p className="text-gray-600 max-w-2xl mx-auto">
-                                    La prise en charge du cancer gastrique et des urgences biliaires lithiasiques
-                                    implique une collaboration étroite entre différentes spécialités.
-                                </p>
-                            </div>
-
-                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                        {/* Séances thématiques */}
+                        <div className="bg-gradient-to-br from-[#f0fdf4] to-[#ecfdf5] rounded-2xl p-8 mb-16">
+                            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                                <span className="w-10 h-10 rounded-xl bg-teal-500 flex items-center justify-center">
+                                    <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" /></svg>
+                                </span>
+                                Séances thématiques :
+                            </h3>
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
                                 {[
-                                    { name: 'Chirurgiens', icon: '🔪' },
-                                    { name: 'Gastro-entérologues', icon: '🏥' },
-                                    { name: 'Oncologues', icon: '💊' },
-                                    { name: 'Radiologues', icon: '📷' },
-                                    { name: 'Anesthésistes-Réanimateurs', icon: '💉' },
-                                    { name: 'Industriels de santé', icon: '🏭' },
-                                ].map((item, index) => (
-                                    <div
-                                        key={index}
-                                        className="bg-white rounded-xl p-4 text-center shadow-sm hover:shadow-md transition-shadow"
-                                    >
-                                        <div className="text-3xl mb-2">{item.icon}</div>
-                                        <p className="text-sm font-medium text-gray-700">{item.name}</p>
+                                    'Hepatobiliaire',
+                                    'Colorectale',
+                                    'Pancreas',
+                                    'Œsogastrique',
+                                    'Pariétale',
+                                    'Robotique',
+                                    'Bariatrique',
+                                    'Urgences',
+                                    'Endocrinienne',
+                                    'Autres',
+                                ].map((theme, i) => (
+                                    <div key={i} className="bg-white rounded-xl px-4 py-3 text-center shadow-sm border border-teal-100 hover:shadow-md hover:border-teal-300 transition-all">
+                                        <span className="text-sm font-medium text-gray-700">{theme}</span>
                                     </div>
                                 ))}
                             </div>

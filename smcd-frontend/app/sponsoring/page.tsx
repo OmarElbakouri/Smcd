@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import { generateReservationPDF, generateReservationDOCX } from '@/lib/generateReservationForm';
 
 // Packages de sponsoring
 const sponsoringPackages = [
@@ -300,7 +301,7 @@ export default function SponsoringPage() {
                 </section>
 
                 {/* Autres Tarifs */}
-                <section className="py-16 bg-white">
+                <section id="autres-tarifs" className="py-16 bg-white">
                     <div className="container mx-auto px-4">
                         <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
                             Autres Tarifs
@@ -324,13 +325,47 @@ export default function SponsoringPage() {
                                             <td className="py-3 text-center text-teal-600 font-semibold">2 000 MAD</td>
                                             <td className="py-3 text-center">2 500 MAD</td>
                                         </tr>
-                                        <tr>
+                                        <tr className="border-b border-gray-100">
                                             <td className="py-3 font-medium">Chirurgien</td>
                                             <td className="py-3 text-center text-teal-600 font-semibold">3 000 MAD</td>
                                             <td className="py-3 text-center">3 500 MAD</td>
                                         </tr>
                                     </tbody>
                                 </table>
+
+                                <div className="mt-6 space-y-2 border-t border-gray-200 pt-6">
+                                    <p className="font-semibold text-gray-900">Pack1 :</p>
+                                    <p className="font-semibold text-gray-900">Pack2 :</p>
+                                    <p className="font-semibold text-gray-900">Pack3 :</p>
+                                </div>
+
+                                <div className="mt-4 pt-4 border-t border-gray-200">
+                                    <p className="font-semibold text-gray-900">RIB :</p>
+                                </div>
+
+                                <div className="mt-6 pt-4 border-t border-gray-200">
+                                    <p className="text-sm font-semibold text-gray-700 mb-3">Formulaire de Réservation</p>
+                                    <div className="flex gap-3">
+                                        <button
+                                            onClick={() => generateReservationDOCX()}
+                                            className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-[#0A1628] text-white rounded-xl text-sm font-medium hover:bg-[#1a2d4a] transition-colors cursor-pointer"
+                                        >
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                            </svg>
+                                            DOC
+                                        </button>
+                                        <button
+                                            onClick={() => generateReservationPDF()}
+                                            className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-red-600 text-white rounded-xl text-sm font-medium hover:bg-red-700 transition-colors cursor-pointer"
+                                        >
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                            </svg>
+                                            PDF
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
 
                             {/* Location de Stand */}
