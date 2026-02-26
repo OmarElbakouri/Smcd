@@ -89,16 +89,7 @@ function LoginForm() {
                 </Form.Item>
             </Form>
 
-            {/* Demo credentials */}
-            <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-                <p className="text-sm text-blue-800 font-medium mb-2">Identifiants de démonstration :</p>
-                <p className="text-sm text-blue-600">
-                    Email: <code className="bg-blue-100 px-1 rounded">admin@smcd.ma</code>
-                </p>
-                <p className="text-sm text-blue-600">
-                    Mot de passe: <code className="bg-blue-100 px-1 rounded">Admin123!</code>
-                </p>
-            </div>
+
         </Card>
     );
 }
