@@ -71,6 +71,7 @@ export default function Header() {
             label: 'Sponsoring',
             children: [
                 { label: 'Formules de Sponsoring', path: '/sponsoring' },
+                { label: 'Formules d\'inscriptions', path: '/inscription' },
                 { label: 'Dossier Sponsoring', path: '/dossier-sponsoring.pdf', external: true },
                 { label: 'Nos Partenaires', path: ROUTES.SPONSORS },
             ]
@@ -190,20 +191,8 @@ export default function Header() {
                             ))}
                         </nav>
 
-                        {/* CTA & Mobile Menu */}
+                        {/* Mobile Menu */}
                         <div className="flex items-center gap-4">
-                            <Link
-                                href="/abstracts/submit"
-                                className={`hidden md:inline-flex items-center px-5 py-2.5 text-sm font-semibold rounded-full transition-all duration-300 ${isScrolled
-                                    ? 'bg-[#00D4AA] text-[#0A1628] hover:bg-[#00B894] shadow-sm hover:shadow-md'
-                                    : 'bg-white text-[#0A1628] hover:bg-gray-100'
-                                    }`}
-                            >
-                                Soumettre
-                                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                </svg>
-                            </Link>
 
                             {/* Mobile Menu Button */}
                             <button
@@ -279,13 +268,7 @@ export default function Header() {
                                     </Link>
                                 )
                             ))}
-                            <Link
-                                href="/abstracts/submit"
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="block px-4 py-3 mt-4 text-center rounded-full text-sm font-semibold bg-[#00D4AA] text-[#0A1628]"
-                            >
-                                Soumettre un Abstract
-                            </Link>
+
                         </nav>
                     </div>
                 </div>

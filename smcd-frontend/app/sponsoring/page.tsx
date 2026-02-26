@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { generateReservationPDF, generateReservationDOCX } from '@/lib/generateReservationForm';
 
 // Packages de sponsoring
 const sponsoringPackages = [
@@ -93,7 +92,7 @@ export default function SponsoringPage() {
                         <div className="absolute top-40 left-[20%] w-1 h-1 bg-white/20 rounded-full" />
                         <div className="absolute top-32 right-[15%] w-1.5 h-1.5 bg-teal-400/40 rounded-full" />
                     </div>
-                    
+
                     <div className="container mx-auto px-4 relative z-10 text-center">
                         <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 italic">
                             Formules de Sponsoring
@@ -118,7 +117,7 @@ export default function SponsoringPage() {
                             <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
                                 En sponsorisant notre congrès, vous pouvez bénéficier :
                             </h2>
-                            
+
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 {/* Avant la manifestation */}
                                 <div className="bg-white rounded-2xl p-8 shadow-lg">
@@ -192,10 +191,10 @@ export default function SponsoringPage() {
                         <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
                             Nos Formules de Sponsoring
                         </h2>
-                        
+
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                             {sponsoringPackages.map((pkg, index) => (
-                                <div 
+                                <div
                                     key={index}
                                     className={`relative rounded-2xl border-2 ${pkg.borderColor} overflow-hidden ${pkg.featured ? 'ring-4 ring-slate-200' : ''}`}
                                 >
@@ -204,7 +203,7 @@ export default function SponsoringPage() {
                                             Recommandé
                                         </div>
                                     )}
-                                    
+
                                     <div className={`p-8 ${pkg.featured ? 'pt-12' : ''}`}>
                                         {/* Header */}
                                         <div className="text-center mb-6">
@@ -264,7 +263,7 @@ export default function SponsoringPage() {
                         <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
                             Avantages Associés
                         </h2>
-                        
+
                         <div className="max-w-3xl mx-auto overflow-x-auto">
                             <table className="w-full bg-white rounded-2xl shadow-lg overflow-hidden">
                                 <thead className="bg-gradient-to-r from-[#0a1628] to-[#1a365d] text-white">
@@ -301,73 +300,13 @@ export default function SponsoringPage() {
                 </section>
 
                 {/* Autres Tarifs */}
-                <section id="autres-tarifs" className="py-16 bg-white">
+                <section className="py-16 bg-white">
                     <div className="container mx-auto px-4">
                         <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
                             Autres Tarifs
                         </h2>
 
                         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-                            {/* Tarifs d'inscription */}
-                            <div className="bg-gradient-to-br from-blue-50 to-teal-50 rounded-2xl p-8 shadow-lg">
-                                <h3 className="text-xl font-bold text-gray-900 mb-6">Tarifs d&apos;inscription</h3>
-                                <table className="w-full">
-                                    <thead>
-                                        <tr className="border-b border-gray-200">
-                                            <th className="py-2 text-left text-gray-600"></th>
-                                            <th className="py-2 text-center text-sm text-gray-600">Avant le 30 mars 2026</th>
-                                            <th className="py-2 text-center text-sm text-gray-600">Après le 30 mars 2026</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr className="border-b border-gray-100">
-                                            <td className="py-3 font-medium">Interne / résident</td>
-                                            <td className="py-3 text-center text-teal-600 font-semibold">2 000 MAD</td>
-                                            <td className="py-3 text-center">2 500 MAD</td>
-                                        </tr>
-                                        <tr className="border-b border-gray-100">
-                                            <td className="py-3 font-medium">Chirurgien</td>
-                                            <td className="py-3 text-center text-teal-600 font-semibold">3 000 MAD</td>
-                                            <td className="py-3 text-center">3 500 MAD</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                                <div className="mt-6 space-y-2 border-t border-gray-200 pt-6">
-                                    <p className="font-semibold text-gray-900">Pack1 :</p>
-                                    <p className="font-semibold text-gray-900">Pack2 :</p>
-                                    <p className="font-semibold text-gray-900">Pack3 :</p>
-                                </div>
-
-                                <div className="mt-4 pt-4 border-t border-gray-200">
-                                    <p className="font-semibold text-gray-900">RIB :</p>
-                                </div>
-
-                                <div className="mt-6 pt-4 border-t border-gray-200">
-                                    <p className="text-sm font-semibold text-gray-700 mb-3">Formulaire de Réservation</p>
-                                    <div className="flex gap-3">
-                                        <button
-                                            onClick={() => generateReservationDOCX()}
-                                            className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-[#0A1628] text-white rounded-xl text-sm font-medium hover:bg-[#1a2d4a] transition-colors cursor-pointer"
-                                        >
-                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                            </svg>
-                                            DOC
-                                        </button>
-                                        <button
-                                            onClick={() => generateReservationPDF()}
-                                            className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-red-600 text-white rounded-xl text-sm font-medium hover:bg-red-700 transition-colors cursor-pointer"
-                                        >
-                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                            </svg>
-                                            PDF
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
                             {/* Location de Stand */}
                             <div className="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl p-8 shadow-lg">
                                 <h3 className="text-xl font-bold text-gray-900 mb-6">Location de Stand</h3>
@@ -394,27 +333,10 @@ export default function SponsoringPage() {
                                     </div>
                                 </div>
                             </div>
-
-                            {/* Prise en charge congressistes */}
-                            <div className="bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl p-8 shadow-lg">
-                                <h3 className="text-xl font-bold text-gray-900 mb-6">Prise en charge de congressistes</h3>
-                                <p className="text-sm text-gray-600 mb-4">
-                                    L&apos;inscription donne accès aux séances du congrès, aux pauses café et déjeuners.
-                                </p>
-                                <div className="space-y-3">
-                                    <div className="flex justify-between items-center">
-                                        <span className="text-gray-600">Repas conjoint</span>
-                                        <span className="font-semibold">400 MAD</span>
-                                    </div>
-                                    <div className="flex justify-between items-center">
-                                        <span className="text-gray-600">Dîner de clôture</span>
-                                        <span className="font-semibold">700 MAD <span className="text-xs text-gray-400">(option)</span></span>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </section>
+
 
                 {/* Marketing & Publicité */}
                 <section className="py-16 bg-gray-50">
@@ -468,7 +390,7 @@ export default function SponsoringPage() {
                         <div className="max-w-2xl mx-auto mt-8 bg-gradient-to-r from-[#0a1628] to-[#1a365d] rounded-2xl p-8 text-center text-white">
                             <h3 className="text-xl font-bold mb-4">Projet personnalisé ?</h3>
                             <p className="text-white/80 mb-6">
-                                Vous avez un projet de partenariat qui ne fait pas partie de la liste ci-dessus ? 
+                                Vous avez un projet de partenariat qui ne fait pas partie de la liste ci-dessus ?
                                 N&apos;hésitez pas à nous en faire part pour que nous puissions étudier ensemble votre projet !
                             </p>
                             <Link
@@ -548,7 +470,7 @@ export default function SponsoringPage() {
                             Devenez partenaire du Congrès SMCD 2026
                         </h2>
                         <p className="text-white/80 max-w-2xl mx-auto mb-8">
-                            Rejoignez nos partenaires et bénéficiez d&apos;une visibilité exceptionnelle 
+                            Rejoignez nos partenaires et bénéficiez d&apos;une visibilité exceptionnelle
                             auprès de la communauté scientifique lors du Congrès National de Chirurgie Digestive.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -558,14 +480,6 @@ export default function SponsoringPage() {
                             >
                                 Nous Contacter
                             </Link>
-                            <a
-                                href="/documents/dossier-sponsoring.pdf"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center px-8 py-3 border-2 border-white text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300"
-                            >
-                                Télécharger le Dossier
-                            </a>
                         </div>
                     </div>
                 </section>

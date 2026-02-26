@@ -149,6 +149,17 @@ export default function HomePage() {
                   <div className="inline-block bg-[#00D4AA] text-[#0A1628] px-5 py-2 rounded-lg font-black text-lg md:text-2xl mt-4 animate-bounce shadow-[0_0_20px_rgba(0,212,170,0.5)]">
                     Date limite: 31 Mars 2026
                   </div>
+                  <div className="mt-5">
+                    <Link
+                      href="/abstracts/submit"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-white text-[#0A1628] font-bold text-base rounded-xl hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                    >
+                      Soumettre un Abstract
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </Link>
+                  </div>
                 </div>
 
                 <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-white/80 leading-tight mb-4">
@@ -226,7 +237,7 @@ export default function HomePage() {
 
                 {/* Inscription Button */}
                 <Link
-                  href="/sponsoring#autres-tarifs"
+                  href="/inscription"
                   className="block bg-[#00D4AA] hover:bg-[#00C49A] text-[#0A1628] text-center font-bold text-lg rounded-2xl p-4 transition-all duration-300 shadow-[0_0_20px_rgba(0,212,170,0.3)] hover:shadow-[0_0_30px_rgba(0,212,170,0.5)] group"
                 >
                   Inscription
@@ -259,32 +270,9 @@ export default function HomePage() {
               ))}
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/abstracts/submit" className="btn-primary group">
-                Soumettre un Abstract
-                <svg className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </Link>
-              <Link href="/videos" className="btn-secondary group">
-                <svg className="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-                Voir les Vidéos
-              </Link>
-            </div>
           </div>
 
-          {/* Scroll Indicator */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-            <div className="flex flex-col items-center gap-2 text-white/30">
-              <span className="text-xs uppercase tracking-widest">Découvrir</span>
-              <div className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center pt-2">
-                <div className="w-1.5 h-3 bg-white/40 rounded-full animate-bounce" />
-              </div>
-            </div>
-          </div>
+
         </section>
 
         {/* ================================================
@@ -550,8 +538,8 @@ Au plaisir de vous retrouver bientôt.`}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/abstracts/submit" className="btn-primary">
-                Soumettre un Abstract
+              <Link href="/inscription" className="btn-primary">
+                Inscription
               </Link>
               <Link href="/contact" className="btn-secondary">
                 Nous Contacter
