@@ -498,6 +498,112 @@ export default function InscriptionPage() {
                 </section>
 
                 {/* ============================================
+                    MODALITÉS DE PAIEMENT
+                    ============================================ */}
+                <section className="py-12 md:py-16 bg-gray-50">
+                    <div className="container mx-auto px-4">
+                        <div className="max-w-5xl mx-auto">
+                            <div className="text-center mb-10 md:mb-12">
+                                <span className="inline-block px-4 py-2 mb-4 text-xs font-semibold uppercase tracking-widest text-teal-700 bg-teal-100 rounded-full">
+                                    Paiement
+                                </span>
+                                <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+                                    Modalités de Paiement
+                                </h2>
+                                <p className="text-gray-500 mt-3 max-w-2xl mx-auto text-sm md:text-base">
+                                    Deux méthodes de paiement sont disponibles pour finaliser votre inscription.
+                                </p>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                                {/* MÉTHODE 1 — Virement Bancaire */}
+                                <div className="relative group">
+                                    <div className="absolute -inset-1 bg-gradient-to-r from-teal-400 to-cyan-500 rounded-2xl opacity-20 blur group-hover:opacity-40 transition-opacity duration-300" />
+                                    <div className="relative bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-gray-100 h-full flex flex-col">
+                                        <div className="flex items-center gap-3 mb-5">
+                                            <div className="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center flex-shrink-0">
+                                                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M3 6h18M3 14h18M3 18h18" />
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 6l7-3 7 3" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <span className="inline-block px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-teal-700 bg-teal-100 rounded-full mb-1">Méthode 1</span>
+                                                <h3 className="text-lg md:text-xl font-bold text-gray-900">Virement Bancaire</h3>
+                                            </div>
+                                        </div>
+
+                                        <p className="text-gray-600 text-sm mb-5 leading-relaxed">
+                                            Effectuez un virement bancaire sur le compte de la SMCD, puis envoyez une <strong className="text-gray-800">capture d&apos;écran du reçu de virement</strong> comme justificatif de paiement.
+                                        </p>
+
+                                        <div className="bg-gradient-to-br from-[#0a1628] to-[#1a365d] rounded-xl p-5 mt-auto">
+                                            <p className="text-xs text-cyan-300/80 uppercase tracking-wider font-semibold mb-2">Compte bancaire SMCD</p>
+                                            <p className="text-white font-mono text-lg md:text-xl font-bold tracking-wider mb-3">
+                                                011 780 0000322000004185 50
+                                            </p>
+                                            <div className="border-t border-white/10 pt-3">
+                                                <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">Au nom de</p>
+                                                <p className="text-white/90 font-semibold text-sm">
+                                                    STE MAROCAINE DE CHIRURGIE DIGESTIVE
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex items-start gap-2 mt-4 p-3 bg-amber-50 rounded-lg border border-amber-200">
+                                            <svg className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                            </svg>
+                                            <p className="text-xs text-amber-800">
+                                                N&apos;oubliez pas d&apos;envoyer la capture d&apos;écran du virement comme preuve de paiement.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* MÉTHODE 2 — Chèque */}
+                                <div className="relative group">
+                                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl opacity-20 blur group-hover:opacity-40 transition-opacity duration-300" />
+                                    <div className="relative bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-gray-100 h-full flex flex-col">
+                                        <div className="flex items-center gap-3 mb-5">
+                                            <div className="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center flex-shrink-0">
+                                                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <span className="inline-block px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-blue-700 bg-blue-100 rounded-full mb-1">Méthode 2</span>
+                                                <h3 className="text-lg md:text-xl font-bold text-gray-900">Chèque</h3>
+                                            </div>
+                                        </div>
+
+                                        <p className="text-gray-600 text-sm mb-5 leading-relaxed">
+                                            Vous pouvez également régler votre inscription par chèque, à établir à l&apos;ordre de la Société Marocaine de Chirurgie Digestive.
+                                        </p>
+
+                                        <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl p-5 mt-auto">
+                                            <p className="text-xs text-blue-200/80 uppercase tracking-wider font-semibold mb-2">Chèque à l&apos;ordre de</p>
+                                            <p className="text-white font-semibold text-base md:text-lg leading-snug">
+                                                STE MAROCAINE DE CHIRURGIE DIGESTIVE
+                                            </p>
+                                        </div>
+
+                                        <div className="flex items-start gap-2 mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                                            <svg className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                                            </svg>
+                                            <p className="text-xs text-blue-800">
+                                                Veuillez envoyer le chèque à l&apos;adresse communiquée lors de votre prise de contact.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* ============================================
                     PRISE EN CHARGE DE CONGRESSISTES
                     ============================================ */}
                 <section className="py-12 md:py-16 bg-gradient-to-br from-green-50 to-teal-50">
