@@ -584,7 +584,7 @@ export default function InscriptionPage() {
                                         <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl p-5 mt-auto">
                                             <p className="text-xs text-blue-200/80 uppercase tracking-wider font-semibold mb-2">Chèque à l&apos;ordre de</p>
                                             <p className="text-white font-semibold text-base md:text-lg leading-snug">
-                                                STE MAROCAINE DE CHIRURGIE DIGESTIVE
+                                                SOCIÉTÉ MAROCAINE DE CHIRURGIE DIGESTIVE
                                             </p>
                                         </div>
 
@@ -593,7 +593,7 @@ export default function InscriptionPage() {
                                                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                                             </svg>
                                             <p className="text-xs text-blue-800">
-                                                Veuillez envoyer le chèque à l&apos;adresse communiquée lors de votre prise de contact.
+                                                Déposer le chèque auprès de la trésorerie
                                             </p>
                                         </div>
                                     </div>
