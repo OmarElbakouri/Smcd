@@ -13,6 +13,8 @@ import {
 } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import axiosInstance from '@/lib/axios';
+import { API_URL } from '@/lib/constants';
+import Cookies from 'js-cookie';
 import type {
     AbstractResponse, AbstractStats, StatutSoumission, Rubrique, UpdateStatus
 } from '@/types';
@@ -48,6 +50,9 @@ export default function AdminAbstractsPage() {
         commentaires: '',
         envoyerEmail: true,
     });
+
+    // Téléchargement Word
+    const [downloadingId, setDownloadingId] = useState<number | null>(null);
 
     // Charger les statistiques
     const fetchStats = useCallback(async () => {
@@ -137,6 +142,34 @@ export default function AdminAbstractsPage() {
         });
     };
 
+    // Télécharger le document Word
+    const handleDownloadWord = async (record: AbstractResponse) => {
+        setDownloadingId(record.id);
+        try {
+            const response = await axiosInstance.get(`/abstracts/${record.id}/download-word`, {
+                responseType: 'blob',
+            });
+
+            const blob = new Blob([response.data], {
+                type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+            });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `SMCD2026_${record.numeroReference?.replace('SMCD2026-', '') || record.id}.docx`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+            message.success('Document téléchargé avec succès');
+        } catch (error) {
+            console.error('Erreur lors du téléchargement', error);
+            message.error('Erreur lors du téléchargement du document');
+        } finally {
+            setDownloadingId(null);
+        }
+    };
+
     // Colonnes du tableau
     const columns: ColumnsType<AbstractResponse> = [
         {
@@ -217,15 +250,14 @@ export default function AdminAbstractsPage() {
                             onClick={() => openStatusModal(record)}
                         />
                     </Tooltip>
-                    {record.wordFileUrl && (
-                        <Tooltip title="Télécharger Word">
-                            <Button
-                                icon={<DownloadOutlined />}
-                                size="small"
-                                onClick={() => window.open(record.wordFileUrl, '_blank')}
-                            />
-                        </Tooltip>
-                    )}
+                    <Tooltip title="Télécharger Word">
+                        <Button
+                            icon={<DownloadOutlined />}
+                            size="small"
+                            loading={downloadingId === record.id}
+                            onClick={() => handleDownloadWord(record)}
+                        />
+                    </Tooltip>
                 </Space>
             ),
         },
@@ -371,16 +403,15 @@ export default function AdminAbstractsPage() {
                     <Button key="close" onClick={() => setDetailModal(false)}>
                         Fermer
                     </Button>,
-                    selectedAbstract?.wordFileUrl && (
-                        <Button
-                            key="download"
-                            type="primary"
-                            icon={<DownloadOutlined />}
-                            onClick={() => window.open(selectedAbstract.wordFileUrl, '_blank')}
-                        >
-                            Télécharger Word
-                        </Button>
-                    ),
+                    <Button
+                        key="download"
+                        type="primary"
+                        icon={<DownloadOutlined />}
+                        loading={downloadingId === selectedAbstract?.id}
+                        onClick={() => selectedAbstract && handleDownloadWord(selectedAbstract)}
+                    >
+                        Télécharger Word
+                    </Button>,
                 ]}
                 width={800}
             >

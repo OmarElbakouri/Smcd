@@ -5,6 +5,7 @@ import com.smcd.congress.model.Abstract;
 import com.smcd.congress.model.enums.Rubrique;
 import com.smcd.congress.model.enums.StatutSoumission;
 import com.smcd.congress.service.AbstractService;
+import com.smcd.congress.service.WordGeneratorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +36,7 @@ import java.util.Map;
 public class AbstractController {
 
     private final AbstractService abstractService;
+    private final WordGeneratorService wordGeneratorService;
 
     /**
      * Soumettre un nouvel abstract (accès public)
@@ -143,6 +147,30 @@ public class AbstractController {
     ) {
         List<AbstractResponseDTO> abstracts = abstractService.getAllForExport(statut, rubrique);
         return ResponseEntity.ok(abstracts);
+    }
+
+    /**
+     * Télécharger le document Word d'un abstract
+     */
+    @GetMapping("/{id}/download-word")
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN', 'MODERATEUR')")
+    public ResponseEntity<byte[]> downloadWord(@PathVariable Long id) {
+        try {
+            Abstract abstractEntity = abstractService.getAbstractEntity(id);
+            byte[] wordBytes = wordGeneratorService.generateAbstractDocumentBytes(abstractEntity);
+
+            String fileName = String.format("SMCD2026_%s.docx",
+                    abstractEntity.getNumeroReference().replace("SMCD2026-", ""));
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .contentLength(wordBytes.length)
+                    .body(wordBytes);
+        } catch (Exception e) {
+            log.error("Erreur lors du téléchargement du Word pour l'abstract {}", id, e);
+            return ResponseEntity.status(500).build();
+        }
     }
 
     /**

@@ -140,6 +140,14 @@ public class AbstractService {
     }
 
     /**
+     * Récupère l'entité Abstract brute par son ID
+     */
+    public Abstract getAbstractEntity(Long id) {
+        return abstractRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Abstract non trouvé avec l'id: " + id));
+    }
+
+    /**
      * Récupère un abstract par son numéro de référence
      */
     public AbstractResponseDTO getAbstractByReference(String numeroReference) {

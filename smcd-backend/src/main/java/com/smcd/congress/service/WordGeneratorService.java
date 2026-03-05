@@ -7,6 +7,7 @@ import org.apache.poi.xwpf.usermodel.*;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.*;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -100,6 +101,46 @@ public class WordGeneratorService {
                     log.warn("Impossible de supprimer le fichier temporaire: {}", tempFile.getAbsolutePath());
                 }
             }
+        }
+    }
+
+    /**
+     * Génère un document Word et retourne les bytes directement (pour téléchargement)
+     */
+    public byte[] generateAbstractDocumentBytes(Abstract abstractEntity) {
+        log.info("Génération du document Word (bytes) pour l'abstract: {}", abstractEntity.getNumeroReference());
+
+        try {
+            XWPFDocument document = new XWPFDocument();
+
+            createHeader(document, abstractEntity);
+            createTitle(document, abstractEntity.getTitre());
+
+            if (abstractEntity.getMotsCles() != null && !abstractEntity.getMotsCles().isEmpty()) {
+                createKeywords(document, abstractEntity.getMotsCles());
+            }
+
+            createSection(document, "Introduction", abstractEntity.getIntroduction());
+            createSection(document, "Matériel et méthodes", abstractEntity.getMaterielMethodes());
+            createSection(document, "Résultats", abstractEntity.getResultats());
+            createSection(document, "Discussion", abstractEntity.getDiscussion());
+            createSection(document, "Conclusion", abstractEntity.getConclusion());
+
+            if (abstractEntity.getReferences() != null && !abstractEntity.getReferences().isEmpty()) {
+                createSection(document, "Références", abstractEntity.getReferences());
+            }
+
+            createFooter(document, abstractEntity);
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            document.write(baos);
+            document.close();
+
+            return baos.toByteArray();
+
+        } catch (IOException e) {
+            log.error("Erreur lors de la génération du document Word", e);
+            throw new RuntimeException("Erreur lors de la génération du document Word: " + e.getMessage());
         }
     }
 
