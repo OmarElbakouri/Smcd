@@ -688,6 +688,9 @@ export default function InscriptionPage() {
                                         PDF
                                     </button>
                                 </div>
+                                <p className="text-xs md:text-sm text-gray-600 mt-5 pt-5 border-t border-gray-200 text-center">
+                                    Nous vous prions de confirmer votre inscription dans les meilleurs délais, compte tenu du nombre limité de places d&apos;hébergement disponibles.
+                                </p>
                             </div>
                         </div>
                     </div>
