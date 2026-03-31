@@ -21,7 +21,7 @@ const { TextArea } = Input;
 const { Option } = Select;
 
 // Deadline du congrès
-const DEADLINE = new Date('2026-03-31T23:59:59');
+const DEADLINE = new Date('2026-04-15T23:59:59');
 
 export default function SubmitAbstractPage() {
     const router = useRouter();
@@ -127,7 +127,7 @@ export default function SubmitAbstractPage() {
                                 <Space>
                                     <ClockCircleOutlined />
                                     <span>
-                                        <strong>{daysRemaining} jours</strong> restants avant la deadline (31 mars 2026)
+                                        <strong>{daysRemaining} jours</strong> restants avant la deadline (15 avril 2026)
                                     </span>
                                 </Space>
                             }

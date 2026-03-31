@@ -147,7 +147,7 @@ export default function HomePage() {
                   </h2>
                   <p className="text-white/80 text-lg md:text-xl font-medium mt-1">(Orale, affichée et vidéo (7min))</p>
                   <div className="inline-block bg-[#00D4AA] text-[#0A1628] px-5 py-2 rounded-lg font-black text-lg md:text-2xl mt-4 animate-bounce shadow-[0_0_20px_rgba(0,212,170,0.5)]">
-                    Date limite: 31 Mars 2026
+                    Date limite: 15 Avril 2026
                   </div>
                   <div className="mt-5">
                     <Link
