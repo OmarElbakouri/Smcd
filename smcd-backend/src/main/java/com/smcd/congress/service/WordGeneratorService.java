@@ -180,6 +180,9 @@ public class WordGeneratorService {
         createInfoLine(document, "Affiliation", abstractEntity.getAffiliation());
         createInfoLine(document, "Rubrique", abstractEntity.getRubrique().getLabel());
         createInfoLine(document, "Type de communication", abstractEntity.getType().getLabel());
+        if (abstractEntity.getUrlVideo() != null && !abstractEntity.getUrlVideo().isEmpty()) {
+            createInfoLine(document, "URL de la vidéo", abstractEntity.getUrlVideo());
+        }
         createInfoLine(document, "Numéro de référence", abstractEntity.getNumeroReference());
         
         if (abstractEntity.getDateSoumission() != null) {
